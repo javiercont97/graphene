@@ -3,48 +3,56 @@
 void Graphene::Object::setProperty(
 	const std::string &name,
 	const std::variant<int, float, double, std::string> &value) {
-	this->m_properties[name] = value;
+	this->properties[name] = value;
 }
 
 bool Graphene::Object::hasProperty(const std::string &name) {
-	return m_properties.find(name) != m_properties.end();
+	return properties.find(name) != properties.end();
 }
 
 void Graphene::Object::clearProperties() {
 	// clear all properties
-	m_properties.clear();
+	properties.clear();
 }
 
 void Graphene::Object::removeProperty(const std::string &name) {
-	m_properties.erase(name);
+	properties.erase(name);
 }
 
 std::vector<std::string> Graphene::Object::getPropertyNames() {
 	std::vector<std::string> names;
-	for (auto &pair : m_properties) {
+	for (auto &pair : properties) {
 		names.push_back(pair.first);
 	}
 	return names;
 }
 
-// void Graphene::Object::notify(
-// 	const Graphene::String &topic,
-// 	const std::variant<int, float, double, std::string> &message,
-// 	EVENT_PAYLOAD_TYPE type) {
-// 	// Do nothing, override this function in derived classes
-// }
+void Graphene::Object::addEventListener(const std::string &event,
+										Object *listener) {
+	// add listener to the event
+	this->eventListeners[event].push_back(listener);
+}
 
-// void Graphene::Object::subscribe(const Graphene::String &topic) {
-// 	this->m_eventQueue.subscribe(topic, this);
-// }
+void Graphene::Object::removeEventListener(const std::string &event,
+										   Object *listener) {
+	if (this->eventListeners.find(event) == this->eventListeners.end()) {
+		return;
+	}
+	auto &listeners = this->eventListeners[event];
+	listeners.erase(std::remove(listeners.begin(), listeners.end(), listener),
+					listeners.end());
+}
 
-// void Graphene::Object::unsubscribe(const Graphene::String &topic) {
-// 	this->m_eventQueue.unsubscribe(topic, this);
-// }
+void Graphene::Object::dispatchEvent(
+	const std::string &event,
+	const std::variant<int, float, double, std::string> &message,
+	EVENT_PAYLOAD_TYPE type) {
+	if (this->eventListeners.find(event) == this->eventListeners.end()) {
+		return;
+	}
 
-// void Graphene::Object::publish(
-// 	const Graphene::String &topic,
-// 	const std::variant<int, float, double, std::string> &message,
-// 	EVENT_PAYLOAD_TYPE type) {
-// 	this->m_eventQueue.publish(topic, message, type);
-// }
+	auto &listeners = this->eventListeners[event];
+	for (auto &listener : listeners) {
+		listener->notify(event, message, type);
+	}
+}

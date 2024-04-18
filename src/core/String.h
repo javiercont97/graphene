@@ -352,17 +352,14 @@ class String {
 		return os;
 	}
 
-	struct StringHash {
-		size_t operator()(const String& str) const {
-			return std::hash<std::string>()(str.str);
-		}
-	};
-
-	/**
-	 * @brief Allow the string to be used in std::unordered_map.
-	 *
-	 */
-
+	size_t operator()(const String& str) const {
+		return std::hash<std::string>()(str.str);
+	}
+	// struct StringHash {
+	// 	size_t operator()(const String& str) const {
+	// 		return std::hash<std::string>()(str.str);
+	// 	}
+	// };
 
    private:
 	std::string str;

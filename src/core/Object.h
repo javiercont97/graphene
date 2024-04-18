@@ -6,12 +6,11 @@
 #include <unordered_map>
 #include <variant>
 
-// #include "EventConsumer.h"
-// #include "EventQueue.h"
 #include "String.h"
 
 namespace Graphene {
-// class Object : public EventConsumer {
+enum class EVENT_PAYLOAD_TYPE { INT, FLOAT, DOUBLE, STRING };
+
 class Object {
    public:
 	/**
@@ -36,7 +35,7 @@ class Object {
 		if (!hasProperty(name)) {
 			return T();
 		}
-		return std::get<T>(m_properties[name]);
+		return std::get<T>(properties[name]);
 	}
 
 	/**
@@ -73,14 +72,49 @@ class Object {
 	 */
 	virtual Graphene::String toString() const { return "Object"; }
 
+	/**
+	 * @brief addEventListener function
+	 *
+	 * @param event
+	 * @param listener
+	 */
+	void addEventListener(const std::string &event, Object *listener);
+
+	/**
+	 * @brief removeEventListener function
+	 *
+	 * @param event
+	 * @param listener
+	 */
+	void removeEventListener(const std::string &event, Object *listener);
+
+	/**
+	 * @brief dispatchEvent function
+	 *
+	 * @param event
+	 */
+	void dispatchEvent(
+		const std::string &event,
+		const std::variant<int, float, double, std::string> &message,
+		EVENT_PAYLOAD_TYPE type);
+
+	/**
+	 * @brief Notify function
+	 *
+	 */
+	virtual void notify(
+		const Graphene::String &topic,
+		const std::variant<int, float, double, std::string> &message,
+		EVENT_PAYLOAD_TYPE type) = 0;
+
    protected:
 	// Object properties
 	std::unordered_map<std::string,
 					   std::variant<int, float, double, std::string>>
-		m_properties;
+		properties;
 
-	// Event queue
-	// EventQueue &m_eventQueue;
+	// Event listeners
+	std::unordered_map<std::string, std::vector<Object *>> eventListeners;
 };
 
 }  // namespace Graphene

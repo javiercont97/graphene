@@ -2,10 +2,13 @@
 #define GRAPHENE_FRAMEWORK_H
 
 // Core includes
-#include "core/EventConsumer.h"
-#include "core/EventQueue.h"
+#include "core/Color.h"
 #include "core/Object.h"
+#include "core/Point.h"
 #include "core/String.h"
+
+// geometry includes
+#include "geometry/Shape.h"
 
 // Components includes
 
