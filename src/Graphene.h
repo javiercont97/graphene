@@ -5,6 +5,7 @@
 #include "core/Color.h"
 #include "core/Object.h"
 #include "core/Point.h"
+#include "core/ScreenDriver.h"
 #include "core/String.h"
 
 // geometry includes

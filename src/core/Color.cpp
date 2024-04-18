@@ -105,3 +105,48 @@ void Graphene::Color::fromRGB888(uint32_t color) {
 	blue = color & 0xFF;
 	alpha = 255;
 }
+
+uint8_t Graphene::Color::toGray8() const { return (red + green + blue) / 3; }
+
+void Graphene::Color::fromGray8(uint8_t color) {
+	red = color;
+	green = color;
+	blue = color;
+	alpha = 255;
+}
+
+uint32_t Graphene::Color::toFormat(PixelFormat format) const {
+	switch (format) {
+		case PixelFormat::RGBA8888:
+			return toRGBA8888();
+		case PixelFormat::ARGB8888:
+			return toARGB8888();
+		case PixelFormat::RGB565:
+			return toRGB565();
+		case PixelFormat::RGB888:
+			return toRGB888();
+		case PixelFormat::GRAY8:
+			return toGray8();
+	}
+	return 0;
+}
+
+void Graphene::Color::fromFormat(uint32_t color, PixelFormat format) {
+	switch (format) {
+		case PixelFormat::RGBA8888:
+			fromRGBA8888(color);
+			break;
+		case PixelFormat::ARGB8888:
+			fromARGB8888(color);
+			break;
+		case PixelFormat::RGB565:
+			fromRGB565(color);
+			break;
+		case PixelFormat::RGB888:
+			fromRGB888(color);
+			break;
+		case PixelFormat::GRAY8:
+			fromGray8(color);
+			break;
+	}
+}
