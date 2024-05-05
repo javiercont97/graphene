@@ -33,6 +33,10 @@ class Point {
 
 	Point operator-(const Point &point) const;
 
+	Point operator+=(const Point &point);
+
+	Point operator-=(const Point &point);
+
 	uint32_t distanceTo(const Point &point) const;
 
 	String toString() const;

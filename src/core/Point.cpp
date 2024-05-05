@@ -57,6 +57,18 @@ Graphene::Point Graphene::Point::operator-(const Point& point) const {
 	return p;
 }
 
+Graphene::Point Graphene::Point::operator+=(const Point& point) {
+	this->x += point.x;
+	this->y += point.y;
+	return *this;
+}
+
+Graphene::Point Graphene::Point::operator-=(const Point& point) {
+	this->x -= point.x;
+	this->y -= point.y;
+	return *this;
+}
+
 uint32_t Graphene::Point::distanceTo(const Point& point) const {
 	int deltaX = point.x - this->x;
 	int deltaY = point.y - this->y;

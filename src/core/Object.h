@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include <cstdarg>
 #include <unordered_map>
 #include <variant>
 
