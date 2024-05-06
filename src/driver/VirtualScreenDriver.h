@@ -12,6 +12,19 @@
 #include "FrameBuffer.h"
 
 namespace Graphene {
+/**
+ * @brief Class to draw on a virtual screen.
+ * Uses FrameBuffer to store the dual buffer.
+ * This class is used to draw on a virtual screen
+ * and swap the display buffer to display the final frame
+ *
+ * Actual display drivers can use this to manipulate the frame buffers
+ * but should copy the final frame to the display hardware themselves
+ *
+ * Similar to the virtual DOM in react.js where the virtual screen
+ * is the virtual DOM and the hardware display is the actual DOM
+ *
+ */
 class VirtualScreenDriver {
    public:
 	VirtualScreenDriver(uint32_t width, uint32_t height);
@@ -117,9 +130,6 @@ class VirtualScreenDriver {
 	 * is dependent on the display hardware (e.g. SPI, I2C, HDMI, DSI)
 	 */
 	virtual void swapBuffers();
-	// Is this function necessary? It seems like it could be implemented anyway,
-	// so it might not be necessary to have it as a virtual function and used
-	// elsewhere (e.g. proper implementation of a display driver class)
 
 	/**
 	 * @brief Get the current display buffer.
@@ -137,8 +147,9 @@ class VirtualScreenDriver {
 	Color getBackgroundColor() const;
 	uint32_t getWidth() const;
 	uint32_t getHeight() const;
+	uint8_t currentFrameIndex() const;
 
-   protected:
+   private:
 	// display geometry
 	uint32_t width;
 	uint32_t height;
