@@ -99,7 +99,7 @@ void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center,
 
 void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
 											   uint32_t radius)
-											   {
+{
 	int32_t x = radius;
 	int32_t y = 0;
 	int32_t err = 0;
