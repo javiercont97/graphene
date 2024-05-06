@@ -7,7 +7,9 @@
 #include "../core/Point.h"
 
 namespace Graphene {
-class FrameBuffer {
+class FrameBuffer
+
+{
    public:
 	FrameBuffer(uint32_t width, uint32_t height);
 	~FrameBuffer();
