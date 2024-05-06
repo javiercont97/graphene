@@ -8,6 +8,10 @@
 #include "core/String.h"
 #include "core/Variant.h"
 
+// Driver includes
+#include "driver/FrameBuffer.h"
+#include "driver/VirtualScreenDriver.h"
+
 // geometry includes
 // #include "geometry/Circle.h"
 // #include "geometry/Constants.h"

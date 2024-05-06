@@ -12,10 +12,10 @@
 #include "FrameBuffer.h"
 
 namespace Graphene {
-class Screen {
+class VirtualScreenDriver {
    public:
-	Screen(uint32_t width, uint32_t height);
-	virtual ~Screen();
+	VirtualScreenDriver(uint32_t width, uint32_t height);
+	virtual ~VirtualScreenDriver();
 
 	//======================== Drawing functions ========================
 	/**

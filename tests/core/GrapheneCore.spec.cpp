@@ -1,11 +1,11 @@
 #include <Graphene.h>
 #include <unity/unity.h>
 
-#include "core/Color.spec.h"
-#include "core/Object.spec.h"
-#include "core/Point.spec.h"
-#include "core/String.spec.h"
-#include "core/Variant.spec.h"
+#include "Color.spec.h"
+#include "Object.spec.h"
+#include "Point.spec.h"
+#include "String.spec.h"
+#include "Variant.spec.h"
 
 void setUp() {
 }
@@ -22,7 +22,7 @@ int main() {
 	RUN_TEST(test_default_constructor);
 	RUN_TEST(test_cstyle_constructor);
 	RUN_TEST(test_copy_constructor);
-	RUN_TEST(test_stdstring_constructor);
+	RUN_TEST(test_std_string_constructor);
 
 	// Test operators
 	RUN_TEST(test_assignment_operator);

@@ -1,6 +1,7 @@
-#include "Screen.h"
+#include "VirtualScreenDriver.h"
 
-Graphene::Screen::Screen(uint32_t width, uint32_t height) {
+Graphene::VirtualScreenDriver::VirtualScreenDriver(uint32_t width,
+												   uint32_t height) {
 	this->width = width;
 	this->height = height;
 
@@ -9,17 +10,15 @@ Graphene::Screen::Screen(uint32_t width, uint32_t height) {
 					Graphene::FrameBuffer(width, height)};
 }
 
-Graphene::Screen::~Screen() {
-	// for (auto frame : this->frames) {
-	// 	delete frame;
-	// }
+Graphene::VirtualScreenDriver::~VirtualScreenDriver() {
 }
 
-void Graphene::Screen::drawPixel(Graphene::Point point) {
+void Graphene::VirtualScreenDriver::drawPixel(Graphene::Point point) {
 	this->frames[this->currentFrame].setPixel(point, Graphene::WHITE);
 }
 
-void Graphene::Screen::drawLine(Graphene::Point start, Graphene::Point end) {
+void Graphene::VirtualScreenDriver::drawLine(Graphene::Point start,
+											 Graphene::Point end) {
 	// Bresenham's line algorithm
 	int32_t dx = std::abs((float)end.getX() - (float)start.getX());
 	int32_t dy = std::abs((float)end.getY() - (float)start.getY());
@@ -46,9 +45,9 @@ void Graphene::Screen::drawLine(Graphene::Point start, Graphene::Point end) {
 	}
 }
 
-void Graphene::Screen::drawRectangle(Graphene::Point position,
-									 uint32_t width,
-									 uint32_t height) {
+void Graphene::VirtualScreenDriver::drawRectangle(Graphene::Point position,
+												  uint32_t width,
+												  uint32_t height) {
 	Graphene::Point p1 = position;
 	Graphene::Point p2 = {position.getX() + width, position.getY()};
 	Graphene::Point p3 = {position.getX() + width, position.getY() + height};
@@ -60,9 +59,9 @@ void Graphene::Screen::drawRectangle(Graphene::Point position,
 	this->drawLine(p4, p1);
 }
 
-void Graphene::Screen::fillRectangle(Graphene::Point position,
-									 uint32_t width,
-									 uint32_t height) {
+void Graphene::VirtualScreenDriver::fillRectangle(Graphene::Point position,
+												  uint32_t width,
+												  uint32_t height) {
 	for (uint32_t y = position.getY(); y < position.getY() + height; y++) {
 		for (uint32_t x = position.getX(); x < position.getX() + width; x++) {
 			this->drawPixel({x, y});
@@ -70,7 +69,8 @@ void Graphene::Screen::fillRectangle(Graphene::Point position,
 	}
 }
 
-void Graphene::Screen::drawCircle(Graphene::Point center, uint32_t radius) {
+void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center,
+											   uint32_t radius) {
 	int32_t x = radius;
 	int32_t y = 0;
 	int32_t err = 0;
@@ -97,7 +97,8 @@ void Graphene::Screen::drawCircle(Graphene::Point center, uint32_t radius) {
 	}
 }
 
-void Graphene::Screen::fillCircle(Graphene::Point center, uint32_t radius) {
+void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
+											   uint32_t radius) {
 	int32_t x = radius;
 	int32_t y = 0;
 	int32_t err = 0;
@@ -125,14 +126,16 @@ void Graphene::Screen::fillCircle(Graphene::Point center, uint32_t radius) {
 	}
 }
 
-void Graphene::Screen::drawPolygon(std::vector<Graphene::Point> points) {
+void Graphene::VirtualScreenDriver::drawPolygon(
+	std::vector<Graphene::Point> points) {
 	for (size_t i = 0; i < points.size() - 1; i++) {
 		this->drawLine(points[i], points[i + 1]);
 	}
 	this->drawLine(points[points.size() - 1], points[0]);
 }
 
-void Graphene::Screen::fillPolygon(std::vector<Graphene::Point> points) {
+void Graphene::VirtualScreenDriver::fillPolygon(
+	std::vector<Graphene::Point> points) {
 	// Find the bounding box of the polygon
 	int32_t minX = points[0].getX();
 	int32_t minY = points[0].getY();
@@ -179,42 +182,43 @@ void Graphene::Screen::fillPolygon(std::vector<Graphene::Point> points) {
 	}
 }
 
-void Graphene::Screen::drawString(Graphene::Point position, String text) {
+void Graphene::VirtualScreenDriver::drawString(Graphene::Point position,
+											   String text) {
 	// TODO: Implement this function
 }
 
-void Graphene::Screen::clearScreen(Color color) {
+void Graphene::VirtualScreenDriver::clearScreen(Color color) {
 	this->frames[this->currentFrame].clear(color);
 }
 
-void Graphene::Screen::swapBuffers() {
+void Graphene::VirtualScreenDriver::swapBuffers() {
 	this->currentFrame = (this->currentFrame + 1) % 2;
 }
 
-Graphene::FrameBuffer Graphene::Screen::getCurrentFrame() {
+Graphene::FrameBuffer Graphene::VirtualScreenDriver::getCurrentFrame() {
 	return this->frames[this->currentFrame];
 }
 
-void Graphene::Screen::setForegroundColor(Color color) {
+void Graphene::VirtualScreenDriver::setForegroundColor(Color color) {
 	this->foregroundColor = color;
 }
 
-void Graphene::Screen::setBackgroundColor(Color color) {
+void Graphene::VirtualScreenDriver::setBackgroundColor(Color color) {
 	this->backgroundColor = color;
 }
 
-Graphene::Color Graphene::Screen::getForegroundColor() const {
+Graphene::Color Graphene::VirtualScreenDriver::getForegroundColor() const {
 	return this->foregroundColor;
 }
 
-Graphene::Color Graphene::Screen::getBackgroundColor() const {
+Graphene::Color Graphene::VirtualScreenDriver::getBackgroundColor() const {
 	return this->backgroundColor;
 }
 
-uint32_t Graphene::Screen::getWidth() const {
+uint32_t Graphene::VirtualScreenDriver::getWidth() const {
 	return this->width;
 }
 
-uint32_t Graphene::Screen::getHeight() const {
+uint32_t Graphene::VirtualScreenDriver::getHeight() const {
 	return this->height;
 }

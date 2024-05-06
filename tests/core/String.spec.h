@@ -48,7 +48,7 @@ void test_copy_constructor() {
 	TEST_ASSERT_NOT_EQUAL_UINT32(10, str2.length());
 }
 
-void test_stdstring_constructor() {
+void test_std_string_constructor() {
 	std::string stdStr("Hello");
 	Graphene::String str(stdStr);
 	TEST_ASSERT_EQUAL_STRING("Hello", str.cStyleString());

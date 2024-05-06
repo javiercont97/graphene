@@ -24,8 +24,8 @@ set(SOURCES
 	# src/geometry/Geometry.h
 	
 	# driver files
-	src/driver/Screen.h
-	src/driver/Screen.cpp
+	src/driver/VirtualScreenDriver.h
+	src/driver/VirtualScreenDriver.cpp
 	src/driver/FrameBuffer.h
 	src/driver/FrameBuffer.cpp
 )
