@@ -20,9 +20,7 @@ class Object {
 	 * @param name
 	 * @param value
 	 */
-	void setProperty(
-		const std::string &name,
-		const std::variant<int, float, double, std::string> &value);
+	void setProperty(const std::string &name, const std::variant<int, float, double, std::string> &value);
 
 	/**
 	 * @brief Get the Property object
@@ -96,25 +94,21 @@ class Object {
 	 *
 	 * @param event
 	 */
-	void dispatchEvent(
-		const std::string &event,
-		const std::variant<int, float, double, std::string> &message,
-		EVENT_PAYLOAD_TYPE type);
+	void dispatchEvent(const std::string &event,
+					   const std::variant<int, float, double, std::string> &message,
+					   EVENT_PAYLOAD_TYPE type);
 
 	/**
 	 * @brief Notify function
 	 *
 	 */
-	virtual void notify(
-		const Graphene::String &topic,
-		const std::variant<int, float, double, std::string> &message,
-		EVENT_PAYLOAD_TYPE type) = 0;
+	virtual void notify(const Graphene::String &topic,
+						const std::variant<int, float, double, std::string> &message,
+						EVENT_PAYLOAD_TYPE type) = 0;
 
    protected:
 	// Object properties
-	std::unordered_map<std::string,
-					   std::variant<int, float, double, std::string>>
-		properties;
+	std::unordered_map<std::string, std::variant<int, float, double, std::string>> properties;
 
 	// Event listeners
 	std::unordered_map<std::string, std::vector<Object *>> eventListeners;

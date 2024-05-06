@@ -53,9 +53,7 @@ class VirtualScreenDriver {
 	 * @param width
 	 * @param height
 	 */
-	void drawRectangle(Graphene::Point position,
-					   uint32_t width,
-					   uint32_t height);
+	void drawRectangle(Graphene::Point position, uint32_t width, uint32_t height);
 
 	/**
 	 * @brief Fill a rectangle with a given position, width, height.
@@ -64,9 +62,7 @@ class VirtualScreenDriver {
 	 * @param width
 	 * @param height
 	 */
-	void fillRectangle(Graphene::Point position,
-					   uint32_t width,
-					   uint32_t height);
+	void fillRectangle(Graphene::Point position, uint32_t width, uint32_t height);
 
 	/**
 	 * @brief Draw a circle with a given center, radius.

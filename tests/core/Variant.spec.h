@@ -56,8 +56,7 @@ void testVariant() {
 	TEST_ASSERT_EQUAL_FLOAT(4.4, v12Vector[3]);
 	TEST_ASSERT_EQUAL_FLOAT(5.5, v12Vector[4]);
 
-	Graphene::Variant v14 =
-		std::vector<std::string>{"Hello", "World", "Goodbye", "Cruel", "World"};
+	Graphene::Variant v14 = std::vector<std::string>{"Hello", "World", "Goodbye", "Cruel", "World"};
 	std::vector<std::string> v14Vector = v14.toStringVector();
 	TEST_ASSERT_EQUAL_STRING("Hello", v14Vector[0].c_str());
 	TEST_ASSERT_EQUAL_STRING("World", v14Vector[1].c_str());

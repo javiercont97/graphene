@@ -30,14 +30,12 @@ void testGetProperty() {
 	obj.setProperty("name", "John Doe");
 	obj.setProperty("age", 25);
 
-	TEST_ASSERT_EQUAL_STRING("John Doe",
-							 obj.getProperty<std::string>("name").c_str());
+	TEST_ASSERT_EQUAL_STRING("John Doe", obj.getProperty<std::string>("name").c_str());
 	TEST_ASSERT_EQUAL_INT(25, obj.getProperty<int>("age"));
 
 	// NEGATIVE TEST
 	TEST_ASSERT_EQUAL_INT(0, obj.getProperty<int>("address"));
-	TEST_ASSERT_EQUAL_STRING("",
-							 obj.getProperty<std::string>("address").c_str());
+	TEST_ASSERT_EQUAL_STRING("", obj.getProperty<std::string>("address").c_str());
 }
 
 void testHasProperty() {
@@ -133,8 +131,7 @@ void testPublish() {
 	TEST_ASSERT_EQUAL_INT(42, obj2.getProperty<int>("topic1"));
 	TEST_ASSERT_EQUAL_FLOAT(3.14f, obj2.getProperty<float>("topic2"));
 	// TEST_ASSERT_EQUAL_DOUBLE(3.141592, obj2.getProperty<double>("topic3"));
-	TEST_ASSERT_EQUAL_STRING("Hello",
-							 obj2.getProperty<std::string>("topic4").c_str());
+	TEST_ASSERT_EQUAL_STRING("Hello", obj2.getProperty<std::string>("topic4").c_str());
 
 	//  +==================================================+
 	//  | source    |  event   |  listener  |  property    |

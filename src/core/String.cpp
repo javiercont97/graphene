@@ -41,8 +41,7 @@ Graphene::String Graphene::String::operator+(const char* str) const {
 	return result;
 }
 
-Graphene::String Graphene::String::operator+(
-	const Graphene::String& str) const {
+Graphene::String Graphene::String::operator+(const Graphene::String& str) const {
 	Graphene::String result = *this;
 	result.str += str.str;
 	return result;
@@ -137,8 +136,7 @@ int Graphene::String::toInt() const {
 	}
 
 	// return 0 if the string is empty or not a number
-	if (this->str.empty() ||
-		!std::all_of(this->str.begin(), this->str.end(), ::isdigit)) {
+	if (this->str.empty() || !std::all_of(this->str.begin(), this->str.end(), ::isdigit)) {
 		return 0;
 	}
 
@@ -215,12 +213,10 @@ size_t Graphene::String::findLast(const String& str) const {
 	return this->str.rfind(str.str);
 }
 
-Graphene::String Graphene::String::replace(const String& from,
-										   const String& to) const {
+Graphene::String Graphene::String::replace(const String& from, const String& to) const {
 	std::string result = this->str;
 	size_t start_pos = 0;
-	while ((start_pos = result.find(from.str, start_pos)) !=
-		   std::string::npos) {
+	while ((start_pos = result.find(from.str, start_pos)) != std::string::npos) {
 		result.replace(start_pos, from.str.length(), to.str);
 		start_pos += to.str.length();
 	}
@@ -248,8 +244,7 @@ Graphene::String Graphene::String::reverse() const {
 	return reversed;
 }
 
-std::vector<Graphene::String> Graphene::String::split(
-	const String& delimiter) const {
+std::vector<Graphene::String> Graphene::String::split(const String& delimiter) const {
 	std::vector<Graphene::String> result;
 	std::string str = this->str;
 	size_t pos = 0;

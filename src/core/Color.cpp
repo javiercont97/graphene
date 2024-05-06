@@ -7,8 +7,7 @@ Graphene::Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 	: red(red), green(green), blue(blue), alpha(alpha) {
 }
 
-Graphene::Color::Color(const Color &color)
-	: red(color.red), green(color.green), blue(color.blue), alpha(color.alpha) {
+Graphene::Color::Color(const Color &color) : red(color.red), green(color.green), blue(color.blue), alpha(color.alpha) {
 }
 
 Graphene::Color &Graphene::Color::operator=(const Color &color) {
@@ -25,13 +24,11 @@ Graphene::Color &Graphene::Color::operator=(const uint32_t &color) {
 }
 
 bool Graphene::Color::operator==(const Color &color) const {
-	return red == color.red && green == color.green && blue == color.blue &&
-		   alpha == color.alpha;
+	return red == color.red && green == color.green && blue == color.blue && alpha == color.alpha;
 }
 
 bool Graphene::Color::operator!=(const Color &color) const {
-	return red != color.red || green != color.green || blue != color.blue ||
-		   alpha != color.alpha;
+	return red != color.red || green != color.green || blue != color.blue || alpha != color.alpha;
 }
 
 Graphene::Color::operator uint32_t() const {

@@ -1,15 +1,13 @@
 #include "VirtualScreenDriver.h"
 
-Graphene::VirtualScreenDriver::VirtualScreenDriver(uint32_t width,
-												   uint32_t height) {
+Graphene::VirtualScreenDriver::VirtualScreenDriver(uint32_t width, uint32_t height) {
 	this->width = width;
 	this->height = height;
 
 	// Initialize the frame buffers
 	// Start drawing on the first frame buffer
 	this->currentFrame = 0;
-	this->frames = {Graphene::FrameBuffer(width, height),
-					Graphene::FrameBuffer(width, height)};
+	this->frames = {Graphene::FrameBuffer(width, height), Graphene::FrameBuffer(width, height)};
 
 	// Set the default colors
 	this->foregroundColor = Graphene::WHITE;
@@ -24,11 +22,15 @@ Graphene::VirtualScreenDriver::~VirtualScreenDriver() {
 }
 
 void Graphene::VirtualScreenDriver::drawPixel(Graphene::Point point) {
+	// if out of bounds, return
+	if (point.getX() < 0 || point.getX() >= this->width || point.getY() < 0 || point.getY() >= this->height) {
+		return;
+	}
+
 	this->frames[this->currentFrame].setPixel(point, this->foregroundColor);
 }
 
-void Graphene::VirtualScreenDriver::drawLine(Graphene::Point start,
-											 Graphene::Point end) {
+void Graphene::VirtualScreenDriver::drawLine(Graphene::Point start, Graphene::Point end) {
 	// Bresenham's line algorithm
 	int32_t dx = std::abs((float)end.getX() - (float)start.getX());
 	int32_t dy = std::abs((float)end.getY() - (float)start.getY());
@@ -55,13 +57,13 @@ void Graphene::VirtualScreenDriver::drawLine(Graphene::Point start,
 	}
 }
 
-void Graphene::VirtualScreenDriver::drawRectangle(Graphene::Point position,
-												  uint32_t width,
-												  uint32_t height) {
+void Graphene::VirtualScreenDriver::drawRectangle(Graphene::Point position, uint32_t width, uint32_t height) {
 	Graphene::Point p1 = position;
-	Graphene::Point p2 = {position.getX() + width, position.getY()};
-	Graphene::Point p3 = {position.getX() + width, position.getY() + height};
-	Graphene::Point p4 = {position.getX(), position.getY() + height};
+	// width - 1 and height - 1 to make sure the rectangle is drawn correctly
+	// subtraction si done to take into account the 0 based indexing
+	Graphene::Point p2 = {position.getX() + width - 1, position.getY()};
+	Graphene::Point p3 = {position.getX() + width - 1, position.getY() + height - 1};
+	Graphene::Point p4 = {position.getX(), position.getY() + height - 1};
 
 	this->drawLine(p1, p2);
 	this->drawLine(p2, p3);
@@ -69,9 +71,7 @@ void Graphene::VirtualScreenDriver::drawRectangle(Graphene::Point position,
 	this->drawLine(p4, p1);
 }
 
-void Graphene::VirtualScreenDriver::fillRectangle(Graphene::Point position,
-												  uint32_t width,
-												  uint32_t height) {
+void Graphene::VirtualScreenDriver::fillRectangle(Graphene::Point position, uint32_t width, uint32_t height) {
 	for (uint32_t y = position.getY(); y < position.getY() + height; y++) {
 		for (uint32_t x = position.getX(); x < position.getX() + width; x++) {
 			this->drawPixel({x, y});
@@ -79,36 +79,52 @@ void Graphene::VirtualScreenDriver::fillRectangle(Graphene::Point position,
 	}
 }
 
-void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center,
-											   uint32_t radius) {
-	int32_t x = radius;
-	int32_t y = 0;
-	int32_t err = 0;
+void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center, uint32_t radius) {
+	// midpoint circle algorithm
 
-	while (x >= y) {
+	// Given a function f(x, y) = x^2 + y^2 - r^2
+	// f(x, y) > 0 means the point is outside the circle
+	// f(x, y) < 0 means the point is inside the circle
+	// f(x, y) = 0 means the point is on the circle
+	auto fCircle = [=](int32_t x, int32_t y, int32_t r) { return x * x + y * y - r * r; };
+
+	radius = radius - 1;  // to take into account 0 based indexing
+
+	// P0 = (0, r)
+	int32_t x = 0;
+	int32_t y = radius;
+
+	// Initial decision parameter of region 1
+	int32_t d = 5 / 4 - radius;
+
+	// loop till x>=y
+	for (int32_t k = 0; x >= y; k++) {
+		// Print the circle points
+		// (x, y) is the current point
+		// Print the mirror image of the current point
+		// in the 4 quadrants
 		this->drawPixel({center.getX() + x, center.getY() + y});
+		this->drawPixel({center.getX() - x, center.getY() + y});
+		this->drawPixel({center.getX() + x, center.getY() - y});
+		this->drawPixel({center.getX() - x, center.getY() - y});
 		this->drawPixel({center.getX() + y, center.getY() + x});
 		this->drawPixel({center.getX() - y, center.getY() + x});
-		this->drawPixel({center.getX() - x, center.getY() + y});
-		this->drawPixel({center.getX() - x, center.getY() - y});
-		this->drawPixel({center.getX() - y, center.getY() - x});
 		this->drawPixel({center.getX() + y, center.getY() - x});
-		this->drawPixel({center.getX() + x, center.getY() - y});
+		this->drawPixel({center.getX() - y, center.getY() - x});
 
-		if (err <= 0) {
-			y += 1;
-			err += 2 * y + 1;
+		// Depending on the value of d, we can either
+		// add x or add x and y
+		if (d < 0) {
+			d += 2 * x + 3;
+		} else {
+			d += 2 * (x - y) + 5;
+			y--;
 		}
-
-		if (err > 0) {
-			x -= 1;
-			err -= 2 * x + 1;
-		}
+		x++;
 	}
 }
 
-void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
-											   uint32_t radius) {
+void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center, uint32_t radius) {
 	int32_t x = radius;
 	int32_t y = 0;
 	int32_t err = 0;
@@ -136,16 +152,14 @@ void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
 	}
 }
 
-void Graphene::VirtualScreenDriver::drawPolygon(
-	std::vector<Graphene::Point> points) {
+void Graphene::VirtualScreenDriver::drawPolygon(std::vector<Graphene::Point> points) {
 	for (size_t i = 0; i < points.size() - 1; i++) {
 		this->drawLine(points[i], points[i + 1]);
 	}
 	this->drawLine(points[points.size() - 1], points[0]);
 }
 
-void Graphene::VirtualScreenDriver::fillPolygon(
-	std::vector<Graphene::Point> points) {
+void Graphene::VirtualScreenDriver::fillPolygon(std::vector<Graphene::Point> points) {
 	// Find the bounding box of the polygon
 	int32_t minX = points[0].getX();
 	int32_t minY = points[0].getY();
@@ -171,10 +185,8 @@ void Graphene::VirtualScreenDriver::fillPolygon(
 	auto isInside = [&points](Graphene::Point point) {
 		bool isInside = false;
 		for (size_t i = 0, j = points.size() - 1; i < points.size(); j = i++) {
-			if (((points[i].getY() > point.getY()) !=
-				 (points[j].getY() > point.getY())) &&
-				(point.getX() < (points[j].getX() - points[i].getX()) *
-										(point.getY() - points[i].getY()) /
+			if (((points[i].getY() > point.getY()) != (points[j].getY() > point.getY())) &&
+				(point.getX() < (points[j].getX() - points[i].getX()) * (point.getY() - points[i].getY()) /
 										(points[j].getY() - points[i].getY()) +
 									points[i].getX())) {
 				isInside = !isInside;
@@ -192,8 +204,7 @@ void Graphene::VirtualScreenDriver::fillPolygon(
 	}
 }
 
-void Graphene::VirtualScreenDriver::drawString(Graphene::Point position,
-											   String text) {
+void Graphene::VirtualScreenDriver::drawString(Graphene::Point position, String text) {
 	// TODO: Implement this function, requires the Font class
 
 	// // Draw each character in the string

@@ -32,14 +32,11 @@ void Graphene::FrameBuffer::clear(Graphene::Color color) {
 	}
 }
 
-void Graphene::FrameBuffer::setPixel(Graphene::Point point,
-									 Graphene::Color color) {
+void Graphene::FrameBuffer::setPixel(Graphene::Point point, Graphene::Color color) {
 	this->buffer[point.getY() * width + point.getX()] = color;
 }
 
-void Graphene::FrameBuffer::setPixel(uint32_t x,
-									 uint32_t y,
-									 Graphene::Color color) {
+void Graphene::FrameBuffer::setPixel(uint32_t x, uint32_t y, Graphene::Color color) {
 	this->buffer[y * width + x] = color;
 }
 

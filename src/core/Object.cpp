@@ -1,8 +1,7 @@
 #include "Object.h"
 
-void Graphene::Object::setProperty(
-	const std::string &name,
-	const std::variant<int, float, double, std::string> &value) {
+void Graphene::Object::setProperty(const std::string &name,
+								   const std::variant<int, float, double, std::string> &value) {
 	this->properties[name] = value;
 }
 
@@ -27,26 +26,22 @@ std::vector<std::string> Graphene::Object::getPropertyNames() {
 	return names;
 }
 
-void Graphene::Object::addEventListener(const std::string &event,
-										Object *listener) {
+void Graphene::Object::addEventListener(const std::string &event, Object *listener) {
 	// add listener to the event
 	this->eventListeners[event].push_back(listener);
 }
 
-void Graphene::Object::removeEventListener(const std::string &event,
-										   Object *listener) {
+void Graphene::Object::removeEventListener(const std::string &event, Object *listener) {
 	if (this->eventListeners.find(event) == this->eventListeners.end()) {
 		return;
 	}
 	auto &listeners = this->eventListeners[event];
-	listeners.erase(std::remove(listeners.begin(), listeners.end(), listener),
-					listeners.end());
+	listeners.erase(std::remove(listeners.begin(), listeners.end(), listener), listeners.end());
 }
 
-void Graphene::Object::dispatchEvent(
-	const std::string &event,
-	const std::variant<int, float, double, std::string> &message,
-	EVENT_PAYLOAD_TYPE type) {
+void Graphene::Object::dispatchEvent(const std::string &event,
+									 const std::variant<int, float, double, std::string> &message,
+									 EVENT_PAYLOAD_TYPE type) {
 	if (this->eventListeners.find(event) == this->eventListeners.end()) {
 		return;
 	}
