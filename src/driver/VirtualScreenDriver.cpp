@@ -8,6 +8,9 @@ Graphene::VirtualScreenDriver::VirtualScreenDriver(uint32_t width,
 	this->currentFrame = 0;
 	this->frames = {Graphene::FrameBuffer(width, height),
 					Graphene::FrameBuffer(width, height)};
+
+	this->foregroundColor = Graphene::WHITE;
+	this->backgroundColor = Graphene::BLACK;
 }
 
 Graphene::VirtualScreenDriver::~VirtualScreenDriver() {
