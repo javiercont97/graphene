@@ -21,9 +21,8 @@
 // 	return *this;
 // }
 
-// void Graphene::Rectangle::getBoundingBox(Point& topLeft, Point& bottomRight) {
-// 	topLeft = position;
-// 	bottomRight = position + Point(width, height);
+// void Graphene::Rectangle::getBoundingBox(Point& topLeft, Point& bottomRight)
+// { 	topLeft = position; 	bottomRight = position + Point(width, height);
 // }
 
 // void Graphene::Rectangle::scale(double factor) {

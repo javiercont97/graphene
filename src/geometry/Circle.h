@@ -15,7 +15,7 @@
 // 	Circle(Point center, uint32_t radius, Color fillColor, Color strokeColor);
 
 // 	Circle& operator=(const Circle& circle);
-	
+
 // 	void getBoundingBox(Point& topLeft, Point& bottomRight) override;
 // 	void scale(double factor) override;
 // 	void draw(ScreenDriver* driver) override;

@@ -1,8 +1,10 @@
 #include "Point.h"
 
-Graphene::Point::Point() : x(0), y(0) {}
+Graphene::Point::Point() : x(0), y(0) {
+}
 
-Graphene::Point::Point(uint32_t x, uint32_t y) : x(x), y(y) {}
+Graphene::Point::Point(uint32_t x, uint32_t y) : x(x), y(y) {
+}
 
 Graphene::Point::Point(const Point& point) {
 	this->x = point.x;

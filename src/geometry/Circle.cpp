@@ -3,7 +3,8 @@
 // Graphene::Circle::Circle(): Shape() {}
 
 // Graphene::Circle::Circle(Point center, uint32_t radius, Color fillColor,
-// 						 Color strokeColor): Shape(center, radius, radius, fillColor, strokeColor) {}
+// 						 Color strokeColor): Shape(center, radius, radius,
+// fillColor, strokeColor) {}
 
 // Graphene::Circle& Graphene::Circle::operator=(const Circle& circle) {
 // 	if (this != &circle) {

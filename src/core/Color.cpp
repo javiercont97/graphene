@@ -1,15 +1,15 @@
 #include "Color.h"
 
-Graphene::Color::Color() : red(0), green(0), blue(0), alpha(255) {}
+Graphene::Color::Color() : red(0), green(0), blue(0), alpha(255) {
+}
 
 Graphene::Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
-	: red(red), green(green), blue(blue), alpha(alpha) {}
+	: red(red), green(green), blue(blue), alpha(alpha) {
+}
 
 Graphene::Color::Color(const Color &color)
-	: red(color.red),
-	  green(color.green),
-	  blue(color.blue),
-	  alpha(color.alpha) {}
+	: red(color.red), green(color.green), blue(color.blue), alpha(color.alpha) {
+}
 
 Graphene::Color &Graphene::Color::operator=(const Color &color) {
 	red = color.red;
@@ -38,21 +38,37 @@ Graphene::Color::operator uint32_t() const {
 	return (alpha << 24) | (red << 16) | (green << 8) | blue;
 }
 
-uint8_t Graphene::Color::getRed() const { return red; }
+uint8_t Graphene::Color::getRed() const {
+	return red;
+}
 
-uint8_t Graphene::Color::getGreen() const { return green; }
+uint8_t Graphene::Color::getGreen() const {
+	return green;
+}
 
-uint8_t Graphene::Color::getBlue() const { return blue; }
+uint8_t Graphene::Color::getBlue() const {
+	return blue;
+}
 
-uint8_t Graphene::Color::getAlpha() const { return alpha; }
+uint8_t Graphene::Color::getAlpha() const {
+	return alpha;
+}
 
-void Graphene::Color::setRed(uint8_t red) { this->red = red; }
+void Graphene::Color::setRed(uint8_t red) {
+	this->red = red;
+}
 
-void Graphene::Color::setGreen(uint8_t green) { this->green = green; }
+void Graphene::Color::setGreen(uint8_t green) {
+	this->green = green;
+}
 
-void Graphene::Color::setBlue(uint8_t blue) { this->blue = blue; }
+void Graphene::Color::setBlue(uint8_t blue) {
+	this->blue = blue;
+}
 
-void Graphene::Color::setAlpha(uint8_t alpha) { this->alpha = alpha; }
+void Graphene::Color::setAlpha(uint8_t alpha) {
+	this->alpha = alpha;
+}
 
 uint32_t Graphene::Color::toRGBA8888() const {
 	return (red << 24) | (green << 16) | (blue << 8) | alpha;
@@ -106,7 +122,9 @@ void Graphene::Color::fromRGB888(uint32_t color) {
 	alpha = 255;
 }
 
-uint8_t Graphene::Color::toGray8() const { return (red + green + blue) / 3; }
+uint8_t Graphene::Color::toGray8() const {
+	return (red + green + blue) / 3;
+}
 
 void Graphene::Color::fromGray8(uint8_t color) {
 	red = color;

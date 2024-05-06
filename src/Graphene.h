@@ -3,10 +3,8 @@
 
 // Core includes
 #include "core/Color.h"
-#include "core/FrameBuffer.h"
 #include "core/Object.h"
 #include "core/Point.h"
-#include "core/Screen.h"
 #include "core/String.h"
 #include "core/Variant.h"
 

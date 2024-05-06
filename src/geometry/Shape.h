@@ -8,12 +8,12 @@
 // #include "../core/String.h"
 // #include "Constants.h"
 
-
 // namespace Graphene {
 // class Shape {
 //    public:
 // 	Shape();
-// 	Shape(Graphene::Point position, uint32_t width, uint32_t height, Color fillColor, Color strokeColor);
+// 	Shape(Graphene::Point position, uint32_t width, uint32_t height, Color
+// fillColor, Color strokeColor);
 
 // 	/**
 // 	 * @brief Move the shape by the given speed
@@ -53,12 +53,12 @@
 // 	 * @brief Get the Bounding Box object
 // 	 * This function is used to get the bounding box of the shape
 // 	 * resulting in the top left and bottom right points of the bounding box
-// 	 * 
+// 	 *
 // 	 * Top left point is the point with the smallest x and y coordinates
 // 	 * Bottom right point is the point with the largest x and y coordinates
-// 	 * 
-// 	 * @param topLeft 
-// 	 * @param bottomRight 
+// 	 *
+// 	 * @param topLeft
+// 	 * @param bottomRight
 // 	 */
 // 	virtual void getBoundingBox(Point& topLeft, Point& bottomRight) = 0;
 
@@ -79,7 +79,8 @@
 // 	void setStrokeColor(Color strokeColor) { this->strokeColor = strokeColor; }
 
 // 	uint32_t getStrokeWeight() const { return strokeWeight; }
-// 	void setStrokeWeight(uint32_t strokeWeight) { this->strokeWeight = strokeWeight; }
+// 	void setStrokeWeight(uint32_t strokeWeight) { this->strokeWeight =
+// strokeWeight; }
 
 //    protected:
 // 	Point position;
