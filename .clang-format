@@ -10,3 +10,5 @@ IndentCaseLabels: true
 KeepEmptyLinesAtTheStartOfBlocks: false
 BinPackArguments: false
 BinPackParameters: false
+# line width
+ColumnLimit: 120

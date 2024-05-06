@@ -34,8 +34,7 @@ void test_virtual_screen_constructor() {
 	// frame buffer should be cleared
 	for (uint32_t x = 0; x < driver.getWidth(); x++) {
 		for (uint32_t y = 0; y < driver.getHeight(); y++) {
-			TEST_ASSERT_EQUAL(Graphene::BLACK,
-							  buffer.getPixel(Graphene::Point(x, y)));
+			TEST_ASSERT_EQUAL(Graphene::BLACK, buffer.getPixel(Graphene::Point(x, y)));
 		}
 	}
 }
@@ -48,8 +47,7 @@ void test_virtual_screen_draw_pixel() {
 	Graphene::FrameBuffer buffer1 = driver.getCurrentFrame();
 	for (uint32_t x = 0; x < driver.getWidth(); x++) {
 		for (uint32_t y = 0; y < driver.getHeight(); y++) {
-			TEST_ASSERT_EQUAL(Graphene::BLACK,
-							  buffer1.getPixel(Graphene::Point(x, y)));
+			TEST_ASSERT_EQUAL(Graphene::BLACK, buffer1.getPixel(Graphene::Point(x, y)));
 		}
 	}
 
@@ -59,8 +57,7 @@ void test_virtual_screen_draw_pixel() {
 	Graphene::FrameBuffer buffer2 = driver.getCurrentFrame();
 	for (uint32_t x = 0; x < driver.getWidth(); x++) {
 		for (uint32_t y = 0; y < driver.getHeight(); y++) {
-			TEST_ASSERT_EQUAL(Graphene::BLACK,
-							  buffer2.getPixel(Graphene::Point(x, y)));
+			TEST_ASSERT_EQUAL(Graphene::BLACK, buffer2.getPixel(Graphene::Point(x, y)));
 		}
 	}
 
@@ -80,14 +77,10 @@ void test_virtual_screen_draw_pixel() {
 	Graphene::FrameBuffer buffer3 = driver.getCurrentFrame();
 
 	TEST_ASSERT_EQUAL(Graphene::WHITE, buffer3.getPixel(Graphene::Point(0, 0)));
-	TEST_ASSERT_EQUAL(Graphene::WHITE,
-					  buffer3.getPixel(Graphene::Point(127, 63)));
-	TEST_ASSERT_EQUAL(Graphene::WHITE,
-					  buffer3.getPixel(Graphene::Point(64, 32)));
-	TEST_ASSERT_EQUAL(Graphene::WHITE,
-					  buffer3.getPixel(Graphene::Point(0, 63)));
-	TEST_ASSERT_EQUAL(Graphene::WHITE,
-					  buffer3.getPixel(Graphene::Point(127, 0)));
+	TEST_ASSERT_EQUAL(Graphene::WHITE, buffer3.getPixel(Graphene::Point(127, 63)));
+	TEST_ASSERT_EQUAL(Graphene::WHITE, buffer3.getPixel(Graphene::Point(64, 32)));
+	TEST_ASSERT_EQUAL(Graphene::WHITE, buffer3.getPixel(Graphene::Point(0, 63)));
+	TEST_ASSERT_EQUAL(Graphene::WHITE, buffer3.getPixel(Graphene::Point(127, 0)));
 }
 
 void test_virtual_screen_driver_draw_line() {
@@ -147,34 +140,24 @@ void test_virtual_screen_driver_draw_line() {
 	// '1' -> NAVY
 	// '2' -> GREEN
 	// '3' -> RED
-	//   |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 |
-	//   14 | 15 |
+	//   |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 | 14 | 15 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 0 |  1 |    |    |    |    |    |    |    |    |    |    |    |    |    |
-	// |  3 |
+	// 0 |  1 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 1 |    |  1 |  1 |    |    |    |    |    |    |    |    |    |    |    |
-	// |  3 |
+	// 1 |    |  1 |  1 |    |    |    |    |    |    |    |    |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 2 |    |    |    |  1 |  1 |    |    |    |    |    |    |    |    |    |
-	// |  3 |
+	// 2 |    |    |    |  1 |  1 |    |    |    |    |    |    |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 3 |    |    |    |    |    |  1 |  1 |    |    |    |    |    |    |    |
-	// |  3 |
+	// 3 |    |    |    |    |    |  1 |  1 |    |    |    |    |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 4 |    |    |    |    |    |    |    |  1 |  1 |    |    |    |    |    |
-	// |  3 |
+	// 4 |    |    |    |    |    |    |    |  1 |  1 |    |    |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 5 |    |    |    |    |    |    |    |    |    |  1 |  1 |    |    |    |
-	// |  3 |
+	// 5 |    |    |    |    |    |    |    |    |    |  1 |  1 |    |    |    |    |  3 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 6 |    |    |    |    |    |    |    |  2 |  2 |  2 |    |  1 |  1 |    |
-	// |    |
+	// 6 |    |    |    |    |    |    |    |  2 |  2 |  2 |    |  1 |  1 |    |    |    |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 7 |    |    |    |  2 |  2 |  2 |  2 |    |    |    |    |    |    |  1 |
-	// 1 |    |
+	// 7 |    |    |    |  2 |  2 |  2 |  2 |    |    |    |    |    |    |  1 |  1 |    |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-	// 8 |  2 |  2 |  2 |    |    |    |    |    |    |    |    |    |    |    |
-	// |  1 |
+	// 8 |  2 |  2 |  2 |    |    |    |    |    |    |    |    |    |    |    |    |  1 |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 }
