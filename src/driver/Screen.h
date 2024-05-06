@@ -6,10 +6,10 @@
 
 #include <vector>
 
-#include "Color.h"
+#include "../core/Color.h"
+#include "../core/Point.h"
+#include "../core/String.h"
 #include "FrameBuffer.h"
-#include "Point.h"
-#include "String.h"
 
 namespace Graphene {
 class Screen {

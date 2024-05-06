@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#include "Color.h"
-#include "Point.h"
+#include "../core/Color.h"
+#include "../core/Point.h"
 
 namespace Graphene {
 class FrameBuffer {

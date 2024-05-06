@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add the source files for the library
 set(SOURCES
 	src/Graphene.h
+	
+	# Core files
 	src/core/Color.h
 	src/core/Color.cpp
 	src/core/Object.h
@@ -17,6 +19,15 @@ set(SOURCES
 	src/core/String.h
 	src/core/String.cpp
 	src/core/Variant.h
+	
+	# Geometry files
+	# src/geometry/Geometry.h
+	
+	# driver files
+	src/driver/Screen.h
+	src/driver/Screen.cpp
+	src/driver/FrameBuffer.h
+	src/driver/FrameBuffer.cpp
 )
 
 # Create the static library
