@@ -98,7 +98,8 @@ void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center,
 }
 
 void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
-											   uint32_t radius) {
+											   uint32_t radius)
+{
 	int32_t x = radius;
 	int32_t y = 0;
 	int32_t err = 0;
@@ -110,8 +111,8 @@ void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center,
 		}
 
 		for (int32_t i = center.getX() - y; i <= center.getX() + y; i++) {
-			this->drawPixel({(uint32_t)i, center.getY() + x});
-			this->drawPixel({(uint32_t)i, center.getY() - x});
+			this->drawPixel({i, center.getY() + x});
+			this->drawPixel({i, center.getY() - x});
 		}
 
 		if (err <= 0) {
