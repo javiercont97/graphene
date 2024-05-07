@@ -1,5 +1,23 @@
 #include "VirtualScreenDriver.h"
 
+Graphene::VirtualScreenDriver::VirtualScreenDriver() {
+	this->width = 16;
+	this->height = 9;
+
+	// Initialize the frame buffers
+	// Start drawing on the first frame buffer
+	this->currentFrame = 0;
+	this->frames = {Graphene::FrameBuffer(width, height), Graphene::FrameBuffer(width, height)};
+
+	// Set the default colors
+	this->foregroundColor = Graphene::WHITE;
+	this->backgroundColor = Graphene::BLACK;
+
+	// Clear the frame buffers
+	this->frames[0].clear(this->backgroundColor);
+	this->frames[1].clear(this->backgroundColor);
+}
+
 Graphene::VirtualScreenDriver::VirtualScreenDriver(uint32_t width, uint32_t height) {
 	this->width = width;
 	this->height = height;

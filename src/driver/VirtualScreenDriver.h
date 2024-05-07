@@ -27,6 +27,8 @@ namespace Graphene {
  */
 class VirtualScreenDriver {
    public:
+	VirtualScreenDriver();
+
 	VirtualScreenDriver(uint32_t width, uint32_t height);
 	virtual ~VirtualScreenDriver();
 
