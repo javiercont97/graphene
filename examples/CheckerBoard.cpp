@@ -5,26 +5,21 @@
 
 int main() {
 	// Create a VirtualScreenDriver
-	uint32_t width = 800;
-	uint32_t height = 480;
-	Graphene::VirtualScreenDriver driver(width, height);
-	driver.clearScreen(Graphene::DARK_GRAY);
+	uint32_t side = 512;
+	Graphene::VirtualScreenDriver driver(side, side);
+	driver.clearScreen(Graphene::BLACK);
 
-	// Draw some shapes
-	driver.setForegroundColor(Graphene::GREEN);
-	driver.drawLine({0, 0}, {width, height});
-
-	driver.setForegroundColor(Graphene::LIME);
-	driver.drawLine({width, 0}, {0, height});
-
-	driver.setForegroundColor(Graphene::TEAL);
-	driver.drawRectangle({width / 4, height / 4}, width / 2 + 1, height / 2 + 1);
-
-	driver.setForegroundColor(Graphene::FUCHSIA);
-	driver.drawPixel({width / 2, height / 2});
-
-	driver.setForegroundColor(Graphene::CYAN);
-	driver.drawCircle({width / 2, height / 2}, height / 4);
+	// Draw a checkerboard pattern
+	uint32_t squareSize = side / 8;
+	Graphene::Color color = Graphene::WHITE;
+	for (uint32_t y = 0; y < side; y += squareSize) {
+		for (uint32_t x = 0; x < side; x += squareSize) {
+			driver.setForegroundColor(color);
+			driver.fillRectangle({x, y}, squareSize, squareSize);
+			color = (color == Graphene::WHITE) ? Graphene::BLACK : Graphene::WHITE;
+		}
+		color = (color == Graphene::WHITE) ? Graphene::BLACK : Graphene::WHITE;
+	}
 
 	// Convert the FrameBuffer to a PPM
 	driver.swapBuffers();
@@ -32,7 +27,7 @@ int main() {
 	Graphene::String ppm = buffer.toPPM();
 
 	// Write the PPM to a file
-	Graphene::String path = "buffer_to_ppm.ppm";
+	Graphene::String path = "checkerboard.ppm";
 	std::ofstream outfile(path.cStyleString(), std::ios::binary | std::ios::out);
 
 	if (!outfile) {
