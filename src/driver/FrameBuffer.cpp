@@ -47,3 +47,15 @@ Graphene::Color Graphene::FrameBuffer::getPixel(Graphene::Point point) const {
 Graphene::Color Graphene::FrameBuffer::getPixel(uint32_t x, uint32_t y) const {
 	return this->buffer[y * width + x];
 }
+
+Graphene::String Graphene::FrameBuffer::toPPM() const {
+	Graphene::String ppm = Graphene::String::asPrintf("P3\n%d %d\n255\n", width, height);
+
+	for (uint32_t i = 0; i < width * height; i++) {
+		ppm += Graphene::String::asPrintf("%d ", buffer[i].getRed());
+		ppm += Graphene::String::asPrintf("%d ", buffer[i].getGreen());
+		ppm += Graphene::String::asPrintf("%d ", buffer[i].getBlue());
+	}
+
+	return ppm;
+}

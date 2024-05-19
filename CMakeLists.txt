@@ -54,3 +54,8 @@ if(CLANG_FORMAT_EXECUTABLE)
 		COMMENT "Formatting code using clang-format"
 	)
 endif()
+
+
+
+# Build examples
+add_subdirectory(examples)

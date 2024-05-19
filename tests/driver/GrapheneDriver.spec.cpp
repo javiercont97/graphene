@@ -26,6 +26,7 @@ int main() {
 	RUN_TEST(test_virtual_screen_driver_draw_rectangle);
 	RUN_TEST(test_virtual_screen_driver_fill_rectangle);
 	RUN_TEST(test_draw_circle);
+	RUN_TEST(test_fill_circle);
 
-	UNITY_END();
+	return UNITY_END();
 }

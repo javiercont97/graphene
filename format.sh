@@ -8,3 +8,6 @@ find src -name '*.h' -exec clang-format -i {} \;
 find tests -name '*.cpp' -exec clang-format -i {} \;
 find tests -name '*.h' -exec clang-format -i {} \;
 
+# format example code
+find examples -name '*.cpp' -exec clang-format -i {} \;
+find examples -name '*.h' -exec clang-format -i {} \;

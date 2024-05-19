@@ -336,6 +336,26 @@ void test_draw_circle() {
 	driver.swapBuffers();
 	Graphene::FrameBuffer buffer = driver.getCurrentFrame();
 
+	std::vector<Graphene::Point> circlePoints;
+	std::vector<Graphene::Point> otherPoints;
+
+	// printf("   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12| 13| 14| 15|\n");
+	// printf("   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	for (int i = 0; i < 9; i++) {
+		// printf(" %d |", i);
+		for (int j = 0; j < 16; j++) {
+			if (buffer.getPixel(Graphene::Point(j, i)) == Graphene::NAVY) {
+				// printf(" 1 |");
+				circlePoints.push_back(Graphene::Point(j, i));
+			} else {
+				// printf("   |");
+				otherPoints.push_back(Graphene::Point(j, i));
+			}
+		}
+		// printf("\n");
+		// printf("   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	}
+
 	// check pixels are drawn to the buffer
 	TEST_ASSERT_EQUAL(Graphene::NAVY, buffer.getPixel(Graphene::Point(7, 0)));
 	TEST_ASSERT_EQUAL(Graphene::NAVY, buffer.getPixel(Graphene::Point(8, 0)));
@@ -390,6 +410,69 @@ void test_draw_circle() {
 	// 6 |    |    |    |    |    |  1 |    |    |    |    |    |  1 |    |    |    |    |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 	// 7 |    |    |    |    |    |  1 |  1 |    |    |    |  1 |  1 |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 8 |    |    |    |    |    |    |    |  1 |  1 |  1 |    |    |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+}
+
+void test_fill_circle() {
+	Graphene::VirtualScreenDriver driver(16, 9);
+	// draw some circles
+	driver.setForegroundColor(Graphene::NAVY);
+	driver.fillCircle(Graphene::Point(8, 4), 5);
+
+	// check pixels are drawn to the buffer
+	driver.swapBuffers();
+	Graphene::FrameBuffer buffer = driver.getCurrentFrame();
+
+	std::vector<Graphene::Point> circlePoints;
+	std::vector<Graphene::Point> otherPoints;
+
+	printf("   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12| 13| 14| 15|\n");
+	printf("   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	for (int i = 0; i < 9; i++) {
+		printf(" %d |", i);
+		for (int j = 0; j < 16; j++) {
+			if (buffer.getPixel(Graphene::Point(j, i)) == Graphene::NAVY) {
+				printf(" 1 |");
+				circlePoints.push_back(Graphene::Point(j, i));
+			} else {
+				printf("   |");
+				otherPoints.push_back(Graphene::Point(j, i));
+			}
+		}
+		printf("\n");
+		printf("   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	}
+
+	for (Graphene::Point p : circlePoints) {
+		TEST_ASSERT_EQUAL(Graphene::NAVY, buffer.getPixel(p));
+	}
+
+	for (Graphene::Point p : otherPoints) {
+		TEST_ASSERT_EQUAL(Graphene::BLACK, buffer.getPixel(p));
+	}
+
+	// ' ' -> BLACK
+	// '0' -> center of the circle
+	// '1' -> NAVY
+	//   |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 | 14 | 15 |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 0 |    |    |    |    |    |    |    |  1 |  1 |  1 |    |    |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 1 |    |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 2 |    |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 3 |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 4 |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 5 |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 6 |    |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |    |
+	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+	// 7 |    |    |    |    |    |  1 |  1 |  1 |  1 |  1 |  1 |  1 |    |    |    |    |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 	// 8 |    |    |    |    |    |    |    |  1 |  1 |  1 |    |    |    |    |    |    |
 	//   +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+

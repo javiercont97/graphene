@@ -23,6 +23,21 @@ class FrameBuffer {
 	Color getPixel(Point point) const;
 	Color getPixel(uint32_t x, uint32_t y) const;
 
+	/**
+	 * @brief Returns the FrameBuffer as a PPM-formatted string.
+	 *
+	 * The PPM format is a simple text-based format for storing images. The format
+	 * is as follows:
+	 *
+	 * P3
+	 * width height
+	 * 255
+	 * r g b r g b r g b ...
+	 *
+	 * @return Graphene::String
+	 */
+	Graphene::String toPPM() const;
+
    private:
 	uint32_t width;
 	uint32_t height;

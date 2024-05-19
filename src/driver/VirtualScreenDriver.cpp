@@ -99,74 +99,87 @@ void Graphene::VirtualScreenDriver::fillRectangle(Graphene::Point position, uint
 
 void Graphene::VirtualScreenDriver::drawCircle(Graphene::Point center, uint32_t radius) {
 	// midpoint circle algorithm
+	radius = radius - 1;  // consider 0 based indexing
 
-	// Given a function f(x, y) = x^2 + y^2 - r^2
-	// f(x, y) > 0 means the point is outside the circle
-	// f(x, y) < 0 means the point is inside the circle
-	// f(x, y) = 0 means the point is on the circle
-	auto fCircle = [=](int32_t x, int32_t y, int32_t r) { return x * x + y * y - r * r; };
+	int x = 0;
+	int y = radius;
+	int p = 1 - radius;	 // Initial decision parameter
 
-	radius = radius - 1;  // to take into account 0 based indexing
+	// Plot the initial point
+	// plotPoints(x_center, y_center, x, y);
+	drawPixel({center.getX() + x, center.getY() + y});
+	drawPixel({center.getX() - x, center.getY() + y});
+	drawPixel({center.getX() + x, center.getY() - y});
+	drawPixel({center.getX() - x, center.getY() - y});
+	drawPixel({center.getX() + y, center.getY() + x});
+	drawPixel({center.getX() - y, center.getY() + x});
+	drawPixel({center.getX() + y, center.getY() - x});
+	drawPixel({center.getX() - y, center.getY() - x});
 
-	// P0 = (0, r)
-	int32_t x = 0;
-	int32_t y = radius;
-
-	// Initial decision parameter of region 1
-	int32_t d = 5 / 4 - radius;
-
-	// loop till x>=y
-	for (int32_t k = 0; x >= y; k++) {
-		// Print the circle points
-		// (x, y) is the current point
-		// Print the mirror image of the current point
-		// in the 4 quadrants
-		this->drawPixel({center.getX() + x, center.getY() + y});
-		this->drawPixel({center.getX() - x, center.getY() + y});
-		this->drawPixel({center.getX() + x, center.getY() - y});
-		this->drawPixel({center.getX() - x, center.getY() - y});
-		this->drawPixel({center.getX() + y, center.getY() + x});
-		this->drawPixel({center.getX() - y, center.getY() + x});
-		this->drawPixel({center.getX() + y, center.getY() - x});
-		this->drawPixel({center.getX() - y, center.getY() - x});
-
-		// Depending on the value of d, we can either
-		// add x or add x and y
-		if (d < 0) {
-			d += 2 * x + 3;
-		} else {
-			d += 2 * (x - y) + 5;
-			y--;
-		}
+	// Iteratively plot points using Midpoint Algorithm
+	while (x < y) {
 		x++;
+		if (p < 0)
+			p += 2 * x + 1;
+		else {
+			y--;
+			p += 2 * (x - y) + 1;
+		}
+		// plotPoints(x_center, y_center, x, y); // Plot points using symmetry
+		drawPixel({center.getX() + x, center.getY() + y});
+		drawPixel({center.getX() - x, center.getY() + y});
+		drawPixel({center.getX() + x, center.getY() - y});
+		drawPixel({center.getX() - x, center.getY() - y});
+		drawPixel({center.getX() + y, center.getY() + x});
+		drawPixel({center.getX() - y, center.getY() + x});
+		drawPixel({center.getX() + y, center.getY() - x});
+		drawPixel({center.getX() - y, center.getY() - x});
 	}
 }
 
 void Graphene::VirtualScreenDriver::fillCircle(Graphene::Point center, uint32_t radius) {
-	int32_t x = radius;
-	int32_t y = 0;
-	int32_t err = 0;
+	// midpoint circle algorithm
+	radius = radius - 1;  // consider 0 based indexing
 
-	while (x >= y) {
-		for (int32_t i = center.getX() - x; i <= center.getX() + x; i++) {
-			this->drawPixel({i, center.getY() + y});
-			this->drawPixel({i, center.getY() - y});
-		}
+	int x = 0;
+	int y = radius;
+	int p = 1 - radius;	 // Initial decision parameter
 
-		for (int32_t i = center.getX() - y; i <= center.getX() + y; i++) {
-			this->drawPixel({i, center.getY() + x});
-			this->drawPixel({i, center.getY() - x});
-		}
+	// Plot the initial point
+	drawPixel({center.getX() + x, center.getY() + y});
+	drawPixel({center.getX() - x, center.getY() + y});
+	drawPixel({center.getX() + x, center.getY() - y});
+	drawPixel({center.getX() - x, center.getY() - y});
+	drawPixel({center.getX() + y, center.getY() + x});
+	drawPixel({center.getX() - y, center.getY() + x});
+	drawPixel({center.getX() + y, center.getY() - x});
+	drawPixel({center.getX() - y, center.getY() - x});
 
-		if (err <= 0) {
-			y += 1;
-			err += 2 * y + 1;
-		}
+	// draw center line
+	drawLine({center.getX() - y, center.getY() + x}, {center.getX() + y, center.getY() + x});
 
-		if (err > 0) {
-			x -= 1;
-			err -= 2 * x + 1;
+	// Iteratively plot points using Midpoint Algorithm
+	while (x < y) {
+		x++;
+		if (p < 0)
+			p += 2 * x + 1;
+		else {
+			y--;
+			p += 2 * (x - y) + 1;
 		}
+		drawPixel({center.getX() + x, center.getY() + y});
+		drawPixel({center.getX() - x, center.getY() + y});
+		drawPixel({center.getX() + x, center.getY() - y});
+		drawPixel({center.getX() - x, center.getY() - y});
+		drawPixel({center.getX() + y, center.getY() + x});
+		drawPixel({center.getX() - y, center.getY() + x});
+		drawPixel({center.getX() + y, center.getY() - x});
+		drawPixel({center.getX() - y, center.getY() - x});
+
+		this->drawLine({center.getX() - x, center.getY() + y}, {center.getX() + x, center.getY() + y});
+		this->drawLine({center.getX() - x, center.getY() - y}, {center.getX() + x, center.getY() - y});
+		this->drawLine({center.getX() - y, center.getY() + x}, {center.getX() + y, center.getY() + x});
+		this->drawLine({center.getX() - y, center.getY() - x}, {center.getX() + y, center.getY() - x});
 	}
 }
 

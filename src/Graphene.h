@@ -13,10 +13,6 @@
 #include "driver/VirtualScreenDriver.h"
 
 // geometry includes
-// #include "geometry/Circle.h"
-// #include "geometry/Constants.h"
-// #include "geometry/Rectangle.h"
-// #include "geometry/Shape.h"
 
 // Components includes
 
