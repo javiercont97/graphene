@@ -3,7 +3,6 @@
 
 #include "Color.spec.h"
 #include "Object.spec.h"
-#include "Point.spec.h"
 #include "String.spec.h"
 #include "Variant.spec.h"
 
@@ -68,31 +67,6 @@ int main() {
 	// Test Object event handling
 	RUN_TEST(testPublish);
 	RUN_TEST(testCircularPublish);
-
-	//======================
-	// Test Point class
-	//======================
-	// Test constructors
-	RUN_TEST(testPointDefaultConstructor);
-	RUN_TEST(testPointParameterizedConstructor);
-	RUN_TEST(testPointCopyConstructor);
-	RUN_TEST(testPointAssignmentOperator);
-
-	// Test accessors
-	RUN_TEST(testPointGetX);
-	RUN_TEST(testPointGetY);
-	RUN_TEST(testPointSetX);
-	RUN_TEST(testPointSetY);
-
-	// Test operators
-	RUN_TEST(testPointEqualityOperator);
-	RUN_TEST(testPointInequalityOperator);
-	RUN_TEST(testPointAdditionOperator);
-	RUN_TEST(testPointSubtractionOperator);
-
-	// Test utility functions
-	RUN_TEST(testPointDistanceTo);
-	RUN_TEST(testPointToString);
 
 	//======================
 	// Test Color class

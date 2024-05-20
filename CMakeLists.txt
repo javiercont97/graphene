@@ -8,26 +8,51 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add the source files for the library
 set(SOURCES
 	src/Graphene.h
+
+	# Interface files
+	src/interfaces/AbstractCanvas.h
+	src/interfaces/AbstractCanvas.cpp
 	
 	# Core files
 	src/core/Color.h
 	src/core/Color.cpp
 	src/core/Object.h
 	src/core/Object.cpp
-	src/core/Point.h
-	src/core/Point.cpp
 	src/core/String.h
 	src/core/String.cpp
 	src/core/Variant.h
+	
+	# Math files
+	src/math/Point.h
+	src/math/Point.cpp
+	src/math/Vector3D.h
+	src/math/Vector3D.cpp
+	# src/math/Matrix.h
+	# src/math/Matrix.cpp
+	# src/math/Quaternion.h
+	# src/math/Quaternion.cpp
+	# src/math/Transform.h
+	# src/math/Transform.cpp
+	# src/math/Vector2D.h
+	# src/math/Vector2D.cpp
+	# src/math/Vector3D.h
+	# src/math/Vector3D.cpp
+	# src/math/Vector4D.h
+	# src/math/Vector4D.cpp
+
+
+	# Image files
+	src/image/Image.h
+	src/image/Image.cpp
 	
 	# Geometry files
 	# src/geometry/Geometry.h
 	
 	# driver files
-	src/driver/VirtualScreenDriver.h
-	src/driver/VirtualScreenDriver.cpp
-	src/driver/FrameBuffer.h
-	src/driver/FrameBuffer.cpp
+	# src/driver/VirtualScreenDriver.h
+	# src/driver/VirtualScreenDriver.cpp
+	# src/driver/FrameBuffer.h
+	# src/driver/FrameBuffer.cpp
 )
 
 # Create the static library

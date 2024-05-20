@@ -3,7 +3,7 @@
 Graphene::Point::Point() : x(0), y(0) {
 }
 
-Graphene::Point::Point(uint32_t x, uint32_t y) : x(x), y(y) {
+Graphene::Point::Point(int32_t x, int32_t y) : x(x), y(y) {
 }
 
 Graphene::Point::Point(const Point& point) {
@@ -17,22 +17,22 @@ Graphene::Point& Graphene::Point::operator=(const Point& point) {
 	return *this;
 }
 
-uint32_t Graphene::Point::getX() const {
+int32_t Graphene::Point::getX() const {
 	// return x;
 	return this->x;
 }
 
-uint32_t Graphene::Point::getY() const {
+int32_t Graphene::Point::getY() const {
 	// return y;
 	return this->y;
 }
 
-void Graphene::Point::setX(uint32_t x) {
+void Graphene::Point::setX(int32_t x) {
 	// assign x to this->x
 	this->x = x;
 }
 
-void Graphene::Point::setY(uint32_t y) {
+void Graphene::Point::setY(int32_t y) {
 	// assign y to this->y
 	this->y = y;
 }
@@ -71,7 +71,7 @@ Graphene::Point Graphene::Point::operator-=(const Point& point) {
 	return *this;
 }
 
-uint32_t Graphene::Point::distanceTo(const Point& point) const {
+int32_t Graphene::Point::distanceTo(const Point& point) const {
 	int deltaX = point.x - this->x;
 	int deltaY = point.y - this->y;
 

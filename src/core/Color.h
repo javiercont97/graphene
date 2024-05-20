@@ -36,22 +36,85 @@ class Color {
 
 	// pixel format conversion
 	uint32_t toRGBA8888() const;
-	void fromRGBA8888(uint32_t color);
-
 	uint32_t toARGB8888() const;
-	void fromARGB8888(uint32_t color);
-
 	uint16_t toRGB565() const;
-	void fromRGB565(uint16_t color);
-
 	uint32_t toRGB888() const;
-	void fromRGB888(uint32_t color);
-
 	uint8_t toGray8() const;
-	void fromGray8(uint8_t color);
-
 	uint32_t toFormat(PixelFormat format) const;
-	void fromFormat(uint32_t color, PixelFormat format);
+
+	struct ColorFactory {
+		static Color fromRGBA8888(uint32_t color) {
+			uint8_t red = (color >> 24) & 0xFF;
+			uint8_t green = (color >> 16) & 0xFF;
+			uint8_t blue = (color >> 8) & 0xFF;
+			uint8_t alpha = color & 0xFF;
+
+			return Color(red, green, blue, alpha);
+		}
+
+		static Color fromARGB8888(uint32_t color) {
+			uint8_t alpha = (color >> 24) & 0xFF;
+			uint8_t red = (color >> 16) & 0xFF;
+			uint8_t green = (color >> 8) & 0xFF;
+			uint8_t blue = color & 0xFF;
+
+			return Color(red, green, blue, alpha);
+		}
+
+		static Color fromRGB565(uint16_t color) {
+			uint8_t r5 = (color >> 11) & 0x1F;
+			uint8_t g6 = (color >> 5) & 0x3F;
+			uint8_t b5 = color & 0x1F;
+
+			uint8_t red = (r5 * 255) / 31;
+			uint8_t green = (g6 * 255) / 63;
+			uint8_t blue = (b5 * 255) / 31;
+			uint8_t alpha = 255;
+
+			return Color(red, green, blue, alpha);
+		}
+
+		static Color fromRGB888(uint32_t color) {
+			uint8_t red = (color >> 16) & 0xFF;
+			uint8_t green = (color >> 8) & 0xFF;
+			uint8_t blue = color & 0xFF;
+			uint8_t alpha = 255;
+
+			return Color(red, green, blue, alpha);
+		}
+
+		static Color fromGray8(uint8_t color) {
+			uint8_t red = color;
+			uint8_t green = color;
+			uint8_t blue = color;
+			uint8_t alpha = 255;
+
+			return Color(red, green, blue, alpha);
+		}
+
+		static Color fromFormat(uint32_t color, PixelFormat format) {
+			switch (format) {
+				case PixelFormat::RGBA8888:
+					return fromRGBA8888(color);
+					break;
+				case PixelFormat::ARGB8888:
+					return fromARGB8888(color);
+					break;
+				case PixelFormat::RGB565:
+					return fromRGB565(color);
+					break;
+				case PixelFormat::RGB888:
+					return fromRGB888(color);
+					break;
+				case PixelFormat::GRAY8:
+					return fromGray8(color);
+					break;
+			}
+
+			// default to ARGB8888
+			return fromARGB8888(color);
+		}
+	};
 
    private:
 	uint8_t red;

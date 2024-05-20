@@ -183,6 +183,14 @@ class String {
 	const char* cStyleString() const;
 
 	/**
+	 * @brief Conversion operator. Get the C-style string. Equivalent to
+	 * cStyleString().
+	 *
+	 * @return const char*
+	 */
+	operator char*() const;
+
+	/**
 	 * @brief Parse the string from the integer.
 	 *
 	 * @param value
