@@ -42,26 +42,5 @@ int main() {
 			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
 	}
 
-	// Export the image to a BMP file
-	fileName = "bmp_demo.bmp";
-	if (!image.exportTo(fileName, Graphene::ImageFormat::BMP)) {
-		std::cerr << Graphene::String::asPrintf(
-			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
-	}
-
-	// Export the image to a PNG file
-	fileName = "png_demo.png";
-	if (!image.exportTo(fileName, Graphene::ImageFormat::PNG)) {
-		std::cerr << Graphene::String::asPrintf(
-			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
-	}
-
-	// Export the image to a JPEG file
-	fileName = "jpeg_demo.jpg";
-	if (!image.exportTo(fileName, Graphene::ImageFormat::JPEG)) {
-		std::cerr << Graphene::String::asPrintf(
-			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
-	}
-
 	return 0;
 }

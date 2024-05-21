@@ -23,16 +23,6 @@ Graphene::String Graphene::Image::getErrorMessage() const {
 	return this->errorMessage;
 }
 
-bool Graphene::Image::exportToBMP(const String& filename) {
-	this->errorMessage = "BMP export not implemented";
-	return false;
-}
-
-bool Graphene::Image::exportToPNG(const String& filename) {
-	this->errorMessage = "PNG export not implemented";
-	return false;
-}
-
 bool Graphene::Image::exportToPPM_P3(const String& filename) {
 	std::ofstream file(filename, std::ios::binary | std::ios::out);
 	if (!file) {
@@ -85,36 +75,15 @@ bool Graphene::Image::exportToPPM_P6(const String& filename) {
 	return true;
 }
 
-bool Graphene::Image::exportToJPEG(const String& filename) {
-	this->errorMessage = "JPEG export not implemented";
-	return false;
-}
-
 bool Graphene::Image::exportTo(const String& filename, ImageFormat format) {
 	switch (format) {
-		case ImageFormat::BMP:
-			return this->exportToBMP(filename);
-		case ImageFormat::PNG:
-			return this->exportToPNG(filename);
 		case ImageFormat::PPM_P3:
 			return this->exportToPPM_P3(filename);
 		case ImageFormat::PPM_P6:
 			return this->exportToPPM_P6(filename);
-		case ImageFormat::JPEG:
-			return this->exportToJPEG(filename);
 	}
 
 	this->errorMessage = "Invalid image format";
-	return false;
-}
-
-bool Graphene::Image::importFromBMP(const String& filename) {
-	this->errorMessage = "BMP import not implemented";
-	return false;
-}
-
-bool Graphene::Image::importFromPNG(const String& filename) {
-	this->errorMessage = "PNG import not implemented";
 	return false;
 }
 
@@ -128,23 +97,12 @@ bool Graphene::Image::importFromPPM_P6(const String& filename) {
 	return false;
 }
 
-bool Graphene::Image::importFromJPEG(const String& filename) {
-	this->errorMessage = "JPEG import not implemented";
-	return false;
-}
-
 bool Graphene::Image::importFrom(const String& filename, ImageFormat format) {
 	switch (format) {
-		case ImageFormat::BMP:
-			return this->importFromBMP(filename);
-		case ImageFormat::PNG:
-			return this->importFromPNG(filename);
 		case ImageFormat::PPM_P3:
 			return this->importFromPPM_P3(filename);
 		case ImageFormat::PPM_P6:
 			return this->importFromPPM_P6(filename);
-		case ImageFormat::JPEG:
-			return this->importFromJPEG(filename);
 	}
 
 	this->errorMessage = "Invalid image format";

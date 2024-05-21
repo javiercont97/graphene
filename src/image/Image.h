@@ -10,7 +10,7 @@
 #include "../math/Point.h"
 
 namespace Graphene {
-enum class ImageFormat { BMP, PNG, PPM_P3, PPM_P6, JPEG };
+enum class ImageFormat { PPM_P3, PPM_P6 };
 
 class Image : public AbstractCanvas {
    public:
@@ -31,20 +31,11 @@ class Image : public AbstractCanvas {
 	// Export functions
 	//=====================================================
    private:
-	// Export the image to a BMP file
-	bool exportToBMP(const String &filename);
-
-	// Export the image to a PNG file
-	bool exportToPNG(const String &filename);
-
 	// Export the image to a PPM file (P3 format)
 	bool exportToPPM_P3(const String &filename);
 
 	// Export the image to a PPM file (P6 format)
 	bool exportToPPM_P6(const String &filename);
-
-	// Export the image to a JPEG file
-	bool exportToJPEG(const String &filename);
 
    public:
 	// export the image to a file with a given format
@@ -54,20 +45,11 @@ class Image : public AbstractCanvas {
 	// Import functions
 	//=====================================================
    private:
-	// Import an image from a BMP file
-	bool importFromBMP(const String &filename);
-
-	// Import an image from a PNG file
-	bool importFromPNG(const String &filename);
-
 	// Import an image from a PPM file (P3 format)
 	bool importFromPPM_P3(const String &filename);
 
 	// Import an image from a PPM file (P6 format)
 	bool importFromPPM_P6(const String &filename);
-
-	// Import an image from a JPEG file
-	bool importFromJPEG(const String &filename);
 
    public:
 	// Import an image from a file with a given format
