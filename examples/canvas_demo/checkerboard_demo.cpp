@@ -19,7 +19,7 @@ int main() {
 
 	// Export the image to a PPM file P6 format
 	Graphene::String fileName = "checkerboard_demo.ppm";
-	if (!image.exportTo(fileName, Graphene::ImageFormat::PPM_P6)) {
+	if (!image.exportTo(fileName, Graphene::ImageFormat::PPM_P3)) {
 		std::cerr << Graphene::String::asPrintf(
 			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
 	}

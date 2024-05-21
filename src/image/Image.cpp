@@ -88,13 +88,97 @@ bool Graphene::Image::exportTo(const String& filename, ImageFormat format) {
 }
 
 bool Graphene::Image::importFromPPM_P3(const String& filename) {
-	this->errorMessage = "PPM_P3 import not implemented";
-	return false;
+	std::ifstream file(filename, std::ios::binary | std::ios::in);
+	if (!file) {
+		this->errorMessage = "Error opening file for reading.";
+		return false;
+	}
+
+	std::string magic;
+	file >> magic;
+	if (magic != "P3") {
+		this->errorMessage = "Invalid magic number.";
+		file.close();
+		return false;
+	}
+
+	file >> this->width;
+	file >> this->height;
+
+	int maxColor;
+	file >> maxColor;
+	if (maxColor != 255) {
+		this->errorMessage = "Invalid max color value.";
+		file.close();
+		return false;
+	}
+
+	this->pixels.clear();
+	for (int32_t i = 0; i < this->width * this->height; i++) {
+		int red, green, blue;
+		file >> red;
+		file >> green;
+		file >> blue;
+		this->pixels.push_back(Graphene::Color(red, green, blue));
+	}
+
+	if (!file.good()) {
+		this->errorMessage = "Error reading data from file.";
+		file.close();
+		return false;
+	}
+
+	file.close();
+	return true;
 }
 
 bool Graphene::Image::importFromPPM_P6(const String& filename) {
-	this->errorMessage = "PPM_P6 import not implemented";
-	return false;
+	std::ifstream file(filename, std::ios::binary | std::ios::in);
+	if (!file) {
+		this->errorMessage = "Error opening file for reading.";
+		return false;
+	}
+
+	std::string magic;
+	file >> magic;
+	if (magic != "P6") {
+		this->errorMessage = "Invalid magic number.";
+		file.close();
+		return false;
+	}
+
+	file >> this->width;
+	file >> this->height;
+
+	int maxColor;
+	file >> maxColor;
+	if (maxColor != 255) {
+		this->errorMessage = "Invalid max color value.";
+		file.close();
+		return false;
+	}
+
+	this->pixels.clear();
+
+	char extraByte;
+	file.read(&extraByte, 1);  // read the newline character
+
+	char red, green, blue;
+	for (int32_t i = 0; i < this->width * this->height; i++) {
+		file.read(&red, 1);
+		file.read(&green, 1);
+		file.read(&blue, 1);
+		this->pixels.push_back(Graphene::Color((uint8_t)red, (uint8_t)green, (uint8_t)blue));
+	}
+
+	if (!file.good()) {
+		this->errorMessage = "Error reading data from file.";
+		file.close();
+		return false;
+	}
+
+	file.close();
+	return true;
 }
 
 bool Graphene::Image::importFrom(const String& filename, ImageFormat format) {

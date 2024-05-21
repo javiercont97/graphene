@@ -4,6 +4,12 @@ target_link_libraries(checkerboard_demo Graphene)
 target_include_directories(checkerboard_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 
+# Import/export
+add_executable(read_and_re_export_demo canvas_demo/read_and_re_export_demo.cpp)
+target_link_libraries(read_and_re_export_demo Graphene)
+target_include_directories(read_and_re_export_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
+
 # # Trigonometric functions
 # add_executable(Trigonometric Trigonometric.cpp)
 # target_link_libraries(Trigonometric Graphene)
