@@ -10,22 +10,16 @@ target_link_libraries(read_and_re_export_demo Graphene)
 target_include_directories(read_and_re_export_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 
-# # Trigonometric functions
-# add_executable(Trigonometric Trigonometric.cpp)
-# target_link_libraries(Trigonometric Graphene)
-# target_include_directories(Trigonometric PRIVATE ${CMAKE_SOURCE_DIR}/src)
+# Trigonometric functions
+add_executable(trigonometric canvas_demo/trigonometric.cpp)
+target_link_libraries(trigonometric Graphene)
+target_include_directories(trigonometric PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 
 # # Minecraft creeper
-# add_executable(Creeper Creeper.cpp)
-# target_link_libraries(Creeper Graphene)
-# target_include_directories(Creeper PRIVATE ${CMAKE_SOURCE_DIR}/src)
-
-
-# # Minecraft Pillager
-# add_executable(Pillager Pillager.cpp)
-# target_link_libraries(Pillager Graphene)
-# target_include_directories(Pillager PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_executable(creeper canvas_demo/creeper.cpp)
+target_link_libraries(creeper Graphene)
+target_include_directories(creeper PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 
 # String usage examples

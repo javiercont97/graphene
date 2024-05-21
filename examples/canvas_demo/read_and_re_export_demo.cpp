@@ -4,7 +4,6 @@
 
 int main() {
 	// Load a PPM3 image, add a red rectangle in the middle of the image, and save it to a PPM6 file
-
 	Graphene::Image image;
 	if (!image.importFrom("checkerboard_demo.ppm", Graphene::ImageFormat::PPM_P3)) {
 		std::cerr << Graphene::String::asPrintf("Failed to load image from \"checkerboard_demo.ppm\": %s\n",

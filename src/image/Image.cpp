@@ -389,6 +389,6 @@ void Graphene::Image::drawString(Graphene::Point position, String text, Graphene
 void Graphene::Image::clear(Graphene::Color color) {
 	this->pixels.clear();
 	for (uint32_t i = 0; i < width * height; i++) {
-		this->pixels.push_back(Graphene::BLACK);
+		this->pixels.push_back(color);
 	}
 }
