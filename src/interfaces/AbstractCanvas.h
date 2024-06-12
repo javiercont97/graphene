@@ -5,6 +5,7 @@
 #include "../core/Font.h"
 #include "../core/String.h"
 #include "../math/Point.h"
+#include "../math/Rect.h"
 
 namespace Graphene {
 
@@ -112,13 +113,14 @@ class AbstractCanvas {
 	//=====================================================
 	// Getters and setters
 	//=====================================================
-	uint32_t getWidth() const;
-	uint32_t getHeight() const;
+	int32_t getWidth() const;
+	int32_t getHeight() const;
+
+	Graphene::Rect getBounds() const;
 
    protected:
 	// display geometry
-	uint32_t width;
-	uint32_t height;
+	Rect bounds;
 };
 }  // namespace Graphene
 

@@ -1,22 +1,22 @@
 #include "AbstractCanvas.h"
 
-Graphene::AbstractCanvas::AbstractCanvas() {
-	this->width = 0;
-	this->height = 0;
+Graphene::AbstractCanvas::AbstractCanvas() : bounds(0, 0, 0, 0) {
 }
 
-Graphene::AbstractCanvas::AbstractCanvas(uint32_t width, uint32_t height) {
-	this->width = width;
-	this->height = height;
+Graphene::AbstractCanvas::AbstractCanvas(uint32_t width, uint32_t height) : bounds(0, 0, width, height) {
 }
 
 Graphene::AbstractCanvas::~AbstractCanvas() {
 }
 
-uint32_t Graphene::AbstractCanvas::getWidth() const {
-	return this->width;
+int32_t Graphene::AbstractCanvas::getWidth() const {
+	return this->bounds.getWidth();
 }
 
-uint32_t Graphene::AbstractCanvas::getHeight() const {
-	return this->height;
+int32_t Graphene::AbstractCanvas::getHeight() const {
+	return this->bounds.getHeight();
+}
+
+Graphene::Rect Graphene::AbstractCanvas::getBounds() const {
+	return this->bounds;
 }
