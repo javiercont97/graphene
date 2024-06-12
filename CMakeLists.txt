@@ -5,6 +5,9 @@ project(Graphene)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable Graphene image format
+add_definitions(-DENABLE_GRAPHENE_IMAGE_FORMAT)
+
 # Add the source files for the library
 set(SOURCES
 	src/Graphene.h
@@ -12,6 +15,7 @@ set(SOURCES
 	# Interface files
 	src/interfaces/AbstractCanvas.h
 	src/interfaces/AbstractCanvas.cpp
+	
 	
 	# Core files
 	src/core/Color.h

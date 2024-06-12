@@ -30,7 +30,7 @@ Overall, the top level design of Graphene provides a solid foundation for buildi
 
 The following is a list of requirements attached to user stories:
 
- 1. [ ] As a user, I want to be able to draw lines, rectangles, circles, and text on the screen.
+ 1. [x] As a user, I want to be able to draw lines, rectangles, circles, and text on the screen.
  2. [ ] As a user, I want to be able to create buttons with customizable labels and styles.
  3. [ ] As a user, I want to be able to create sliders with adjustable values and visual indicators.
  4. [ ] As a user, I want to be able to create graphs to visualize data in real-time.
@@ -59,4 +59,16 @@ build_flags =
 build_unflags = 
 	-fno-rtti
 	-std=gnu++14
+```
+
+## Feature flags
+Add these macros definition before importing Graphene.h to enable the desired features
+```cmake
+# Image import/export
+# enable the image format feature
+add_definitions(-DENABLE_GRAPHENE_IMAGE_FORMAT)
+
+# Embedded UI
+
+
 ```

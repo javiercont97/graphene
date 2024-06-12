@@ -2,10 +2,13 @@
 #define GRAPHENE_DRIVER_INTERFACE_H
 
 #include "../core/Color.h"
+#include "../core/Font.h"
 #include "../core/String.h"
 #include "../math/Point.h"
 
 namespace Graphene {
+
+enum class TextAlignment { LEFT, CENTER, RIGHT };
 
 // Interface for canvas classes, which are responsible for rendering to the screen
 // or to an image buffer. The canvas class should be able to draw lines, rectangles,
@@ -89,7 +92,11 @@ class AbstractCanvas {
 	 * @param position
 	 * @param text
 	 */
-	virtual void drawString(Graphene::Point position, String text, Graphene::Color color) = 0;
+	virtual void drawString(Graphene::Point position,
+							String text,
+							Graphene::Color color,
+							Font font,
+							TextAlignment align = TextAlignment::CENTER) = 0;
 
 	/**
 	 * @brief Clear the screen with background color.

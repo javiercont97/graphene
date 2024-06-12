@@ -1,3 +1,4 @@
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
 #include "Image.h"
 
 Graphene::Image::Image() : AbstractCanvas() {
@@ -363,10 +364,10 @@ void Graphene::Image::fillPolygon(std::vector<Graphene::Point> points, Graphene:
 	auto isInside = [&points](Graphene::Point point) {
 		bool isInside = false;
 		for (size_t i = 0, j = points.size() - 1; i < points.size(); j = i++) {
-			if (((points[i].getY() > point.getY()) != (points[j].getY() > point.getY())) &&
-				(point.getX() < (points[j].getX() - points[i].getX()) * (point.getY() - points[i].getY()) /
-										(points[j].getY() - points[i].getY()) +
-									points[i].getX())) {
+			if (((points[i].getY() > point.getY()) != (points[j].getY() > point.getY()))
+				&& (point.getX() < (points[j].getX() - points[i].getX()) * (point.getY() - points[i].getY())
+										   / (points[j].getY() - points[i].getY())
+									   + points[i].getX())) {
 				isInside = !isInside;
 			}
 		}
@@ -392,3 +393,4 @@ void Graphene::Image::clear(Graphene::Color color) {
 		this->pixels.push_back(color);
 	}
 }
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT

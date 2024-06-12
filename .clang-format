@@ -10,5 +10,16 @@ IndentCaseLabels: true
 KeepEmptyLinesAtTheStartOfBlocks: false
 BinPackArguments: false
 BinPackParameters: false
+
 # line width
 ColumnLimit: 120
+
+# New configurations for formatting complex conditionals
+BreakBeforeBinaryOperators: NonAssignment
+PenaltyBreakBeforeFirstCallParameter: 1
+# PenaltyBreakBinaryOperator: 0
+PenaltyExcessCharacter: 1000000
+PenaltyBreakString: 0
+PenaltyBreakComment: 0
+PenaltyReturnTypeOnItsOwnLine: 0
+AllowAllParametersOfDeclarationOnNextLine: true
