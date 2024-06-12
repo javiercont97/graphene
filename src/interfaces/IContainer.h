@@ -27,8 +27,27 @@ class IContainer : public IDrawable {
 	void setStretchX(uint8_t stretchX) override;
 	void setStretchY(uint8_t stretchY) override;
 
+	// getters and setters
+	int getSpacing() const;
+	void setSpacing(int spacing);
+	int getTopPadding() const;
+	void setTopPadding(int topPadding);
+	int getRightPadding() const;
+	void setRightPadding(int rightPadding);
+	int getBottomPadding() const;
+	void setBottomPadding(int bottomPadding);
+	int getLeftPadding() const;
+	void setLeftPadding(int leftPadding);
+
    protected:
 	std::vector<IDrawable *> children;
+
+	int topPadding = 0;
+	int rightPadding = 0;
+	int bottomPadding = 0;
+	int leftPadding = 0;
+
+	int spacing = 0;
 };
 }  // namespace Graphene
 

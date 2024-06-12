@@ -43,3 +43,48 @@ void Graphene::IContainer::setStretchY(uint8_t stretchY) {
 	IDrawable::setStretchY(stretchY);
 	this->updateLayout();
 }
+
+int Graphene::IContainer::getSpacing() const {
+	return spacing;
+}
+
+void Graphene::IContainer::setSpacing(int spacing) {
+	this->spacing = spacing;
+	updateLayout();
+}
+
+int Graphene::IContainer::getTopPadding() const {
+	return this->topPadding;
+}
+
+void Graphene::IContainer::setTopPadding(int topPadding) {
+	this->topPadding = topPadding;
+	updateLayout();
+}
+
+int Graphene::IContainer::getRightPadding() const {
+	return this->rightPadding;
+}
+
+void Graphene::IContainer::setRightPadding(int rightPadding) {
+	this->rightPadding = rightPadding;
+	updateLayout();
+}
+
+int Graphene::IContainer::getBottomPadding() const {
+	return this->bottomPadding;
+}
+
+void Graphene::IContainer::setBottomPadding(int bottomPadding) {
+	this->bottomPadding = bottomPadding;
+	updateLayout();
+}
+
+int Graphene::IContainer::getLeftPadding() const {
+	return this->leftPadding;
+}
+
+void Graphene::IContainer::setLeftPadding(int leftPadding) {
+	this->leftPadding = leftPadding;
+	updateLayout();
+}

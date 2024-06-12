@@ -8,13 +8,13 @@ void Graphene::HorizontalLayout::updateLayout() {
 	}
 
 	// remaining space after padding and spacing
-	int remainingSpace = bounds.getWidth() - padding * 2 - spacing * (children.size() - 1);
+	int remainingSpace = bounds.getWidth() - leftPadding - rightPadding - spacing * (children.size() - 1);
 
 	// calculate and apply the width of each child
-	int x = bounds.getX() + padding;
+	int x = bounds.getX() + leftPadding;
 	for (auto child : children) {
 		int childWidth = remainingSpace * child->getStretchX() / totalStretch;
-		child->setBounds(Rect(x, bounds.getY() + padding, childWidth, bounds.getHeight() - padding * 2));
+		child->setBounds(Rect(x, bounds.getY() + topPadding, childWidth, bounds.getHeight() - bottomPadding * 2));
 		x += childWidth + spacing;
 	}
 }

@@ -10,35 +10,13 @@ class HorizontalLayout : public IContainer {
 	HorizontalLayout(IContainer *parent = nullptr) : IContainer(parent) {
 	}
 
-	HorizontalLayout(int padding, int spacing, IContainer *parent = nullptr)
-		: IContainer(parent), padding(padding), spacing(spacing) {
-	}
-
-	// getters and setters
-	int getPadding() const {
-		return padding;
-	}
-
-	void setPadding(int padding) {
+	HorizontalLayout(int padding, int spacing, IContainer *parent = nullptr) : IContainer(parent) {
 		this->padding = padding;
-		updateLayout();
-	}
-
-	int getSpacing() const {
-		return spacing;
-	}
-
-	void setSpacing(int spacing) {
 		this->spacing = spacing;
-		updateLayout();
 	}
 
 	// Inherited via IContainer
 	virtual void updateLayout() override;
-
-   protected:
-	int padding = 0;
-	int spacing = 0;
 };
 
 }  // namespace Graphene
