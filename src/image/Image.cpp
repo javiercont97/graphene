@@ -1,3 +1,4 @@
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
 #include "Image.h"
 
 Graphene::Image::Image() : AbstractCanvas() {
@@ -392,3 +393,4 @@ void Graphene::Image::clear(Graphene::Color color) {
 		this->pixels.push_back(color);
 	}
 }
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT

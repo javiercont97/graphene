@@ -4,6 +4,7 @@
 #include <iostream>
 
 int main() {
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
 	// Create a VirtualScreenDriver
 	int32_t side = 512;
 	Graphene::Image image(side, side);
@@ -28,6 +29,8 @@ int main() {
 		std::cerr << Graphene::String::asPrintf(
 			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
 	}
-
+#else
+	std::cerr << "Graphene was built without image format support\n";
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT
 	return 0;
 }

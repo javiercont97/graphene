@@ -4,6 +4,7 @@
 #include <iostream>
 
 int main() {
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
 	int32_t width = 1920 / 2;
 	int32_t height = 1080 / 2;
 
@@ -46,5 +47,8 @@ int main() {
 		std::cerr << Graphene::String::asPrintf(
 			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
 	}
+#else
+	std::cerr << "Graphene was built without image format support\n";
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT
 	return 0;
 }

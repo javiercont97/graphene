@@ -1,3 +1,5 @@
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
+
 #if !defined(GRAPHENE_IMAGE_H)
 #define GRAPHENE_IMAGE_H
 
@@ -111,3 +113,5 @@ class Image : public AbstractCanvas {
 }  // namespace Graphene
 
 #endif	// GRAPHENE_IMAGE_H
+
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT

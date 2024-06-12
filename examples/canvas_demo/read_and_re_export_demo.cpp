@@ -3,6 +3,7 @@
 #include <iostream>
 
 int main() {
+#if defined(ENABLE_GRAPHENE_IMAGE_FORMAT)
 	// Load a PPM3 image, add a red rectangle in the middle of the image, and save it to a PPM6 file
 	Graphene::Image image;
 	if (!image.importFrom("checkerboard_demo.ppm", Graphene::ImageFormat::PPM_P3)) {
@@ -37,6 +38,8 @@ int main() {
 		std::cerr << Graphene::String::asPrintf(
 			"Failed to save image to \"%s\": %s\n", fileName.cStyleString(), image.getErrorMessage().cStyleString());
 	}
-
+#else
+	std::cerr << "Graphene was built without image format support\n";
+#endif	// ENABLE_GRAPHENE_IMAGE_FORMAT
 	return 0;
 }
