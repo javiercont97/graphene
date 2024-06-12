@@ -11,7 +11,10 @@ class HorizontalLayout : public IContainer {
 	}
 
 	HorizontalLayout(int padding, int spacing, IContainer *parent = nullptr) : IContainer(parent) {
-		this->padding = padding;
+		this->topPadding = padding;
+		this->rightPadding = padding;
+		this->bottomPadding = padding;
+		this->leftPadding = padding;
 		this->spacing = spacing;
 	}
 
