@@ -13,6 +13,9 @@
 
 // Interfaces includes
 #include "interfaces/AbstractCanvas.h"
+#include "interfaces/IContainer.h"
+#include "interfaces/IDrawable.h"
+#include "interfaces/IWidget.h"
 
 // Image includes
 #include "image/Image.h"

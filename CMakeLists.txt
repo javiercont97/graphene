@@ -16,6 +16,7 @@ set(SOURCES
 	src/interfaces/AbstractCanvas.h
 	src/interfaces/AbstractCanvas.cpp
 	
+	
 	# Core files
 	src/core/Color.h
 	src/core/Color.cpp
