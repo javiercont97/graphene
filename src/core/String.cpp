@@ -97,6 +97,11 @@ const char* Graphene::String::cStyleString() const {
 	return this->str.c_str();
 }
 
+Graphene::String::operator char*() const {
+	// Convert the string to a C-style string
+	return const_cast<char*>(this->str.c_str());
+}
+
 Graphene::String Graphene::String::fromInt(int value) {
 	// Convert an integer to a string
 	return std::to_string(value);

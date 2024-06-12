@@ -4,26 +4,28 @@
 #include <math.h>
 #include <stdint.h>
 
-#include "String.h"
+#include "../core/String.h"
+
+// DEPRECATED
 
 namespace Graphene {
 class Point {
    public:
 	Point();
 
-	Point(uint32_t x, uint32_t y);
+	Point(int32_t x, int32_t y);
 
 	Point(const Point &point);
 
 	Point &operator=(const Point &point);
 
-	uint32_t getX() const;
+	int32_t getX() const;
 
-	uint32_t getY() const;
+	int32_t getY() const;
 
-	void setX(uint32_t x);
+	void setX(int32_t x);
 
-	void setY(uint32_t y);
+	void setY(int32_t y);
 
 	bool operator==(const Point &point) const;
 
@@ -37,13 +39,13 @@ class Point {
 
 	Point operator-=(const Point &point);
 
-	uint32_t distanceTo(const Point &point) const;
+	int32_t distanceTo(const Point &point) const;
 
 	String toString() const;
 
    private:
-	uint32_t x;
-	uint32_t y;
+	int32_t x;
+	int32_t y;
 };
 
 }  // namespace Graphene

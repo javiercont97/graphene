@@ -57,14 +57,14 @@ void testColor(void) {
 
 	// Test pixel format conversion
 	TEST_ASSERT_EQUAL(0xFF0000FF, color2.toRGBA8888());
-	color2.fromRGBA8888(0xFF0000FF);
+	color2 = Graphene::Color::ColorFactory::fromRGBA8888(0xFF0000FF);
 	TEST_ASSERT_EQUAL(255, color2.getRed());
 	TEST_ASSERT_EQUAL(0, color2.getGreen());
 	TEST_ASSERT_EQUAL(0, color2.getBlue());
 	TEST_ASSERT_EQUAL(255, color2.getAlpha());
 
 	TEST_ASSERT_EQUAL(0xFFFF0000, color2.toARGB8888());
-	color2.fromARGB8888(0xFF0000FF);
+	color2 = Graphene::Color::ColorFactory::fromARGB8888(0xFF0000FF);
 	TEST_ASSERT_EQUAL(255, color2.getAlpha());
 	TEST_ASSERT_EQUAL(0, color2.getRed());
 	TEST_ASSERT_EQUAL(0, color2.getGreen());
@@ -72,14 +72,14 @@ void testColor(void) {
 
 	color2 = 0xffff0000;
 	TEST_ASSERT_EQUAL(0xF800, color2.toRGB565());
-	color2.fromRGB565(0xF800);
+	color2 = Graphene::Color::ColorFactory::fromRGB565(0xF800);
 	TEST_ASSERT_EQUAL(255, color2.getRed());
 	TEST_ASSERT_EQUAL(0, color2.getGreen());
 	TEST_ASSERT_EQUAL(0, color2.getBlue());
 	TEST_ASSERT_EQUAL(255, color2.getAlpha());
 
 	TEST_ASSERT_EQUAL(0xFF0000, color2.toRGB888());
-	color2.fromRGB888(0x00FF00);
+	color2 = Graphene::Color::ColorFactory::fromRGB888(0x00FF00);
 	TEST_ASSERT_EQUAL(0, color2.getRed());
 	TEST_ASSERT_EQUAL(255, color2.getGreen());
 	TEST_ASSERT_EQUAL(0, color2.getBlue());
@@ -89,7 +89,7 @@ void testColor(void) {
 void testGrayScale() {
 	Graphene::Color color;
 	TEST_ASSERT_EQUAL(0, color.toGray8());
-	color.fromGray8(255);
+	color = Graphene::Color::ColorFactory::fromGray8(255);
 	TEST_ASSERT_EQUAL(255, color.getRed());
 	TEST_ASSERT_EQUAL(255, color.getGreen());
 	TEST_ASSERT_EQUAL(255, color.getBlue());
