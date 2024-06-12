@@ -6,8 +6,8 @@
 #include "../../core/Color.h"
 #include "../../core/Font.h"
 #include "../../core/String.h"
-#include "../interfaces/IContainer.h"
-#include "../interfaces/IWidget.h"
+#include "../../interfaces/IContainer.h"
+#include "../../interfaces/IWidget.h"
 
 namespace Graphene {
 class Button : public IWidget {
