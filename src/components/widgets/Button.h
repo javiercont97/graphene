@@ -64,9 +64,9 @@ class Button : public IWidget {
 	Color borderColor = Graphene::BLACK;
 
 	// callbacks
-	std::function<void()> onPressCallback;
-	std::function<void()> onReleaseCallback;
-	std::function<void()> onTapCallback;
+	std::function<void()> onPressCallback = []() {};
+	std::function<void()> onReleaseCallback = []() {};
+	std::function<void()> onTapCallback = []() {};
 };
 }  // namespace Graphene
 
