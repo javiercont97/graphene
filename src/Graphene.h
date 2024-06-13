@@ -18,6 +18,7 @@
 
 // Interfaces includes
 #include "interfaces/AbstractCanvas.h"
+#include "interfaces/AbstractTouchInput.h"
 #include "interfaces/IContainer.h"
 #include "interfaces/IDrawable.h"
 #include "interfaces/IWidget.h"
@@ -28,6 +29,9 @@
 // Widgets, layouts/containers and components includes
 #include "components/layouts/HorizontalLayout.h"
 #include "components/widgets/Button.h"
+
+// Runtime includes
+#include "runtime/GrapheneApp.h"
 
 // Driver includes
 // #include "driver/FrameBuffer.h"
