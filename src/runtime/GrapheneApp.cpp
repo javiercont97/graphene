@@ -39,7 +39,7 @@ std::vector<Graphene::TouchEvent> Graphene::GrapheneApp::processTouchEvents(std:
 
 	auto now = std::chrono::steady_clock::now();
 	const float tapThresholdDistance = 10.0f;						  // threshold for movement
-	const auto tapThresholdTime = std::chrono::milliseconds(500);	  // threshold for tap duration
+	const auto tapThresholdTime = std::chrono::milliseconds(200);	  // threshold for tap duration
 	const auto longPressThreshold = std::chrono::milliseconds(2000);  // threshold for long press
 
 	// To store matched previous points
