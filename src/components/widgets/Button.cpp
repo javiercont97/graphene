@@ -5,7 +5,7 @@ void Graphene::Button::draw(AbstractCanvas& canvas) {
 
 	canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
 
-	canvas.drawString(bounds.getCenter(), text, textColor, font, Graphene::TextAlignment::CENTER);
+	canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
 }
 
 //====================================================================
