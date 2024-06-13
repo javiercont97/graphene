@@ -48,48 +48,38 @@ std::vector<Graphene::TouchEvent> Graphene::GrapheneApp::processTouchEvents(std:
 	if (!points.empty()) {
 		auto point = points[0];
 
-		// Check if there is a previous touch point with PRESS or LONG_PRESS event
-		bool hasPrevTouchPoint = false;
-		Graphene::TouchEvent prevTouchEvent;
-		for (const auto &prevEvent : this->prevTouchEvents) {
-			if (prevEvent.type == TouchEventType::PRESS || prevEvent.type == TouchEventType::LONG_PRESS) {
-				hasPrevTouchPoint = true;
-				prevTouchEvent = prevEvent;
-				break;
-			}
+		if (this->prevTouchEvents.empty()) {
+			events.push_back({TouchEventType::PRESS, point, now});
 		}
 
-		if (!hasPrevTouchPoint) {
-			events.push_back({TouchEventType::PRESS, point, now});
-		} else {
-			// Check if the point has moved
-			if (point.distanceTo(prevTouchEvent.position) > moveThresholdDistance) {
-				events.push_back({TouchEventType::MOVE, point, now});
-			} else {
-				// Check if the point has been pressed for a long time
-				if (now - prevTouchEvent.timestamp > longPressThreshold) {
-					events.push_back({TouchEventType::LONG_PRESS, point, now});
+		// Check if there is a previous touch point with PRESS or LONG_PRESS event
+		for (const auto &prevEvent : this->prevTouchEvents) {
+			if (prevEvent.type == TouchEventType::PRESS || prevEvent.type == TouchEventType::LONG_PRESS) {
+				// Check if the point has moved
+				if (point.distanceTo(prevEvent.position) > moveThresholdDistance) {
+					events.push_back({TouchEventType::MOVE, point, now});
+				} else {
+					// Check if the point has been pressed for a long time
+					if (now - prevEvent.timestamp > longPressThreshold) {
+						events.push_back({TouchEventType::LONG_PRESS, point, now});
+					}
 				}
 			}
 		}
 	} else {
 		// Check if there is a previous touch point with PRESS or LONG_PRESS event
-		bool hasPrevTouchPoint = false;
-		Graphene::TouchEvent prevTouchEvent;
+		bool hasPrevPressTouchPoint = false;
 		for (const auto &prevEvent : this->prevTouchEvents) {
 			if (prevEvent.type == TouchEventType::PRESS || prevEvent.type == TouchEventType::LONG_PRESS) {
-				hasPrevTouchPoint = true;
-				prevTouchEvent = prevEvent;
-				break;
+				events.push_back({TouchEventType::RELEASE, prevEvent.position, now});
 			}
-		}
 
-		if (hasPrevTouchPoint) {
-			// Check if the point has been pressed for a short time
-			if (now - prevTouchEvent.timestamp < tapThresholdTime) {
-				events.push_back({TouchEventType::TAP, prevTouchEvent.position, now});
+			if (prevEvent.type == TouchEventType::PRESS) {
+				// Check if the point has been pressed for a short time
+				if (now - prevEvent.timestamp < tapThresholdTime) {
+					events.push_back({TouchEventType::TAP, prevEvent.position, now});
+				}
 			}
-			events.push_back({TouchEventType::RELEASE, prevTouchEvent.position, now});
 		}
 	}
 
