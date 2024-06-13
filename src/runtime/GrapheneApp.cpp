@@ -38,69 +38,59 @@ std::vector<Graphene::TouchEvent> Graphene::GrapheneApp::processTouchEvents(std:
 	std::vector<TouchEvent> events;
 
 	auto now = std::chrono::steady_clock::now();
-	const float tapThresholdDistance = 10.0f;						  // threshold for movement
-	const auto tapThresholdTime = std::chrono::milliseconds(200);	  // threshold for tap duration
-	const auto longPressThreshold = std::chrono::milliseconds(2000);  // threshold for long press
+	const float tapThresholdDistance = 10.0f;						 // threshold for movement
+	const auto tapThresholdTime = std::chrono::milliseconds(100);	 // threshold for tap duration
+	const auto longPressThreshold = std::chrono::milliseconds(500);	 // threshold for long press
 
-	// To store matched previous points
-	std::vector<bool> matchedPrevPoints(prevTouchPoints.size(), false);
-	std::vector<bool> matchedCurrentPoints(points.size(), false);
+	// Process touch points, there must be only one entry in points vector
+	if (points.size() == 1) {
+		auto point = points[0];
+		auto event = TouchEvent();
+		event.position = point;
+		event.timestamp = now;
 
-	// Iterate through current touch points
-	for (size_t i = 0; i < points.size(); ++i) {
-		Point &currentPoint = points[i];
-		int32_t minDistance = std::numeric_limits<int32_t>::max();
-		int closestPrevIndex = -1;
-
-		// Find the closest previous point
-		for (size_t j = 0; j < prevTouchPoints.size(); ++j) {
-			if (!matchedPrevPoints[j]) {
-				int32_t dist = currentPoint.distanceTo(prevTouchPoints[j].position);
-				if (dist < minDistance) {
-					minDistance = dist;
-					closestPrevIndex = j;
-				}
+		// Check if this is a new touch point
+		bool isNewTouchPoint = true;
+		for (const auto &prevEvent : this->prevTouchPoints) {
+			if (prevEvent.position.distanceTo(point) < tapThresholdDistance) {
+				isNewTouchPoint = false;
+				break;
 			}
 		}
 
-		// If a close previous point is found, match it
-		if (closestPrevIndex != -1 && minDistance < tapThresholdDistance) {
-			matchedPrevPoints[closestPrevIndex] = true;
-			matchedCurrentPoints[i] = true;
-
-			TouchEvent &prevPoint = prevTouchPoints[closestPrevIndex];
-			auto duration = now - prevPoint.timestamp;
-
-			if (minDistance > tapThresholdDistance) {
-				events.push_back({Graphene::TouchEventType::MOVE, currentPoint, now});
-			} else if (duration > longPressThreshold) {
-				events.push_back({Graphene::TouchEventType::LONG_PRESS, currentPoint, now});
-			}
+		if (isNewTouchPoint) {
+			event.type = TouchEventType::PRESS;
+			events.push_back(event);
 		} else {
-			// New touch point detected
-			events.push_back({Graphene::TouchEventType::PRESS, currentPoint, now});
-		}
-	}
-
-	// Check for released points (not present in current points but present in previous)
-	// Handle unmatched previous points (released points)
-	for (size_t j = 0; j < prevTouchPoints.size(); ++j) {
-		if (!matchedPrevPoints[j]) {
-			TouchEvent &prevPoint = prevTouchPoints[j];
-			auto duration = now - prevPoint.timestamp;
-
-			if (duration <= tapThresholdTime) {
-				static auto lastTapTime = std::chrono::steady_clock::time_point::min();
-				auto timeSinceLastTap = now - lastTapTime;
-
-				if (timeSinceLastTap <= tapThresholdTime) {
-					events.push_back({Graphene::TouchEventType::DOUBLE_TAP, prevPoint.position, now});
-				} else {
-					events.push_back({Graphene::TouchEventType::TAP, prevPoint.position, now});
-					lastTapTime = now;
+			// Check if this is a long press
+			bool isLongPress = true;
+			for (const auto &prevEvent : this->prevTouchPoints) {
+				if (prevEvent.position.distanceTo(point) < tapThresholdDistance) {
+					auto duration = now - prevEvent.timestamp;
+					if (duration < longPressThreshold) {
+						isLongPress = false;
+						break;
+					}
 				}
+			}
+
+			if (isLongPress) {
+				event.type = TouchEventType::LONG_PRESS;
+				events.push_back(event);
 			} else {
-				events.push_back({Graphene::TouchEventType::RELEASE, prevPoint.position, now});
+				// Check if this is a move
+				bool isMove = true;
+				for (const auto &prevEvent : this->prevTouchPoints) {
+					if (prevEvent.position.distanceTo(point) < tapThresholdDistance) {
+						isMove = false;
+						break;
+					}
+				}
+
+				if (isMove) {
+					event.type = TouchEventType::MOVE;
+					events.push_back(event);
+				}
 			}
 		}
 	}
