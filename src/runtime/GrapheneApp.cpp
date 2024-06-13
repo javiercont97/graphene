@@ -21,16 +21,14 @@ void Graphene::GrapheneApp::eventLoop() {
 	}
 
 	// Update previous touch points state
-	this->prevTouchEvents = events;
-
-	// this->prevTouchEvents.clear();	// Clear the old state
-	// for (const auto &event : events) {
-	// 	// Only keep relevant events that indicate ongoing touch points
-	// 	if (event.type == Graphene::TouchEventType::MOVE || event.type == Graphene::TouchEventType::PRESS
-	// 		|| event.type == Graphene::TouchEventType::LONG_PRESS) {
-	// 		this->prevTouchEvents.push_back(event);
-	// 	}
-	// }
+	this->prevTouchEvents.clear();	// Clear the old state
+	for (const auto &event : events) {
+		// Only keep relevant events that indicate ongoing touch points
+		if (event.type == Graphene::TouchEventType::MOVE || event.type == Graphene::TouchEventType::PRESS
+			|| event.type == Graphene::TouchEventType::LONG_PRESS) {
+			this->prevTouchEvents.push_back(event);
+		}
+	}
 
 	// draw
 	this->rootContainer->draw(*this->canvas);

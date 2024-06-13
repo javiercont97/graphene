@@ -7,6 +7,8 @@ namespace Graphene {
 class IContainer : public IDrawable {
    public:
 	IContainer(IContainer *parent = nullptr) : IDrawable(parent){};
+	~IContainer() {
+	}
 
 	void add(IDrawable *drawable);
 	void remove(IDrawable *drawable);
