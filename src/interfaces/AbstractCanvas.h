@@ -96,6 +96,7 @@ class AbstractCanvas {
 	virtual void drawString(Graphene::Point position,
 							String text,
 							Graphene::Color color,
+							Graphene::Color bgColor,
 							Font font,
 							TextAlignment align = TextAlignment::CENTER) = 0;
 
