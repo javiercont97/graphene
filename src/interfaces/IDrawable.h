@@ -32,6 +32,9 @@ class IDrawable {
 	}
 
 	virtual void setStretchX(uint8_t stretchX) {
+		if (stretchX == 0) {
+			stretchX = 1;
+		}
 		this->stretchX = stretchX;
 	}
 
@@ -40,6 +43,9 @@ class IDrawable {
 	}
 
 	virtual void setStretchY(uint8_t stretchY) {
+		if (stretchY == 0) {
+			stretchY = 1;
+		}
 		this->stretchY = stretchY;
 	}
 
