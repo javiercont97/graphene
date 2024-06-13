@@ -2,7 +2,7 @@
 #include "Image.h"
 
 Graphene::Image::Image() : AbstractCanvas() {
-	for (uint32_t i = 0; i < width * height; i++) {
+	for (uint32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		this->pixels.push_back(Graphene::BLACK);
 	}
 }
@@ -31,9 +31,9 @@ bool Graphene::Image::exportToPPM_P3(const String& filename) {
 		return false;
 	}
 
-	file << Graphene::String::asPrintf("P3\n%d %d\n255\n", this->width, this->height);
+	file << Graphene::String::asPrintf("P3\n%d %d\n255\n", getBounds().getWidth(), getBounds().getHeight());
 
-	for (int32_t i = 0; i < this->width * this->height; i++) {
+	for (int32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		file << Graphene::String::asPrintf("%d ", this->pixels[i].getRed());
 		file << Graphene::String::asPrintf("%d ", this->pixels[i].getGreen());
 		file << Graphene::String::asPrintf("%d ", this->pixels[i].getBlue());
@@ -57,9 +57,9 @@ bool Graphene::Image::exportToPPM_P6(const String& filename) {
 		return false;
 	}
 
-	file << Graphene::String::asPrintf("P6\n%d %d\n255\n", this->width, this->height);
+	file << Graphene::String::asPrintf("P6\n%d %d\n255\n", getBounds().getWidth(), getBounds().getHeight());
 
-	for (int32_t i = 0; i < this->width * this->height; i++) {
+	for (int32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		file << this->pixels[i].getRed();
 		file << this->pixels[i].getGreen();
 		file << this->pixels[i].getBlue();
@@ -103,8 +103,11 @@ bool Graphene::Image::importFromPPM_P3(const String& filename) {
 		return false;
 	}
 
-	file >> this->width;
-	file >> this->height;
+	uint32_t width;
+	uint32_t height;
+	file >> width;
+	file >> height;
+	this->bounds = Graphene::Rect(0, 0, width, height);
 
 	int maxColor;
 	file >> maxColor;
@@ -115,7 +118,7 @@ bool Graphene::Image::importFromPPM_P3(const String& filename) {
 	}
 
 	this->pixels.clear();
-	for (int32_t i = 0; i < this->width * this->height; i++) {
+	for (int32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		int red, green, blue;
 		file >> red;
 		file >> green;
@@ -148,8 +151,11 @@ bool Graphene::Image::importFromPPM_P6(const String& filename) {
 		return false;
 	}
 
-	file >> this->width;
-	file >> this->height;
+	uint32_t width;
+	uint32_t height;
+	file >> width;
+	file >> height;
+	this->bounds = Graphene::Rect(0, 0, width, height);
 
 	int maxColor;
 	file >> maxColor;
@@ -165,7 +171,7 @@ bool Graphene::Image::importFromPPM_P6(const String& filename) {
 	file.read(&extraByte, 1);  // read the newline character
 
 	char red, green, blue;
-	for (int32_t i = 0; i < this->width * this->height; i++) {
+	for (int32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		file.read(&red, 1);
 		file.read(&green, 1);
 		file.read(&blue, 1);
@@ -196,11 +202,12 @@ bool Graphene::Image::importFrom(const String& filename, ImageFormat format) {
 
 void Graphene::Image::drawPixel(Graphene::Point point, Graphene::Color color) {
 	// if out of bounds, return
-	if (point.getX() < 0 || point.getX() >= this->width || point.getY() < 0 || point.getY() >= this->height) {
+	if (point.getX() < 0 || point.getX() >= getBounds().getWidth() || point.getY() < 0
+		|| point.getY() >= getBounds().getHeight()) {
 		return;
 	}
 
-	this->pixels[point.getY() * this->width + point.getX()] = color;
+	this->pixels[point.getY() * getBounds().getWidth() + point.getX()] = color;
 }
 
 void Graphene::Image::drawLine(Graphene::Point start, Graphene::Point end, Graphene::Color color) {
@@ -383,13 +390,18 @@ void Graphene::Image::fillPolygon(std::vector<Graphene::Point> points, Graphene:
 	}
 }
 
-void Graphene::Image::drawString(Graphene::Point position, String text, Graphene::Color color) {
+void Graphene::Image::drawString(Graphene::Point position,
+								 Graphene::String text,
+								 Graphene::Color color,
+								 Graphene::Color bgColor,
+								 Graphene::Font font,
+								 Graphene::TextAlignment align) {
 	// TODO: Implement drawString function. Requires a font.
 }
 
 void Graphene::Image::clear(Graphene::Color color) {
 	this->pixels.clear();
-	for (uint32_t i = 0; i < width * height; i++) {
+	for (uint32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		this->pixels.push_back(color);
 	}
 }

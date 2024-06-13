@@ -15,6 +15,14 @@ set(SOURCES
 	# Interface files
 	src/interfaces/AbstractCanvas.h
 	src/interfaces/AbstractCanvas.cpp
+	src/interfaces/AbstractTouchInput.h
+	src/interfaces/AbstractTouchInput.cpp
+
+	src/interfaces/IDrawable.h
+	src/interfaces/IContainer.h
+	src/interfaces/IContainer.cpp
+	src/interfaces/IWidget.h
+	src/interfaces/IWidget.cpp
 	
 	
 	# Core files
@@ -25,12 +33,16 @@ set(SOURCES
 	src/core/String.h
 	src/core/String.cpp
 	src/core/Variant.h
+	src/core/Font.h
+	src/core/Font.cpp
 	
 	# Math files
 	src/math/Point.h
 	src/math/Point.cpp
 	src/math/Vector3D.h
 	src/math/Vector3D.cpp
+	src/math/Rect.h
+	src/math/Rect.cpp
 	# src/math/Matrix.h
 	# src/math/Matrix.cpp
 	# src/math/Quaternion.h
@@ -49,14 +61,19 @@ set(SOURCES
 	src/image/Image.h
 	src/image/Image.cpp
 	
-	# Geometry files
-	# src/geometry/Geometry.h
-	
-	# driver files
-	# src/driver/VirtualScreenDriver.h
-	# src/driver/VirtualScreenDriver.cpp
-	# src/driver/FrameBuffer.h
-	# src/driver/FrameBuffer.cpp
+	# components
+	src/components/layouts/HorizontalLayout.h
+	src/components/layouts/HorizontalLayout.cpp
+	src/components/layouts/VerticalLayout.h
+	src/components/layouts/VerticalLayout.cpp
+
+	src/components/widgets/Label.h
+	src/components/widgets/Label.cpp
+	src/components/widgets/Button.h
+	src/components/widgets/Button.cpp
+
+	# events
+	src/events/TouchEvent.h
 )
 
 # Create the static library

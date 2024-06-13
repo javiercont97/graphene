@@ -10,6 +10,7 @@
 #include "../core/Color.h"
 #include "../interfaces/AbstractCanvas.h"
 #include "../math/Point.h"
+#include "../math/Rect.h"
 
 namespace Graphene {
 enum class ImageFormat { PPM_P3, PPM_P6 };
@@ -101,7 +102,12 @@ class Image : public AbstractCanvas {
 	virtual void fillCircle(Graphene::Point center, int32_t radius, Graphene::Color color);
 	virtual void drawPolygon(std::vector<Graphene::Point> points, Graphene::Color color);
 	virtual void fillPolygon(std::vector<Graphene::Point> points, Graphene::Color color);
-	virtual void drawString(Graphene::Point position, String text, Graphene::Color color);
+	virtual void drawString(Graphene::Point position,
+							Graphene::String text,
+							Graphene::Color color,
+							Graphene::Color bgColor,
+							Graphene::Font font,
+							Graphene::TextAlignment align = TextAlignment::CENTER) override;
 	virtual void clear(Graphene::Color color);
 
    private:

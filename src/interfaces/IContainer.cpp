@@ -23,7 +23,7 @@ void Graphene::IContainer::draw(AbstractCanvas& canvas) {
 
 void Graphene::IContainer::onTouchEvent(TouchEvent* event) {
 	for (auto child : children) {
-		if (child->getBounds().contains(event->getP())) {
+		if (child->getBounds().contains(event->position)) {
 			child->onTouchEvent(event);
 		}
 	}

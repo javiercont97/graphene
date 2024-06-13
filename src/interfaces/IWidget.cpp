@@ -1,7 +1,7 @@
 #include "IWidget.h"
 
 void Graphene::IWidget::onTouchEvent(TouchEvent* event) {
-	switch (event->getType()) {
+	switch (event->type) {
 		case TouchEventType::PRESS:
 			onPress(event);
 			break;
