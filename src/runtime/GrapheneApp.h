@@ -18,10 +18,9 @@ class GrapheneApp {
    protected:
 	AbstractCanvas *canvas;
 	AbstractTouchInput *touchInput;
-
 	IContainer *rootContainer;
 
-	std::vector<TouchEvent> prevTouchPoints;
+	std::vector<TouchEvent> prevTouchEvents;
 };
 
 }  // namespace Graphene
