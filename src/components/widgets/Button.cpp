@@ -24,6 +24,10 @@ void Graphene::Button::onTap(TouchEvent* event) {
 	this->onTapCallback();
 }
 
+void Graphene::Button::onLongPress(TouchEvent* event) {
+	this->onLongPressCallback();
+}
+
 void Graphene::Button::setText(String text) {
 	this->text = text;
 }
@@ -58,4 +62,8 @@ void Graphene::Button::onRelease(std::function<void()> callback) {
 
 void Graphene::Button::onTap(std::function<void()> callback) {
 	this->onTapCallback = callback;
+}
+
+void Graphene::Button::onLongPress(std::function<void()> callback) {
+	this->onLongPressCallback = callback;
 }

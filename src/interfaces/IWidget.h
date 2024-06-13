@@ -15,12 +15,14 @@ class IWidget : public IDrawable {
 	// Event handlers, override to handle events
 	void onTouchEvent(TouchEvent *event) override;
 
+   protected:
 	virtual void onPress(TouchEvent *event){};
 	virtual void onRelease(TouchEvent *event){};
 	virtual void onTap(TouchEvent *event){};
 	virtual void onLongPress(TouchEvent *event){};
+	virtual void onMove(TouchEvent *event){};  // drag
+
 	// virtual void onDoubleTap(TouchEvent *event) = 0;
-	// virtual void onDrag(DragEvent *event) = 0;
 	// virtual void onDrop(DragEvent *event) = 0;
 
    protected:

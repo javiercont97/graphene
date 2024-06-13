@@ -38,6 +38,7 @@ class Button : public IWidget {
 	void onPress(TouchEvent *event) override;
 	void onRelease(TouchEvent *event) override;
 	void onTap(TouchEvent *event) override;
+	virtual void onLongPress(TouchEvent *event) override;
 
 	// Setters
 	void setText(String text);
@@ -52,6 +53,7 @@ class Button : public IWidget {
 	void onPress(std::function<void()> callback);
 	void onRelease(std::function<void()> callback);
 	void onTap(std::function<void()> callback);
+	void onLongPress(std::function<void()> callback);
 
    protected:
 	// state properties
@@ -69,6 +71,7 @@ class Button : public IWidget {
 	std::function<void()> onPressCallback = []() {};
 	std::function<void()> onReleaseCallback = []() {};
 	std::function<void()> onTapCallback = []() {};
+	std::function<void()> onLongPressCallback = []() {};
 };
 }  // namespace Graphene
 
