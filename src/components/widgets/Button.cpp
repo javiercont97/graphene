@@ -44,6 +44,10 @@ void Graphene::Button::setBorderColor(Color color) {
 	this->borderColor = color;
 }
 
+Graphene::String Graphene::Button::getText() {
+	return this->text;
+}
+
 void Graphene::Button::onPress(std::function<void()> callback) {
 	this->onPressCallback = callback;
 }

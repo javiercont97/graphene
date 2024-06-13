@@ -46,6 +46,8 @@ class Button : public IWidget {
 	void setBackgroundColor(Color color);
 	void setBorderColor(Color color);
 
+	String getText();
+
 	// Callbacks
 	void onPress(std::function<void()> callback);
 	void onRelease(std::function<void()> callback);
