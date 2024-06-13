@@ -21,14 +21,16 @@ void Graphene::GrapheneApp::eventLoop() {
 	}
 
 	// Update previous touch points state
-	this->prevTouchEvents.clear();	// Clear the old state
-	for (const auto &event : events) {
-		// Only keep relevant events that indicate ongoing touch points
-		if (event.type == Graphene::TouchEventType::MOVE || event.type == Graphene::TouchEventType::PRESS
-			|| event.type == Graphene::TouchEventType::LONG_PRESS) {
-			this->prevTouchEvents.push_back(event);
-		}
-	}
+	this->prevTouchEvents = events;
+
+	// this->prevTouchEvents.clear();	// Clear the old state
+	// for (const auto &event : events) {
+	// 	// Only keep relevant events that indicate ongoing touch points
+	// 	if (event.type == Graphene::TouchEventType::MOVE || event.type == Graphene::TouchEventType::PRESS
+	// 		|| event.type == Graphene::TouchEventType::LONG_PRESS) {
+	// 		this->prevTouchEvents.push_back(event);
+	// 	}
+	// }
 
 	// draw
 	this->rootContainer->draw(*this->canvas);
@@ -68,7 +70,6 @@ std::vector<Graphene::TouchEvent> Graphene::GrapheneApp::processTouchEvents(std:
 		}
 	} else {
 		// Check if there is a previous touch point with PRESS or LONG_PRESS event
-		bool hasPrevPressTouchPoint = false;
 		for (const auto &prevEvent : this->prevTouchEvents) {
 			if (prevEvent.type == TouchEventType::PRESS || prevEvent.type == TouchEventType::LONG_PRESS) {
 				events.push_back({TouchEventType::RELEASE, prevEvent.position, now});
