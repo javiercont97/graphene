@@ -5,9 +5,6 @@
 
 #include <stm32f769i_discovery_ts.h>
 
-#include "../../core/Color.h"
-#include "../../core/Font.h"
-#include "../../core/String.h"
 #include "../../math/Point.h"
 
 namespace GrapheneDrivers {
