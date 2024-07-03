@@ -12,48 +12,46 @@ To get started with Graphene, simply include the library in your project and sta
 
 Start exploring the possibilities of Graphene today and unlock the full potential of your embedded devices!
 
-## Top level design
+## Contributing
 
-The top level design of Graphene is based on a modular and extensible architecture. It follows a component-based approach, where each graphical element is represented as a separate component. This allows for easy customization and reusability of components across different projects.
+### Install git hooks (optional)
 
-At the core of Graphene's design is the Graphics Engine, which handles the rendering and manipulation of graphical elements. The Graphics Engine provides a set of APIs that developers can use to create, update, and interact with components.
+```bash
+# From repository root directory
+chmod +x scripts/install-hooks.sh
+./scripts/install-hooks.sh
+```
 
-In addition to the Graphics Engine, Graphene also includes a Theme Engine, which allows for easy customization of the visual appearance of components. Developers can define their own themes or choose from a set of pre-defined themes to achieve the desired look and feel.
-
-To ensure optimal performance and resource utilization, Graphene employs various optimization techniques. It leverages hardware acceleration capabilities whenever available, and implements efficient algorithms for rendering and event handling.
-
-The top level design of Graphene promotes code reusability and maintainability. It encourages the separation of concerns, with clear separation between the graphical presentation layer and the underlying business logic. This allows for easier testing, debugging, and maintenance of the codebase.
-
-Overall, the top level design of Graphene provides a solid foundation for building visually appealing and responsive user interfaces on embedded devices. It offers flexibility, extensibility, and performance, making it a powerful choice for developers working on embedded applications.
 
 ## Requirements
 
 The following is a list of requirements attached to user stories:
 
  1. [x] As a user, I want to be able to draw lines, rectangles, circles, and text on the screen.
- 2. [ ] As a user, I want to be able to create buttons with customizable labels and styles.
+ 2. [x] As a user, I want to be able to create buttons with customizable labels and styles.
  3. [ ] As a user, I want to be able to create sliders with adjustable values and visual indicators.
  4. [ ] As a user, I want to be able to create graphs to visualize data in real-time.
  5. [ ] As a user, I want the library to separate the graphical presentation layer from the underlying business logic.
  6. [ ] As a user, I want to be able to customize the visual appearance of components using themes.
  7. [ ] As a user, I want the library to be compatible with different RTOSs and hardware platforms.
  8. [ ] As a user, I want the library to provide consistent and reliable performance.
- 9. [ ] As a user, I want the library to be well-documented with examples to facilitate learning and usage.
+ 9. [x] As a user, I want the library to be well-documented with examples to facilitate learning and usage.
 10. [ ] As a user, I want the library to promote code reusability and maintainability.
 11. [ ] As a user, I want the library to leverage hardware acceleration capabilities whenever available.
 12. [ ] As a user, I want the library to implement efficient algorithms for rendering and event handling.
 13. [ ] As a user, I want the library to be flexible and extensible for future enhancements and customizations.
 14. [ ] As a user, I want the library to provide optimal performance and resource utilization.
+15. [x] As a user, I want to automatically arrange widgets according to layouts (vertical and horizontal)
 
 These requirements will guide the development of Graphene and ensure that it meets the needs and expectations of its users.
 
 
 ## Build instructions
 
-Use these build flags
+Use these build flags to platformio.ini
 
 ```ini
-build_flags = 
+build_flags =  
 	-std=gnu++2a
 	-std=c++2a
 build_unflags = 
@@ -63,12 +61,23 @@ build_unflags =
 
 ## Feature flags
 Add these macros definition before importing Graphene.h to enable the desired features
+
+This can be done either by CMakeLists.txt file
 ```cmake
-# Image import/export
-# enable the image format feature
+# Enable the image format feature import/export
 add_definitions(-DENABLE_GRAPHENE_IMAGE_FORMAT)
 
-# Embedded UI
-
-
+# Board+Display specific drivers (display and touch). Use only one at a time
+add_definitions(-DENABLE_STM32F769I_DRIVERS)
+add_definitions(-DENABLE_NODEMCU_DRIVERS)
 ```
+
+Or platformio.ini file
+
+```ini
+build_flags =  
+	-DENABLE_GRAPHENE_IMAGE_FORMAT
+	-DENABLE_STM32F769I_DRIVERS
+	-DENABLE_NODEMCU_DRIVERS
+```
+

@@ -5,8 +5,10 @@ project(Graphene)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Enable Graphene image format
+# Enable/Disable Graphene features
 add_definitions(-DENABLE_GRAPHENE_IMAGE_FORMAT)
+# add_definitions(-DENABLE_STM32F769I_DRIVERS)
+# add_definitions(-DENABLE_NODEMCU_DRIVERS)
 
 # Add the source files for the library
 set(SOURCES
@@ -23,7 +25,6 @@ set(SOURCES
 	src/interfaces/IContainer.cpp
 	src/interfaces/IWidget.h
 	src/interfaces/IWidget.cpp
-	
 	
 	# Core files
 	src/core/Color.h
@@ -43,19 +44,6 @@ set(SOURCES
 	src/math/Vector3D.cpp
 	src/math/Rect.h
 	src/math/Rect.cpp
-	# src/math/Matrix.h
-	# src/math/Matrix.cpp
-	# src/math/Quaternion.h
-	# src/math/Quaternion.cpp
-	# src/math/Transform.h
-	# src/math/Transform.cpp
-	# src/math/Vector2D.h
-	# src/math/Vector2D.cpp
-	# src/math/Vector3D.h
-	# src/math/Vector3D.cpp
-	# src/math/Vector4D.h
-	# src/math/Vector4D.cpp
-
 
 	# Image files
 	src/image/Image.h
@@ -74,6 +62,9 @@ set(SOURCES
 
 	# events
 	src/events/TouchEvent.h
+
+	# drivers
+	src/drivers/STM32F769I/STM32F769I_Canvas.h
 )
 
 # Create the static library

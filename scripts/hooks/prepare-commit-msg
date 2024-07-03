@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+# Extract the commit message from the command-line arguments
+COMMIT_MSG="$(cat $1)"
+
+echo "-[prepare-commit] Check commit message: '$COMMIT_MSG'"
+
+# Regular expression to match conventional commit format
+PATTERN="^(revert: )?(feat|fix|docs|style|refactor|perf|test|chore|build|ci)(\(.+\))?: .{1,100}$"
+
+if ! [[ $COMMIT_MSG =~ $PATTERN ]]; then
+	# If the commit message does not match the pattern, print an error message
+	echo "*--- COMMIT FAILED ---*"
+	echo "Error: Commit message does not follow conventional commit standard."
+	echo "Please use the following format: <type>(<scope>): <subject>"
+	echo "Example: feat(api): add new endpoint"
+	echo ""
+	echo "Available types: feat, fix, docs, style, refactor, perf, test, chore, build, ci"
+
+	exit 1
+fi
+
+echo "-[prepare-commit] Commit message is valid. Proceeding with commit."
