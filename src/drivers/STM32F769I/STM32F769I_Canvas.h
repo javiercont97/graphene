@@ -7,7 +7,12 @@
 #include <stm32f769i_discovery.h>
 #include <stm32f769i_discovery_lcd.h>
 
-namespace Graphene {
+#include "../../core/Color.h"
+#include "../../core/Font.h"
+#include "../../core/String.h"
+#include "../../math/Point.h"
+
+namespace GrapheneDrivers {
 
 class STM32F769I_Canvas : public Graphene::AbstractCanvas {
    public:
@@ -138,7 +143,7 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 	}
 };
 
-}  // namespace Graphene
+}  // namespace GrapheneDrivers
 
 #endif	// GRAPHENE_STM32F769I_TOUCHSCREEN_DRIVER_H
 
