@@ -2480,9 +2480,7 @@ const uint8_t Graphene24_charmap[] = {
 	0x00, 0x00, 0x00, //                  
 };
 // clang-format on
-
 const Font Graphene24(Graphene24_charmap, 17, 24);
-
 }  // namespace Graphene
 
 #endif	// GRAPHENE_GRAPHENE_FONTS_H
