@@ -36,6 +36,7 @@ set(SOURCES
 	src/core/Variant.h
 	src/core/Font.h
 	src/core/Font.cpp
+	src/core/GrapheneFonts.h
 	
 	# Math files
 	src/math/Point.h
@@ -63,9 +64,16 @@ set(SOURCES
 	# events
 	src/events/TouchEvent.h
 
+	# runtime
+	src/runtime/GrapheneApp.h
+	src/runtime/GrapheneApp.cpp
+
 	# drivers
 	src/drivers/STM32F769I/STM32F769I_Canvas.h
 	src/drivers/STM32F769I/STM32F769I_Touch.h
+	src/drivers/STM32F769I/STMFonts.h
+
+	src/drivers/NodeMCU/NodeMCU_TFT.h
 )
 
 # Create the static library

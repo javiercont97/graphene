@@ -5,9 +5,6 @@ Graphene::GrapheneApp::GrapheneApp(AbstractCanvas *canvas, AbstractTouchInput *t
 }
 
 Graphene::GrapheneApp::~GrapheneApp() {
-	delete this->canvas;
-	delete this->touchInput;
-	delete this->rootContainer;
 }
 
 void Graphene::GrapheneApp::eventLoop() {

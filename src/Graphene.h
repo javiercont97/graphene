@@ -4,6 +4,7 @@
 // Core includes
 #include "core/Color.h"
 #include "core/Font.h"
+#include "core/GrapheneFonts.h"
 #include "core/Object.h"
 #include "core/String.h"
 #include "core/Variant.h"
@@ -23,7 +24,7 @@
 #include "interfaces/IDrawable.h"
 #include "interfaces/IWidget.h"
 
-// Image includes
+// Image includes, this acts as a driver
 #include "image/Image.h"
 
 // Widgets, layouts/containers and components includes
@@ -36,9 +37,13 @@
 #include "runtime/GrapheneApp.h"
 
 // Driver includes
+// NodeMCU
 #include "drivers/NodeMCU/NodeMCU_TFT.h"
+
+// STM32F769I
 #include "drivers/STM32F769I/STM32F769I_Canvas.h"
 #include "drivers/STM32F769I/STM32F769I_Touch.h"
+#include "drivers/STM32F769I/STMFonts.h"
 
 // geometry includes
 

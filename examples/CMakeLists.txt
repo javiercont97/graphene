@@ -33,4 +33,7 @@ add_executable(vector_demo vectors_demo/vector_demo.cpp)
 target_link_libraries(vector_demo Graphene)
 target_include_directories(vector_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
-
+# GUI demo usage examples
+add_executable(gui_demo gui_demo/gui_demo.cpp gui_demo/MainView.h gui_demo/MainView.cpp)
+target_link_libraries(gui_demo Graphene)
+target_include_directories(gui_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
