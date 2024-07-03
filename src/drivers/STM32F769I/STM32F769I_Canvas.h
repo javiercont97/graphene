@@ -1,7 +1,7 @@
 #if defined(ENABLE_STM32F769I_DRIVERS)
 
-#if !defined(GRAPHENE_STM32F769I_TOUCHSCREEN_DRIVER_H)
-#define GRAPHENE_STM32F769I_TOUCHSCREEN_DRIVER_H
+#if !defined(GRAPHENE_STM32F769I_LCD_DRIVER_H)
+#define GRAPHENE_STM32F769I_LCD_DRIVER_H
 
 #include <stdint.h>
 #include <stm32f769i_discovery.h>
@@ -145,6 +145,6 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 
 }  // namespace GrapheneDrivers
 
-#endif	// GRAPHENE_STM32F769I_TOUCHSCREEN_DRIVER_H
+#endif	// GRAPHENE_STM32F769I_LCD_DRIVER_H
 
 #endif	// ENABLE_STM32F769I_DRIVERS
