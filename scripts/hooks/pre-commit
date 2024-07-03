@@ -1,17 +1,57 @@
 #!/bin/bash
 
+##############################################
+# colorize
+##############################################
+
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+NC='\033[0m' # No Color
+
+# Function to apply color
+colorize() {
+	local color=$1
+	shift
+	local message="$@"
+	echo -e "${color}${message}${NC}"
+}
+
+
+##############################################
+# main
+##############################################
 STAGED_FILES=$(git diff --cached --name-only)
 
-echo "*--- staged files ---*"
+echo "$(colorize $GREEN '*--- staged files ---*')"
 for FILE in $STAGED_FILES; do
-	echo $FILE
+	echo "- $(colorize $BLUE $FILE)"
 done
-echo "*--------------------*"
+echo "$(colorize $GREEN '*--------------------*')"
 
-echo "-[pre-commit] Running formatter..."
+echo "-[pre-commit] $(colorize $CYAN 'Running formatter...')"
 # Run the formatter
 ./format.sh
-echo "-[pre-commit] Code formatted"
+echo "-[pre-commit] $(colorize $GREEN 'Code formatted!')"
+
+
+# Get the list of changed files after formatting
+CHANGED_FILES=$(git diff --name-only)
+echo "$(colorize $PURPLE '*--- files changed by formatter ---*')"
+if [ -z "$CHANGED_FILES" ]; then
+    echo "$(colorize $GREEN 'No files were changed by the formatter.')"
+else
+    for FILE in $CHANGED_FILES; do
+        echo "- $(colorize $YELLOW $FILE)"
+    done
+fi
+echo "$(colorize $PURPLE '*----------------------------------*')"
+
 
 # restage formatted files
 for FILE in $STAGED_FILES; do

@@ -20,10 +20,6 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 	STM32F769I_Canvas() : AbstractCanvas(BSP_LCD_GetXSize(), BSP_LCD_GetYSize()) {
 		BSP_LCD_Init();
 
-		// this->mainFrameBuffer = LCD_FB_START_ADDRESS;
-		// this->alternateFrameBuffer =
-		// 	LCD_FB_START_ADDRESS + (this->getWidth() * this->getHeight() * 4);
-
 		// set layer addresses
 		BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
 		BSP_LCD_SelectLayer(LTDC_LAYER_1);

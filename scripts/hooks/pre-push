@@ -1,24 +1,30 @@
 #!/bin/bash
 
+##############################################
+# colorize
+##############################################
 
-# Extract the commit message from the command-line arguments
-COMMIT_MSG="$(cat $1)"
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+NC='\033[0m' # No Color
 
-echo "-[prepare-commit] Check commit message: '$COMMIT_MSG'"
+# Function to apply color
+colorize() {
+	local color=$1
+	shift
+	local message="$@"
+	echo -e "${color}${message}${NC}"
+}
 
-# Regular expression to match conventional commit format
-PATTERN="^(revert: )?(feat|fix|docs|style|refactor|perf|test|chore|build|ci)(\(.+\))?: .{1,100}$"
 
-if ! [[ $COMMIT_MSG =~ $PATTERN ]]; then
-	# If the commit message does not match the pattern, print an error message
-	echo "*--- COMMIT FAILED ---*"
-	echo "Error: Commit message does not follow conventional commit standard."
-	echo "Please use the following format: <type>(<scope>): <subject>"
-	echo "Example: feat(api): add new endpoint"
-	echo ""
-	echo "Available types: feat, fix, docs, style, refactor, perf, test, chore, build, ci"
+##############################################
+# main
+##############################################
 
-	exit 1
-fi
-
-echo "-[prepare-commit] Commit message is valid. Proceeding with commit."
+echo "-[pre-push] $(colorize $CYAN 'Running pre-push hook')"
