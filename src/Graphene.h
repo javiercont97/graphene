@@ -38,6 +38,7 @@
 // Driver includes
 #include "drivers/NodeMCU/NodeMCU_TFT.h"
 #include "drivers/STM32F769I/STM32F769I_Canvas.h"
+#include "drivers/STM32F769I/STM32F769I_Touch.h"
 
 // geometry includes
 
