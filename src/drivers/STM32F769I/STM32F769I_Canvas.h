@@ -12,6 +12,8 @@
 #include "../../core/String.h"
 #include "../../math/Point.h"
 
+#include "../../core/GrapheneFonts.h"
+
 namespace GrapheneDrivers {
 
 class STM32F769I_Canvas : public Graphene::AbstractCanvas {
@@ -111,6 +113,14 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 					Graphene::TextAlignment alignment) override {
 		BSP_LCD_SetBackColor(bgColor);
 		BSP_LCD_SetTextColor(color);
+
+		sFONT stmFont = {
+			.table = font.getCharMap(),
+			.Width = font.getWidth(),
+			.Height = font.getHeight()
+		};
+
+		BSP_LCD_SetFont(&stmFont);
 
 		Graphene::Point textLeftCorner(position.getX() - text.length() * Font24.Width / 2,
 									   position.getY() - Font24.Height / 2);

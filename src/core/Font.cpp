@@ -7,3 +7,7 @@ uint16_t Graphene::Font::getWidth() const {
 uint16_t Graphene::Font::getHeight() const {
 	return this->Height;
 }
+
+uint8_t* Graphene::Font::getCharMap() const {
+	return (uint8_t*)this->charmap;
+}
