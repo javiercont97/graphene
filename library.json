@@ -1,6 +1,6 @@
 {
 	"name": "Graphene",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "A simple library for creating graphical user interfaces for STM32F769I discovery board.",
 	"keywords": "STM32F769I, GUI, Graphical User Interface, Touchscreen",
 	"repository": {
