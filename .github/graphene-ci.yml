@@ -1,0 +1,41 @@
+name: Graphene CI - Publish to PlatformIO registry
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run unit tests
+      run: |
+        ./scripts/tests.sh
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+    - name: Install PlatformIO
+      run: |
+        python -m pip install --upgrade pip
+        python3 -m pip install -U platformio
+        # pip install platformio  # Install PlatformIO CLI
+
+    - name: Authenticate PlatformIO
+      env:
+        PIO_USERNAME: ${{ secrets.PIO_USERNAME }}
+        PIO_PASSWORD: ${{ secrets.PIO_PASSWORD }}
+      run: |
+        pio account login -u $PIO_USERNAME -p $PIO_PASSWORD
+        # pio account login --token $PIO_TOKEN  # Use token-based authentication
+
+    - name: Publish Package
+      run: |
+        pio pkg publish .  # Adjust the directory if necessary
