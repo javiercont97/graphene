@@ -16,9 +16,7 @@ class Font {
 	// getters
 	uint16_t getWidth() const;
 	uint16_t getHeight() const;
-	uint8_t* getCharMap() const;
-
-
+	uint8_t *getCharMap() const;
 
    private:
 	const uint8_t *charmap;
