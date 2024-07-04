@@ -401,7 +401,8 @@ void Graphene::Image::drawString(Graphene::Point position,
 }
 
 void Graphene::Image::clear(Graphene::Color color) {
-	this->pixels.clear();for (uint32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
+	this->pixels.clear();
+	for (uint32_t i = 0; i < getBounds().getWidth() * getBounds().getHeight(); i++) {
 		this->pixels.push_back(color);
 	}
 }

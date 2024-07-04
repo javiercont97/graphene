@@ -26,7 +26,7 @@ colorize() {
 ##############################################
 # main
 ##############################################
-STAGED_FILES=$(git diff --cached --name-only)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
 
 echo "$(colorize $GREEN '*--- staged files ---*')"
 for FILE in $STAGED_FILES; do
