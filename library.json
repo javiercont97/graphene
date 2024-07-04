@@ -28,8 +28,7 @@
 	"build": {
 		"flags": [
 			"-std=gnu++2a",
-			"-std=c++2a",
-			"-DENABLE_STM32F769I_DRIVERS"
+			"-std=c++2a"
 		],
 		"unflags": [
 			"-fno-rtti",

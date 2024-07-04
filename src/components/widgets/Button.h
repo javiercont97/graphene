@@ -5,6 +5,7 @@
 
 #include "../../core/Color.h"
 #include "../../core/Font.h"
+#include "../../core/GrapheneFonts.h"
 #include "../../core/String.h"
 #include "../../interfaces/IContainer.h"
 #include "../../interfaces/IWidget.h"
@@ -62,7 +63,7 @@ class Button : public IWidget {
 	// rendering properties
 	String text;
 	// TODO: Pick these from theme
-	Font font;
+	Font font = Graphene::Graphene24;
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;
 	Color borderColor = Graphene::BLACK;
