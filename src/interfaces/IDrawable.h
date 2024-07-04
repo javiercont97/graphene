@@ -19,6 +19,9 @@ class IDrawable {
 	IDrawable(Rect bounds, IContainer *parent = nullptr) : parent(parent), bounds(bounds) {
 	}
 
+	virtual ~IDrawable() {
+	}
+
 	Rect getBounds() const {
 		return bounds;
 	}

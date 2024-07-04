@@ -396,7 +396,8 @@ void Graphene::Image::drawString(Graphene::Point position,
 								 Graphene::Color bgColor,
 								 Graphene::Font font,
 								 Graphene::TextAlignment align) {
-	// TODO: Implement drawString function. Requires a font.
+	// Center the text
+	Graphene::Point textTopLeft;
 }
 
 void Graphene::Image::clear(Graphene::Color color) {

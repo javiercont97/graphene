@@ -1,0 +1,39 @@
+{
+	"name": "Graphene",
+	"version": "1.0.0",
+	"description": "A simple library for creating graphical user interfaces for STM32F769I discovery board.",
+	"keywords": "STM32F769I, GUI, Graphical User Interface, Touchscreen",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/javiercont97/graphene.git"
+	},
+	"authors": [
+		{
+			"name": "Javier Contreras",
+			"email": "javiercont97",
+			"url": "https://github.com/javiercont97",
+			"maintainer": true
+		}
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/javiercont97/graphene",
+	"dependencies": {
+		"mbed-st/BSP_DISCO_F769NI": "0.0.0+sha.d13d7c447539"
+	},
+	"frameworks": "mbed",
+	"platforms": "ststm32",
+	"headers": [
+		"Graphene.h"
+	],
+	"build": {
+		"flags": [
+			"-std=gnu++2a",
+			"-std=c++2a",
+			"-DENABLE_STM32F769I_DRIVERS"
+		],
+		"unflags": [
+			"-fno-rtti",
+			"-std=gnu++14"
+		]
+	}
+}

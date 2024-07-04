@@ -14,6 +14,7 @@ void tearDown() {
 
 int main() {
 	UNITY_BEGIN();
+
 	//======================
 	// Test String class
 	//======================

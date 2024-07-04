@@ -28,3 +28,4 @@ colorize() {
 ##############################################
 
 echo "-[pre-push] $(colorize $CYAN 'Running pre-push hook')"
+# TODO: prevent push if unit tests fail
