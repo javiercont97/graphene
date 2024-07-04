@@ -9,10 +9,9 @@
 
 #include "../../core/Color.h"
 #include "../../core/Font.h"
+#include "../../core/GrapheneFonts.h"
 #include "../../core/String.h"
 #include "../../math/Point.h"
-
-#include "../../core/GrapheneFonts.h"
 
 namespace GrapheneDrivers {
 
@@ -114,11 +113,7 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 		BSP_LCD_SetBackColor(bgColor);
 		BSP_LCD_SetTextColor(color);
 
-		sFONT stmFont = {
-			.table = font.getCharMap(),
-			.Width = font.getWidth(),
-			.Height = font.getHeight()
-		};
+		sFONT stmFont = {.table = font.getCharMap(), .Width = font.getWidth(), .Height = font.getHeight()};
 
 		BSP_LCD_SetFont(&stmFont);
 
