@@ -36,7 +36,7 @@ echo "$(colorize $GREEN '*--------------------*')"
 
 echo "-[pre-commit] $(colorize $CYAN 'Running formatter...')"
 # Run the formatter
-./format.sh
+./scripts/format.sh
 echo "-[pre-commit] $(colorize $GREEN 'Code formatted!')"
 
 

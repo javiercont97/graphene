@@ -7,6 +7,9 @@ namespace Graphene {
 
 class Font {
    public:
+	Font() {
+	}
+
 	Font(const uint8_t *charmap, uint16_t Width, uint16_t Height) : charmap(charmap), Width(Width), Height(Height) {
 	}
 
