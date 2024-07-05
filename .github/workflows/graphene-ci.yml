@@ -27,7 +27,7 @@ jobs:
     - name: Install unity test framework
       run: |
         git clone https://github.com/ThrowTheSwitch/Unity.git
-        cp -r Unity/
+        cd Unity/
         mkdir build
         cd build
         cmake ..
