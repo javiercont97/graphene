@@ -40,7 +40,6 @@ class Label : public IWidget {
    protected:
 	// rendering properties
 	String text;
-	// TODO: Pick these from theme
 	Font font = Graphene::Graphene24;
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;

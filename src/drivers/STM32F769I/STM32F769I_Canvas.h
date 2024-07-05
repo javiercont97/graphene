@@ -125,6 +125,7 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 								(uint8_t *)text.cStyleString(),
 								LEFT_MODE);
 
+		// TODO: Implement text alignment
 		// switch (alignment) {
 		// 	case Graphene::TextAlignment::LEFT:
 		// 		BSP_LCD_DisplayStringAt(

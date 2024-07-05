@@ -27,12 +27,6 @@ class STM32F769I_Touch : public Graphene::AbstractTouchInput {
 		BSP_TS_GetState(&TS_State);
 
 		if (TS_State.touchDetected) {
-			// for (uint32_t i = 0; i < TS_State.touchDetected; i++) {
-			// 	Graphene::Point touchPoint(TS_State.touchX[i],
-			// 							   TS_State.touchY[i]);
-			// 	touchPoints.push_back(touchPoint);
-			// }
-
 			Graphene::Point touchPoint(TS_State.touchX[0], TS_State.touchY[0]);
 			touchPoints.push_back(touchPoint);
 		}

@@ -6,6 +6,8 @@
 #include <Arduino.h>
 
 namespace Graphene {
+
+// TODO: Implement NodeMCU_TFT driver
 class NodeMCU_TFt {};
 
 }  // namespace Graphene

@@ -23,7 +23,7 @@ chmod +x scripts/install-hooks.sh
 ```
 
 
-## Requirements
+## User stories
 
 The following is a list of requirements attached to user stories:
 
@@ -36,7 +36,7 @@ The following is a list of requirements attached to user stories:
  7. [ ] As a user, I want the library to be compatible with different RTOSs and hardware platforms.
  8. [ ] As a user, I want the library to provide consistent and reliable performance.
  9. [x] As a user, I want the library to be well-documented with examples to facilitate learning and usage.
-10. [ ] As a user, I want the library to promote code reusability and maintainability.
+10. [x] As a user, I want the library to promote code reusability and maintainability.
 11. [ ] As a user, I want the library to leverage hardware acceleration capabilities whenever available.
 12. [ ] As a user, I want the library to implement efficient algorithms for rendering and event handling.
 13. [ ] As a user, I want the library to be flexible and extensible for future enhancements and customizations.
@@ -76,8 +76,7 @@ Or platformio.ini file
 
 ```ini
 build_flags =  
-	-DENABLE_GRAPHENE_IMAGE_FORMAT
-	-DENABLE_STM32F769I_DRIVERS
-	-DENABLE_NODEMCU_DRIVERS
+	-D ENABLE_GRAPHENE_IMAGE_FORMAT
+	-D ENABLE_STM32F769I_DRIVERS
+	-D ENABLE_NODEMCU_DRIVERS
 ```
-
