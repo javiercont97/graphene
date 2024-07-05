@@ -13,10 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run unit tests
-      run: |
-        ./scripts/tests.sh
-
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -27,6 +23,20 @@ jobs:
         python -m pip install --upgrade pip
         python3 -m pip install -U platformio
         # pip install platformio  # Install PlatformIO CLI
+
+    - name: Install unity test framework
+      run: |
+        git clone https://github.com/ThrowTheSwitch/Unity.git
+        cp -r Unity/
+        mkdir build
+        cd build
+        cmake ..
+        make
+        sudo make install
+
+    - name: Run unit tests
+      run: |
+        ./scripts/tests.sh
 
     - name: Authenticate PlatformIO
       env:
