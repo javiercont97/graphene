@@ -11,6 +11,7 @@
 #include "../../core/Font.h"
 #include "../../core/GrapheneFonts.h"
 #include "../../core/String.h"
+#include "../../interfaces/AbstractCanvas.h"
 #include "../../math/Point.h"
 
 namespace GrapheneDrivers {

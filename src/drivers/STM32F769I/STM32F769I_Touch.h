@@ -5,6 +5,7 @@
 
 #include <stm32f769i_discovery_ts.h>
 
+#include "../../interfaces/AbstractTouchInput.h"
 #include "../../math/Point.h"
 
 namespace GrapheneDrivers {

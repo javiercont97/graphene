@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Enable/Disable Graphene features
 add_definitions(-DENABLE_GRAPHENE_IMAGE_FORMAT)
 # add_definitions(-DENABLE_STM32F769I_DRIVERS)
-# add_definitions(-DENABLE_NODEMCU_DRIVERS)
+add_definitions(-DENABLE_NODEMCU_DRIVERS)
 
 # Add the source files for the library
 set(SOURCES

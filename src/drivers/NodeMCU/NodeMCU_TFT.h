@@ -11,11 +11,12 @@
 #include "../../core/Font.h"
 #include "../../core/GrapheneFonts.h"
 #include "../../core/String.h"
+#include "../../interfaces/AbstractCanvas.h"
 #include "../../math/Point.h"
 
 namespace Graphene {
 
-class AdafruitST7735 {
+class AdafruitST7735 : public Graphene::AbstractCanvas {
    public:
 	/**
 	 * @brief Construct a new Adafruit ST7735 display driver for Graphene
@@ -29,33 +30,36 @@ class AdafruitST7735 {
 	AdafruitST7735(uint32_t width, uint32_t height, uint8_t TFT_CS, uint8_t TFT_DC, uint8_t TFT_RST)
 		: Graphene::AbstractCanvas(width, height) {
 		tft = new Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
+		tft->initR(INITR_144GREENTAB);
+		tft->setRotation(2);
+		tft->fillScreen(Graphene::BLACK.toRGB565());
 	}
 
 	//=====================================================
 	// Drawing functions
 	//=====================================================
 	void drawPixel(Graphene::Point point, Graphene::Color color) {
-		tft->drawPixel(point.getX(), point.getY(), color.to565());
+		tft->drawPixel(point.getX(), point.getY(), color.toRGB565());
 	}
 
 	void drawLine(Graphene::Point start, Graphene::Point end, Graphene::Color color) {
-		tft->drawLine(start.getX(), start.getY(), end.getX(), end.getY(), color.to565());
+		tft->drawLine(start.getX(), start.getY(), end.getX(), end.getY(), color.toRGB565());
 	}
 
 	void drawRectangle(Graphene::Point position, int32_t width, int32_t height, Graphene::Color color) {
-		tft->drawRect(position.getX(), position.getY(), width, height, color.to565());
+		tft->drawRect(position.getX(), position.getY(), width, height, color.toRGB565());
 	}
 
 	void fillRectangle(Graphene::Point position, int32_t width, int32_t height, Graphene::Color color) {
-		tft->fillRect(position.getX(), position.getY(), width, height, color.to565());
+		tft->fillRect(position.getX(), position.getY(), width, height, color.toRGB565());
 	}
 
 	void drawCircle(Graphene::Point center, int32_t radius, Graphene::Color color) {
-		tft->drawCircle(center.getX(), center.getY(), radius, color.to565());
+		tft->drawCircle(center.getX(), center.getY(), radius, color.toRGB565());
 	}
 
 	void fillCircle(Graphene::Point center, int32_t radius, Graphene::Color color) {
-		tft->fillCircle(center.getX(), center.getY(), radius, color.to565());
+		tft->fillCircle(center.getX(), center.getY(), radius, color.toRGB565());
 	}
 
 	/**
@@ -64,26 +68,10 @@ class AdafruitST7735 {
 	 * @param points
 	 */
 	void drawPolygon(std::vector<Graphene::Point> points, Graphene::Color color) {
-		// Convert vector of Graphene::Point to Adafruit GFX Point
-		std::vector<Adafruit_GFX::Point> adafruitPoints;
-		for (Graphene::Point point : points) {
-			adafruitPoints.push_back(Adafruit_GFX::Point(point.getX(), point.getY()));
+		for (size_t i = 0; i < points.size() - 1; i++) {
+			this->drawLine(points[i], points[i + 1], color);
 		}
-
-		// tft->drawPolygon(adafruitPoints.data(), adafruitPoints.size(), color.to565());
-
-		for (int i = 0; i < adafruitPoints.size(); i++) {
-			tft->drawLine(adafruitPoints[i].x,
-						  adafruitPoints[i].y,
-						  adafruitPoints[(i + 1) % adafruitPoints.size()].x,
-						  adafruitPoints[(i + 1) % adafruitPoints.size()].y,
-						  color.to565());
-		}
-		tft->drawLine(adafruitPoints[0].x,
-					  adafruitPoints[0].y,
-					  adafruitPoints[adafruitPoints.size() - 1].x,
-					  adafruitPoints[adafruitPoints.size() - 1].y,
-					  color.to565());
+		this->drawLine(points[points.size() - 1], points[0], color);
 	}
 
 	/**
@@ -92,13 +80,48 @@ class AdafruitST7735 {
 	 * @param points
 	 */
 	void fillPolygon(std::vector<Graphene::Point> points, Graphene::Color color) {
-		// Convert vector of Graphene::Point to Adafruit GFX Point
-		std::vector<Adafruit_GFX::Point> adafruitPoints;
-		for (Graphene::Point point : points) {
-			adafruitPoints.push_back(Adafruit_GFX::Point(point.getX(), point.getY()));
+		// Find the bounding box of the polygon
+		int32_t minX = points[0].getX();
+		int32_t minY = points[0].getY();
+		int32_t maxX = points[0].getX();
+		int32_t maxY = points[0].getY();
+
+		for (size_t i = 1; i < points.size(); i++) {
+			if (points[i].getX() < minX) {
+				minX = points[i].getX();
+			}
+			if (points[i].getY() < minY) {
+				minY = points[i].getY();
+			}
+			if (points[i].getX() > maxX) {
+				maxX = points[i].getX();
+			}
+			if (points[i].getY() > maxY) {
+				maxY = points[i].getY();
+			}
 		}
 
-		tft->fillPolygon(adafruitPoints.data(), adafruitPoints.size(), color.to565());
+		// Check if a point is inside the polygon
+		auto isInside = [&points](Graphene::Point point) {
+			bool isInside = false;
+			for (size_t i = 0, j = points.size() - 1; i < points.size(); j = i++) {
+				if (((points[i].getY() > point.getY()) != (points[j].getY() > point.getY()))
+					&& (point.getX() < (points[j].getX() - points[i].getX()) * (point.getY() - points[i].getY())
+											   / (points[j].getY() - points[i].getY())
+										   + points[i].getX())) {
+					isInside = !isInside;
+				}
+			}
+			return isInside;
+		};
+
+		for (int32_t y = minY; y <= maxY; y++) {
+			for (int32_t x = minX; x <= maxX; x++) {
+				if (isInside({x, y})) {
+					this->drawPixel({x, y}, color);
+				}
+			}
+		}
 	}
 
 	/**
@@ -114,8 +137,8 @@ class AdafruitST7735 {
 					Font font,
 					TextAlignment align = TextAlignment::CENTER) {
 		tft->setCursor(position.getX(), position.getY());
-		tft->setTextColor(color.to565(), bgColor.to565());
-		tft->setTextSize(font.size);
+		tft->setTextColor(color.toRGB565(), bgColor.toRGB565());
+		tft->setTextSize(font.getHeight());
 		tft->setTextWrap(true);
 		tft->print(text);
 		// TODO: Convert Graphene::Font to Adafruit GFX Font
@@ -128,7 +151,7 @@ class AdafruitST7735 {
 	 * @param color
 	 */
 	void clear(Graphene::Color color) {
-		tft->fillScreen(color.to565());
+		tft->fillScreen(color.toRGB565());
 	}
 
    protected:
