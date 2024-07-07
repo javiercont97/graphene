@@ -6,7 +6,7 @@
 #include "../math/Point.h"
 
 namespace Graphene {
-enum class TouchEventType { PRESS, RELEASE, TAP, LONG_PRESS, DOUBLE_TAP, MOVE };
+enum class TouchEventType { PRESS, RELEASE, TAP, MOVE };
 
 struct TouchEvent {
 	TouchEventType type;

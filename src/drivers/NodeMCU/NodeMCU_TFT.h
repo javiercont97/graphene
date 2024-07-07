@@ -31,7 +31,7 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 		: Graphene::AbstractCanvas(width, height) {
 		tft = new Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 		tft->initR(INITR_144GREENTAB);
-		tft->setRotation(2);
+		tft->setRotation(0);
 		tft->fillScreen(Graphene::BLACK.toRGB565());
 	}
 
@@ -136,7 +136,10 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 					Graphene::Color bgColor,
 					Font font,
 					TextAlignment align = TextAlignment::CENTER) {
-		tft->setCursor(position.getX(), position.getY());
+		int16_t spacing = font.getHeight();
+		int16_t textWidthInPixels = text.length() * (font.getWidth() + spacing) - spacing;
+		int32_t x = position.getX() - textWidthInPixels / 2;
+		tft->setCursor((int16_t)x, (int16_t)position.getY() - font.getWidth() / 2);
 		tft->setTextColor(color.toRGB565(), bgColor.toRGB565());
 		tft->setTextSize(font.getHeight());
 		tft->setTextWrap(true);

@@ -20,7 +20,8 @@ class GrapheneApp {
 	AbstractTouchInput *touchInput;
 	IContainer *rootContainer;
 
-	std::vector<TouchEvent> prevTouchEvents;
+	bool hasPrevTouchEvent = false;
+	Graphene::TouchEvent prevTouchEvent;
 };
 
 }  // namespace Graphene
