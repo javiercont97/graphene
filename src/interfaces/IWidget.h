@@ -12,21 +12,20 @@ class IWidget : public IDrawable {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) = 0;
 
-	// Event handlers, override to handle events
 	void onTouchEvent(TouchEvent *event) override;
+	void setFocus(bool focus);
 
    protected:
 	virtual void onPress(TouchEvent *event){};
 	virtual void onRelease(TouchEvent *event){};
 	virtual void onTap(TouchEvent *event){};
-	virtual void onLongPress(TouchEvent *event){};
-	virtual void onMove(TouchEvent *event){};  // drag
-
-	// virtual void onDoubleTap(TouchEvent *event) = 0;
-	// virtual void onDrop(DragEvent *event) = 0;
+	virtual void onMove(TouchEvent *event){};
+	virtual void onFocus(){};
+	virtual void onLostFocus(){};
 
    protected:
 	bool isFocused = false;
+	bool _needsRedraw = true;
 };
 
 }  // namespace Graphene

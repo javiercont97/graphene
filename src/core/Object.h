@@ -70,7 +70,7 @@ class Object {
 	 * @return Graphene::String
 	 */
 	virtual Graphene::String toString() const {
-		return "Object";
+		return Graphene::String::asPrintf("Object(%x){}", this);
 	}
 
 	/**

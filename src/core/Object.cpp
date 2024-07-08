@@ -10,7 +10,6 @@ bool Graphene::Object::hasProperty(const std::string &name) {
 }
 
 void Graphene::Object::clearProperties() {
-	// clear all properties
 	properties.clear();
 }
 
@@ -27,7 +26,6 @@ std::vector<std::string> Graphene::Object::getPropertyNames() {
 }
 
 void Graphene::Object::addEventListener(const std::string &event, Object *listener) {
-	// add listener to the event
 	this->eventListeners[event].push_back(listener);
 }
 

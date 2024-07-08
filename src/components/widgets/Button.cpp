@@ -1,16 +1,17 @@
 #include "Button.h"
 
 void Graphene::Button::draw(AbstractCanvas& canvas) {
-	canvas.fillRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), backgroundColor);
+	if (this->_needsRedraw) {
+		canvas.fillRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), backgroundColor);
+		canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
 
-	canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
+		if (this->isFocused) {
+			canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
+		}
 
-	canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
+		this->_needsRedraw = false;
+	}
 }
-
-//====================================================================
-// getters and setters
-//====================================================================
 
 void Graphene::Button::onPress(TouchEvent* event) {
 	this->onPressCallback();
@@ -30,22 +31,27 @@ void Graphene::Button::onLongPress(TouchEvent* event) {
 
 void Graphene::Button::setText(String text) {
 	this->text = text;
+	this->_needsRedraw = true;	// force redraw
 }
 
 void Graphene::Button::setFont(Font font) {
 	this->font = font;
+	this->_needsRedraw = true;	// force redraw
 }
 
 void Graphene::Button::setTextColor(Color color) {
 	this->textColor = color;
+	this->_needsRedraw = true;	// force redraw
 }
 
 void Graphene::Button::setBackgroundColor(Color color) {
 	this->backgroundColor = color;
+	this->_needsRedraw = true;	// force redraw
 }
 
 void Graphene::Button::setBorderColor(Color color) {
 	this->borderColor = color;
+	this->_needsRedraw = true;	// force redraw
 }
 
 Graphene::String Graphene::Button::getText() {
@@ -62,8 +68,4 @@ void Graphene::Button::onRelease(std::function<void()> callback) {
 
 void Graphene::Button::onTap(std::function<void()> callback) {
 	this->onTapCallback = callback;
-}
-
-void Graphene::Button::onLongPress(std::function<void()> callback) {
-	this->onLongPressCallback = callback;
 }

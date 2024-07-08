@@ -11,8 +11,17 @@ void Graphene::IWidget::onTouchEvent(TouchEvent* event) {
 		case TouchEventType::TAP:
 			onTap(event);
 			break;
-		case TouchEventType::LONG_PRESS:
-			onLongPress(event);
+		case TouchEventType::MOVE:
+			onMove(event);
 			break;
+	}
+}
+
+void Graphene::IWidget::setFocus(bool focus) {
+	isFocused = focus;
+	if (focus) {
+		onFocus();
+	} else {
+		onLostFocus();
 	}
 }
