@@ -24,4 +24,6 @@ void Graphene::IWidget::setFocus(bool focus) {
 	} else {
 		onLostFocus();
 	}
+
+	_needsRedraw = true;
 }
