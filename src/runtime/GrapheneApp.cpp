@@ -23,6 +23,7 @@ void Graphene::GrapheneApp::eventLoop() {
 	// draw
 	if (this->rootContainer->needsRedraw()) {
 		this->rootContainer->forceRedraw();
+		this->canvas->clear(this->rootContainer->getBackgroundColor());
 	}
 	this->rootContainer->draw(*this->canvas);
 }

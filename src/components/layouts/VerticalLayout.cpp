@@ -18,4 +18,6 @@ void Graphene::VerticalLayout::updateLayout() {
 			Rect(bounds.getX() + leftPadding, y, bounds.getWidth() - rightPadding - leftPadding, childHeight));
 		y += childHeight + spacing;
 	}
+
+	Graphene::IContainer::updateLayout();
 }

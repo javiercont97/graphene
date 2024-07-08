@@ -15,14 +15,12 @@ void Graphene::IContainer::clear() {
 	this->updateLayout();
 }
 
+void Graphene::IContainer::updateLayout() {
+	this->forceRedraw();
+}
+
 void Graphene::IContainer::draw(AbstractCanvas& canvas) {
 	for (auto child : children) {
-		if (child->needsRedraw()) {
-			canvas.fillRectangle(child->getBounds().getTopLeft(),
-								 child->getBounds().getWidth(),
-								 child->getBounds().getHeight(),
-								 this->backgroundColor);
-		}
 		child->draw(canvas);
 	}
 }
@@ -107,5 +105,14 @@ int Graphene::IContainer::getLeftPadding() const {
 
 void Graphene::IContainer::setLeftPadding(int leftPadding) {
 	this->leftPadding = leftPadding;
+	updateLayout();
+}
+
+Graphene::Color Graphene::IContainer::getBackgroundColor() const {
+	return this->backgroundColor;
+}
+
+void Graphene::IContainer::setBackgroundColor(Graphene::Color color) {
+	this->backgroundColor = color;
 	updateLayout();
 }

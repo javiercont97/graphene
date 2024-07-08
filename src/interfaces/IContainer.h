@@ -19,7 +19,7 @@ class IContainer : public IDrawable {
 		return children.at(index);
 	}
 
-	virtual void updateLayout() = 0;
+	virtual void updateLayout();
 
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
@@ -42,6 +42,8 @@ class IContainer : public IDrawable {
 	void setBottomPadding(int bottomPadding);
 	int getLeftPadding() const;
 	void setLeftPadding(int leftPadding);
+	Graphene::Color getBackgroundColor() const;
+	void setBackgroundColor(Graphene::Color color);
 
    protected:
 	std::vector<IDrawable *> children;
