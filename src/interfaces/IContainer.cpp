@@ -36,6 +36,12 @@ bool Graphene::IContainer::needsRedraw() const {
 	return false;
 }
 
+void Graphene::IContainer::forceRedraw() {
+	for (auto child : children) {
+		child->forceRedraw();
+	}
+}
+
 void Graphene::IContainer::onTouchEvent(TouchEvent* event) {
 	for (auto child : children) {
 		if (child->getBounds().contains(event->position)) {

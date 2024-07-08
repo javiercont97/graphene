@@ -24,6 +24,7 @@ class IContainer : public IDrawable {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 	virtual bool needsRedraw() const override;
+	virtual void forceRedraw() override;
 
 	virtual void onTouchEvent(TouchEvent *event) override;
 

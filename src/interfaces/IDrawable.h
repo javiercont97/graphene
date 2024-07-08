@@ -54,6 +54,7 @@ class IDrawable {
 
 	virtual void draw(AbstractCanvas &canvas) = 0;
 	virtual bool needsRedraw() const = 0;
+	virtual void forceRedraw() = 0;
 
 	// Event handlers
 	virtual void onTouchEvent(TouchEvent *event) = 0;

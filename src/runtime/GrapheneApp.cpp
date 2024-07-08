@@ -21,6 +21,9 @@ void Graphene::GrapheneApp::eventLoop() {
 	}
 
 	// draw
+	if (this->rootContainer->needsRedraw()) {
+		this->rootContainer->forceRedraw();
+	}
 	this->rootContainer->draw(*this->canvas);
 }
 

@@ -12,6 +12,7 @@ class IWidget : public IDrawable {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) = 0;
 	virtual bool needsRedraw() const override;
+	virtual void forceRedraw() override;
 
 	void onTouchEvent(TouchEvent *event) override;
 	void setFocus(bool focus);
