@@ -16,9 +16,13 @@ void Graphene::IContainer::clear() {
 }
 
 void Graphene::IContainer::draw(AbstractCanvas& canvas) {
-	canvas.fillRectangle(
-		this->getBounds().getTopLeft(), this->getBounds().getWidth(), this->getBounds().getHeight(), backgroundColor);
 	for (auto child : children) {
+		if (child->needsRedraw()) {
+			canvas.fillRectangle(child->getBounds().getTopLeft(),
+								 child->getBounds().getWidth(),
+								 child->getBounds().getHeight(),
+								 this->backgroundColor);
+		}
 		child->draw(canvas);
 	}
 }
