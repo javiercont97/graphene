@@ -1,5 +1,9 @@
 #include "IWidget.h"
 
+bool Graphene::IWidget::needsRedraw() const {
+	return this->_needsRedraw;
+}
+
 void Graphene::IWidget::onTouchEvent(TouchEvent* event) {
 	switch (event->type) {
 		case TouchEventType::PRESS:

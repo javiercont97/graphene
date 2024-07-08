@@ -27,27 +27,27 @@ void Graphene::Button::onTap(TouchEvent* event) {
 
 void Graphene::Button::setText(String text) {
 	this->text = text;
-	this->_needsRedraw = true;	// force redraw
+	this->_needsRedraw = true;
 }
 
 void Graphene::Button::setFont(Font font) {
 	this->font = font;
-	this->_needsRedraw = true;	// force redraw
+	this->_needsRedraw = true;
 }
 
 void Graphene::Button::setTextColor(Color color) {
 	this->textColor = color;
-	this->_needsRedraw = true;	// force redraw
+	this->_needsRedraw = true;
 }
 
 void Graphene::Button::setBackgroundColor(Color color) {
 	this->backgroundColor = color;
-	this->_needsRedraw = true;	// force redraw
+	this->_needsRedraw = true;
 }
 
 void Graphene::Button::setBorderColor(Color color) {
 	this->borderColor = color;
-	this->_needsRedraw = true;	// force redraw
+	this->_needsRedraw = true;
 }
 
 Graphene::String Graphene::Button::getText() {

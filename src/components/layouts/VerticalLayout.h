@@ -6,7 +6,7 @@
 namespace Graphene {
 class VerticalLayout : public IContainer {
    public:
-	VerticalLayout(IContainer *parent = nullptr) : IContainer(parent){};
+	VerticalLayout(Graphene::Color bgColor, IContainer *parent = nullptr) : IContainer(bgColor, parent){};
 
 	// Inherited via IContainer
 	virtual void updateLayout() override;

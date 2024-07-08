@@ -16,9 +16,20 @@ void Graphene::IContainer::clear() {
 }
 
 void Graphene::IContainer::draw(AbstractCanvas& canvas) {
+	canvas.fillRectangle(
+		this->getBounds().getTopLeft(), this->getBounds().getWidth(), this->getBounds().getHeight(), backgroundColor);
 	for (auto child : children) {
 		child->draw(canvas);
 	}
+}
+
+bool Graphene::IContainer::needsRedraw() const {
+	for (auto child : children) {
+		if (child->needsRedraw()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void Graphene::IContainer::onTouchEvent(TouchEvent* event) {

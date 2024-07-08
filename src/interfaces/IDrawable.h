@@ -1,7 +1,7 @@
 #if !defined(GRAPHENE_DRAWABLE_INTERFACE_H)
 #define GRAPHENE_DRAWABLE_INTERFACE_H
 
-#include "../core/Object.h"
+// #include "../core/Object.h"
 #include "../events/TouchEvent.h"
 #include "../math/Rect.h"
 #include "AbstractCanvas.h"
@@ -11,7 +11,7 @@ namespace Graphene {
 // Placeholder layout interface to avoid circular dependencies
 class IContainer;
 
-class IDrawable : public Graphene::Object {
+class IDrawable {
    public:
 	IDrawable(IContainer *parent = nullptr) : parent(parent) {
 	}
@@ -53,17 +53,10 @@ class IDrawable : public Graphene::Object {
 	}
 
 	virtual void draw(AbstractCanvas &canvas) = 0;
+	virtual bool needsRedraw() const = 0;
 
 	// Event handlers
 	virtual void onTouchEvent(TouchEvent *event) = 0;
-
-	void notify(const Graphene::String &topic,
-				const std::variant<int, float, double, std::string> &message,
-				Graphene::EVENT_PAYLOAD_TYPE type) override {
-		if (topic == "redraw") {
-			// _needsRedraw = true;
-		}
-	}
 
    protected:
 	IContainer *parent;
