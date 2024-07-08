@@ -25,10 +25,6 @@ void Graphene::Button::onTap(TouchEvent* event) {
 	this->onTapCallback();
 }
 
-void Graphene::Button::onLongPress(TouchEvent* event) {
-	this->onLongPressCallback();
-}
-
 void Graphene::Button::setText(String text) {
 	this->text = text;
 	this->_needsRedraw = true;	// force redraw
