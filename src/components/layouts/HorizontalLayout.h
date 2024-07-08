@@ -7,10 +7,11 @@ namespace Graphene {
 
 class HorizontalLayout : public IContainer {
    public:
-	HorizontalLayout(IContainer *parent = nullptr) : IContainer(parent) {
+	HorizontalLayout(Graphene::Color bgColor, IContainer *parent = nullptr) : IContainer(bgColor, parent) {
 	}
 
-	HorizontalLayout(int padding, int spacing, IContainer *parent = nullptr) : IContainer(parent) {
+	HorizontalLayout(int padding, int spacing, Graphene::Color bgColor, IContainer *parent = nullptr)
+		: IContainer(bgColor, parent) {
 		this->topPadding = padding;
 		this->rightPadding = padding;
 		this->bottomPadding = padding;

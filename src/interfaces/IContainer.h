@@ -1,12 +1,13 @@
 #if !defined(GRAPHENE_LAYOUT_INTERFACE_H)
 #define GRAPHENE_LAYOUT_INTERFACE_H
 
+#include "../core/Color.h"
 #include "IDrawable.h"
 
 namespace Graphene {
 class IContainer : public IDrawable {
    public:
-	IContainer(IContainer *parent = nullptr) : IDrawable(parent){};
+	IContainer(Graphene::Color bgColor, IContainer *parent = nullptr) : backgroundColor(bgColor), IDrawable(parent){};
 	~IContainer() {
 	}
 
@@ -22,6 +23,7 @@ class IContainer : public IDrawable {
 
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
+	virtual bool needsRedraw() const override;
 
 	virtual void onTouchEvent(TouchEvent *event) override;
 
@@ -49,6 +51,8 @@ class IContainer : public IDrawable {
 	int leftPadding = 0;
 
 	int spacing = 0;
+
+	Graphene::Color backgroundColor;
 };
 }  // namespace Graphene
 
