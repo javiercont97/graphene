@@ -7,7 +7,7 @@
 namespace Graphene {
 class IContainer : public IDrawable {
    public:
-	IContainer(Graphene::Color bgColor, IContainer *parent = nullptr) : backgroundColor(bgColor), IDrawable(parent){};
+	IContainer(Graphene::Color bgColor, IContainer *parent = nullptr) : IDrawable(parent), children({}), backgroundColor(bgColor) {};
 	~IContainer() {
 	}
 
@@ -47,6 +47,7 @@ class IContainer : public IDrawable {
 
    protected:
 	std::vector<IDrawable *> children;
+   	Graphene::Color backgroundColor;
 
 	int topPadding = 0;
 	int rightPadding = 0;
@@ -54,8 +55,6 @@ class IContainer : public IDrawable {
 	int leftPadding = 0;
 
 	int spacing = 0;
-
-	Graphene::Color backgroundColor;
 };
 }  // namespace Graphene
 

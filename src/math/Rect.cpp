@@ -46,8 +46,16 @@ Graphene::Point Graphene::Rect::getTopLeft() const {
 	return p;
 }
 
+Graphene::Point Graphene::Rect::getTopRight() const {
+	return Point(p.getX() + width, p.getY());
+}
+
 Graphene::Point Graphene::Rect::getBottomRight() const {
 	return Point(p.getX() + width, p.getY() + height);
+}
+
+Graphene::Point Graphene::Rect::getBottomLeft() const {
+	return Point(p.getX(), p.getY() + height);
 }
 
 Graphene::Point Graphene::Rect::getCenter() const {

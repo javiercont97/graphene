@@ -60,6 +60,8 @@ set(SOURCES
 	src/components/widgets/Label.cpp
 	src/components/widgets/Button.h
 	src/components/widgets/Button.cpp
+	src/components/widgets/Slider.h
+	src/components/widgets/Slider.cpp
 
 	# events
 	src/events/TouchEvent.h

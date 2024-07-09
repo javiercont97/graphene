@@ -32,6 +32,7 @@
 #include "components/layouts/VerticalLayout.h"
 #include "components/widgets/Button.h"
 #include "components/widgets/Label.h"
+#include "components/widgets/Slider.h"
 
 // Runtime includes
 #include "runtime/GrapheneApp.h"

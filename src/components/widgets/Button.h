@@ -35,11 +35,13 @@ class Button : public IWidget {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 
+	private:
 	// Inherited via IWidget
 	void onPress(TouchEvent *event) override;
 	void onRelease(TouchEvent *event) override;
 	void onTap(TouchEvent *event) override;
 
+	public:
 	// Setters
 	void setText(String text);
 	void setFont(Font font);
@@ -55,17 +57,12 @@ class Button : public IWidget {
 	void onTap(std::function<void()> callback);
 
    protected:
-	// state properties
-	// bool isPressed = false;
-
-	// rendering properties
 	String text;
 	Font font = Graphene::Graphene24;
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;
 	Color borderColor = Graphene::BLACK;
 
-	// callbacks
 	std::function<void()> onPressCallback = []() {};
 	std::function<void()> onReleaseCallback = []() {};
 	std::function<void()> onTapCallback = []() {};

@@ -35,9 +35,9 @@ class Rect {
 	void setHeight(uint32_t height);
 
 	Point getTopLeft() const;
-
+	Point getTopRight() const;
 	Point getBottomRight() const;
-
+	Point getBottomLeft() const;
 	Point getCenter() const;
 
 	void setTopLeft(Point p);
