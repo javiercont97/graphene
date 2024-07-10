@@ -23,6 +23,25 @@ class Slider: public IWidget {
 		: IWidget(parent), value(min), min(min), max(max), step(step) {
 	}
 
+	Slider(uint16_t min,
+		   uint16_t max,
+		   uint16_t step,
+		   Color backgroundColor,
+		   Color sliderColor,
+		   Color borderColor,
+		   Color lineColor,
+		   IContainer *parent = nullptr)
+		: IWidget(parent),
+		  value(min),
+		  min(min),
+		  max(max),
+		  step(step),
+		  backgroundColor(backgroundColor),
+		  sliderColor(sliderColor),
+		  borderColor(borderColor),
+		  lineColor(lineColor) {
+	}
+
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 

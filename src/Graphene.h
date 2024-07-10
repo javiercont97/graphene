@@ -33,6 +33,7 @@
 #include "components/widgets/Button.h"
 #include "components/widgets/Label.h"
 #include "components/widgets/Slider.h"
+#include "components/widgets/ProgressBar.h"
 
 // Runtime includes
 #include "runtime/GrapheneApp.h"
