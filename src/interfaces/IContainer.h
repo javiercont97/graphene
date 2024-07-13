@@ -28,9 +28,9 @@ class IContainer : public IDrawable {
 
 	virtual void onTouchEvent(TouchEvent *event) override;
 
-	void setBounds(Rect bounds) override;
-	void setStretchX(uint8_t stretchX) override;
-	void setStretchY(uint8_t stretchY) override;
+	virtual void setBounds(Rect bounds) override;
+	virtual void setStretchX(uint8_t stretchX) override;
+	virtual void setStretchY(uint8_t stretchY) override;
 
 	int getSpacing() const;
 	void setSpacing(int spacing);

@@ -1,6 +1,10 @@
 #include "ProgressBar.h"
 
 void Graphene::ProgressBar::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+	
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), backgroundColor);
 

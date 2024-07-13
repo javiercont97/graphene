@@ -1,6 +1,10 @@
 #include "Slider.h"
 
 void Graphene::Slider::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+	
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(
 			this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), this->backgroundColor);

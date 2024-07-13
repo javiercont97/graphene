@@ -55,6 +55,8 @@ set(SOURCES
 	src/components/layouts/HorizontalLayout.cpp
 	src/components/layouts/VerticalLayout.h
 	src/components/layouts/VerticalLayout.cpp
+	src/components/layouts/PaginatedView.h
+	src/components/layouts/PaginatedView.cpp
 
 	src/components/widgets/Label.h
 	src/components/widgets/Label.cpp

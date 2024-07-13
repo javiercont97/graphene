@@ -1,6 +1,10 @@
 #include "Button.h"
 
 void Graphene::Button::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), backgroundColor);
 		canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);

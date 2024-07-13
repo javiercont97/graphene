@@ -20,6 +20,10 @@ void Graphene::IContainer::updateLayout() {
 }
 
 void Graphene::IContainer::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+
 	for (auto child : children) {
 		child->draw(canvas);
 	}
@@ -41,6 +45,10 @@ void Graphene::IContainer::forceRedraw() {
 }
 
 void Graphene::IContainer::onTouchEvent(TouchEvent* event) {
+	if (!this->isVisible()) {
+		return;
+	}
+
 	for (auto child : children) {
 		if (child->getBounds().contains(event->position)) {
 			child->onTouchEvent(event);

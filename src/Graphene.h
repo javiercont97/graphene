@@ -28,6 +28,7 @@
 #include "image/Image.h"
 
 // Widgets, layouts/containers and components includes
+#include "components/layouts/PaginatedView.h"
 #include "components/layouts/HorizontalLayout.h"
 #include "components/layouts/VerticalLayout.h"
 #include "components/widgets/Button.h"

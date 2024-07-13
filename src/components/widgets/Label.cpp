@@ -1,6 +1,10 @@
 #include "Label.h"
 
 void Graphene::Label::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+	
 	if (this->_needsRedraw) {
 		canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
 
