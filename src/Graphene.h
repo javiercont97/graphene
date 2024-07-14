@@ -29,9 +29,13 @@
 
 // Widgets, layouts/containers and components includes
 #include "components/layouts/HorizontalLayout.h"
+#include "components/layouts/PaginatedView.h"
 #include "components/layouts/VerticalLayout.h"
 #include "components/widgets/Button.h"
+#include "components/widgets/CheckBox.h"
 #include "components/widgets/Label.h"
+#include "components/widgets/ProgressBar.h"
+#include "components/widgets/Slider.h"
 
 // Runtime includes
 #include "runtime/GrapheneApp.h"

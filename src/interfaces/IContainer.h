@@ -7,7 +7,8 @@
 namespace Graphene {
 class IContainer : public IDrawable {
    public:
-	IContainer(Graphene::Color bgColor, IContainer *parent = nullptr) : backgroundColor(bgColor), IDrawable(parent){};
+	IContainer(Graphene::Color bgColor, IContainer *parent = nullptr)
+		: IDrawable(parent), children({}), backgroundColor(bgColor){};
 	~IContainer() {
 	}
 
@@ -28,9 +29,9 @@ class IContainer : public IDrawable {
 
 	virtual void onTouchEvent(TouchEvent *event) override;
 
-	void setBounds(Rect bounds) override;
-	void setStretchX(uint8_t stretchX) override;
-	void setStretchY(uint8_t stretchY) override;
+	virtual void setBounds(Rect bounds) override;
+	virtual void setStretchX(uint8_t stretchX) override;
+	virtual void setStretchY(uint8_t stretchY) override;
 
 	int getSpacing() const;
 	void setSpacing(int spacing);
@@ -47,6 +48,7 @@ class IContainer : public IDrawable {
 
    protected:
 	std::vector<IDrawable *> children;
+	Graphene::Color backgroundColor;
 
 	int topPadding = 0;
 	int rightPadding = 0;
@@ -54,8 +56,6 @@ class IContainer : public IDrawable {
 	int leftPadding = 0;
 
 	int spacing = 0;
-
-	Graphene::Color backgroundColor;
 };
 }  // namespace Graphene
 

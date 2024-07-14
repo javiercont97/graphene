@@ -105,7 +105,7 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 		delete[] corners;
 	}
 
-	void drawString(Graphene::Point position,
+	void drawString(Graphene::Rect frame,
 					Graphene::String text,
 					Graphene::Color color,
 					Graphene::Color bgColor,
@@ -115,30 +115,40 @@ class STM32F769I_Canvas : public Graphene::AbstractCanvas {
 		BSP_LCD_SetTextColor(color);
 
 		sFONT stmFont = {.table = font.getCharMap(), .Width = font.getWidth(), .Height = font.getHeight()};
-
 		BSP_LCD_SetFont(&stmFont);
 
-		Graphene::Point textLeftCorner(position.getX() - text.length() * Font24.Width / 2,
-									   position.getY() - Font24.Height / 2);
+		switch (alignment) {
+			case Graphene::TextAlignment::LEFT: {
+				Graphene::Point position = frame.getTopLeft();
+				Graphene::Point textLeftCorner(position.getX(),
+											   position.getY() + frame.getHeight() / 2 - font.getHeight() / 2);
 
-		BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
-								(uint16_t)textLeftCorner.getY(),
-								(uint8_t *)text.cStyleString(),
-								LEFT_MODE);
+				BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+										(uint16_t)textLeftCorner.getY(),
+										(uint8_t *)text.cStyleString(),
+										LEFT_MODE);
+			} break;
+			case Graphene::TextAlignment::CENTER: {
+				Graphene::Point position = frame.getCenter();
+				Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth() / 2,
+											   position.getY() - font.getHeight() / 2);
 
-		// TODO: Implement text alignment
-		// switch (alignment) {
-		// 	case Graphene::TextAlignment::LEFT:
-		// 		BSP_LCD_DisplayStringAt(
-		// 			(uint16_t)position.getX(), (uint16_t)position.getY(),
-		// (uint8_t *)text.c_str(), LEFT_MODE); 		break; 	case
-		// Graphene::TextAlignment::CENTER: 		BSP_LCD_DisplayStringAt(
-		// 			(uint16_t)position.getX(), (uint16_t)position.getY(),
-		// (uint8_t *)text.c_str(), CENTER_MODE); 		break; 	case
-		// Graphene::TextAlignment::RIGHT: 		BSP_LCD_DisplayStringAt(
-		// 			(uint16_t)position.getX(), (uint16_t)position.getY(),
-		// (uint8_t *)text.c_str(), RIGHT_MODE); 		break;
-		// }
+				BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+										(uint16_t)textLeftCorner.getY(),
+										(uint8_t *)text.cStyleString(),
+										LEFT_MODE);
+			} break;
+			case Graphene::TextAlignment::RIGHT: {
+				Graphene::Point position = {frame.getTopRight().getX(), frame.getCenter().getY()};
+				Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth(),
+											   position.getY() - font.getHeight() / 2);
+
+				BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+										(uint16_t)textLeftCorner.getY(),
+										(uint8_t *)text.cStyleString(),
+										LEFT_MODE);
+			} break;
+		}
 	}
 
 	void clear(Graphene::Color color) override {

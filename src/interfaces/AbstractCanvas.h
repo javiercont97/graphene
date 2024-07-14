@@ -88,12 +88,12 @@ class AbstractCanvas {
 	virtual void fillPolygon(std::vector<Graphene::Point> points, Graphene::Color color) = 0;
 
 	/**
-	 * @brief Draw a string at a given position.
+	 * @brief Draw a string at a given frame.
 	 *
-	 * @param position
+	 * @param frame
 	 * @param text
 	 */
-	virtual void drawString(Graphene::Point position,
+	virtual void drawString(Graphene::Rect frame,
 							String text,
 							Graphene::Color color,
 							Graphene::Color bgColor,

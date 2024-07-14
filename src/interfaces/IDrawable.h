@@ -52,6 +52,22 @@ class IDrawable {
 		this->stretchY = stretchY;
 	}
 
+	bool isVisible() const {
+		return _isVisible;
+	}
+
+	virtual void setVisible(bool isVisible) {
+		_isVisible = isVisible;
+	}
+
+	virtual void show() {
+		setVisible(true);
+	}
+
+	virtual void hide() {
+		setVisible(false);
+	}
+
 	virtual void draw(AbstractCanvas &canvas) = 0;
 	virtual bool needsRedraw() const = 0;
 	virtual void forceRedraw() = 0;
@@ -66,6 +82,8 @@ class IDrawable {
 	// Stretch factors, used as layout hints/polices
 	uint8_t stretchX = 1;
 	uint8_t stretchY = 1;
+
+	bool _isVisible = true;
 };
 
 }  // namespace Graphene

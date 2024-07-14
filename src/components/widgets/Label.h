@@ -34,8 +34,10 @@ class Label : public IWidget {
 	void setFont(Font font);
 	void setTextColor(Color color);
 	void setBackgroundColor(Color color);
+	void setAlignment(Graphene::TextAlignment alignment);
 
 	String getText();
+	Graphene::TextAlignment getAlignment();
 
    protected:
 	// rendering properties
@@ -43,6 +45,7 @@ class Label : public IWidget {
 	Font font = Graphene::Graphene24;
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;
+	Graphene::TextAlignment alignment = Graphene::TextAlignment::CENTER;
 };
 }  // namespace Graphene
 

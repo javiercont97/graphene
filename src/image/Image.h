@@ -102,7 +102,7 @@ class Image : public AbstractCanvas {
 	virtual void fillCircle(Graphene::Point center, int32_t radius, Graphene::Color color);
 	virtual void drawPolygon(std::vector<Graphene::Point> points, Graphene::Color color);
 	virtual void fillPolygon(std::vector<Graphene::Point> points, Graphene::Color color);
-	virtual void drawString(Graphene::Point position,
+	virtual void drawString(Graphene::Rect frame,
 							Graphene::String text,
 							Graphene::Color color,
 							Graphene::Color bgColor,

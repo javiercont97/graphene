@@ -9,6 +9,10 @@ void Graphene::IWidget::forceRedraw() {
 }
 
 void Graphene::IWidget::onTouchEvent(TouchEvent* event) {
+	if (!this->isVisible()) {
+		return;
+	}
+
 	switch (event->type) {
 		case TouchEventType::PRESS:
 			onPress(event);

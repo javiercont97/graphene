@@ -1,5 +1,5 @@
-#if !defined(GRAPHENE_BUTTON_WIDGET_H)
-#define GRAPHENE_BUTTON_WIDGET_H
+#if !defined(GRAPHENE_CHECKBOX_WIDGET_H)
+#define GRAPHENE_CHECKBOX_WIDGET_H
 
 #include <functional>
 
@@ -11,12 +11,12 @@
 #include "../../interfaces/IWidget.h"
 
 namespace Graphene {
-class Button : public IWidget {
+class CheckBox : public IWidget {
    public:
-	Button(IContainer *parent = nullptr) : IWidget(parent) {
+	CheckBox(IContainer *parent = nullptr) : IWidget(parent) {
 	}
 
-	Button(
+	CheckBox(
 		String text, Font font, Color textColor, Color backgroundColor, Color borderColor, IContainer *parent = nullptr)
 		: IWidget(parent),
 		  text(text),
@@ -26,21 +26,19 @@ class Button : public IWidget {
 		  borderColor(borderColor) {
 	}
 
-	Button(String text, Font font, IContainer *parent = nullptr) : IWidget(parent), text(text), font(font) {
+	CheckBox(String text, Font font, IContainer *parent = nullptr) : IWidget(parent), text(text), font(font) {
 	}
 
-	Button(String text, IContainer *parent = nullptr) : IWidget(parent), text(text) {
+	CheckBox(String text, IContainer *parent = nullptr) : IWidget(parent), text(text) {
 	}
 
-	void click();
+	void toggle();
 
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 
    private:
 	// Inherited via IWidget
-	void onPress(TouchEvent *event) override;
-	void onRelease(TouchEvent *event) override;
 	void onTap(TouchEvent *event) override;
 
    public:
@@ -50,15 +48,12 @@ class Button : public IWidget {
 	void setTextColor(Color color);
 	void setBackgroundColor(Color color);
 	void setBorderColor(Color color);
-	void setAlignment(Graphene::TextAlignment alignment);
+	void setCheckColor(Color color);
 
 	String getText();
-	Graphene::TextAlignment getAlignment();
 
 	// Callbacks
-	void onPress(std::function<void()> callback);
-	void onRelease(std::function<void()> callback);
-	void onTap(std::function<void()> callback);
+	void onStateChange(std::function<void(bool)> callback);
 
    protected:
 	String text;
@@ -66,12 +61,11 @@ class Button : public IWidget {
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;
 	Color borderColor = Graphene::BLACK;
-	Graphene::TextAlignment alignment = Graphene::TextAlignment::CENTER;
+	Color checkColor = Graphene::GREEN;
+	bool checked = false;
 
-	std::function<void()> onPressCallback = []() {};
-	std::function<void()> onReleaseCallback = []() {};
-	std::function<void()> onTapCallback = []() {};
+	std::function<void(bool)> onStateChangeCallback = [](bool state) {};
 };
 }  // namespace Graphene
 
-#endif	// GRAPHENE_BUTTON_WIDGET_H
+#endif	// GRAPHENE_CHECKBOX_WIDGET_H

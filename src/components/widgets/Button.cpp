@@ -1,9 +1,19 @@
 #include "Button.h"
 
+void Graphene::Button::click() {
+	this->onPressCallback();
+	this->onReleaseCallback();
+	this->onTapCallback();
+}
+
 void Graphene::Button::draw(AbstractCanvas& canvas) {
+	if (!this->isVisible()) {
+		return;
+	}
+
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), backgroundColor);
-		canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
+		canvas.drawString(bounds, text, textColor, backgroundColor, font, this->alignment);
 
 		if (this->isFocused) {
 			canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
@@ -50,8 +60,17 @@ void Graphene::Button::setBorderColor(Color color) {
 	this->forceRedraw();
 }
 
+void Graphene::Button::setAlignment(Graphene::TextAlignment alignment) {
+	this->alignment = alignment;
+	this->forceRedraw();
+}
+
 Graphene::String Graphene::Button::getText() {
 	return this->text;
+}
+
+Graphene::TextAlignment Graphene::Button::getAlignment() {
+	return this->alignment;
 }
 
 void Graphene::Button::onPress(std::function<void()> callback) {
