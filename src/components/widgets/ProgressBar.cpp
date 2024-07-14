@@ -14,7 +14,7 @@ void Graphene::ProgressBar::draw(AbstractCanvas& canvas) {
 			canvas.fillRectangle(bounds.getTopLeft(), progressWidth, bounds.getHeight(), progressColor);
 		}
 
-		canvas.drawString(bounds.getCenter(), String::fromInt(value), textColor, value>(max-min)/2 ? progressColor : backgroundColor, Graphene::Graphene24, Graphene::TextAlignment::CENTER);
+		canvas.drawString(bounds, String::fromInt(value), textColor, value>(max-min)/2 ? progressColor : backgroundColor, Graphene::Graphene24, Graphene::TextAlignment::CENTER);
 
 		canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
 

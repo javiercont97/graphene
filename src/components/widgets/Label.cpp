@@ -7,7 +7,7 @@ void Graphene::Label::draw(AbstractCanvas& canvas) {
 	
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), backgroundColor);
-		canvas.drawString(bounds.getCenter(), text, textColor, backgroundColor, font, Graphene::TextAlignment::CENTER);
+		canvas.drawString(bounds, text, textColor, backgroundColor, font, this->alignment);
 
 		this->_needsRedraw = false;
 	}
@@ -15,24 +15,33 @@ void Graphene::Label::draw(AbstractCanvas& canvas) {
 
 void Graphene::Label::setText(String text) {
 	this->text = text;
-	this->forceRedraw();  // force redraw
+	this->forceRedraw();
 }
 
 void Graphene::Label::setFont(Font font) {
 	this->font = font;
-	this->forceRedraw();  // force redraw
+	this->forceRedraw();
 }
 
 void Graphene::Label::setTextColor(Color color) {
 	this->textColor = color;
-	this->forceRedraw();  // force redraw
+	this->forceRedraw();
 }
 
 void Graphene::Label::setBackgroundColor(Color color) {
 	this->backgroundColor = color;
-	this->forceRedraw();  // force redraw
+	this->forceRedraw();
+}
+
+void Graphene::Label::setAlignment(Graphene::TextAlignment alignment) {
+	this->alignment = alignment;
+	this->forceRedraw();
 }
 
 Graphene::String Graphene::Label::getText() {
 	return this->text;
+}
+
+Graphene::TextAlignment Graphene::Label::getAlignment() {
+	return this->alignment;
 }
