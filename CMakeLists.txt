@@ -64,6 +64,10 @@ set(SOURCES
 	src/components/widgets/Button.cpp
 	src/components/widgets/Slider.h
 	src/components/widgets/Slider.cpp
+	src/components/widgets/ProgressBar.h
+	src/components/widgets/ProgressBar.cpp
+	src/components/widgets/CheckBox.h
+	src/components/widgets/CheckBox.cpp
 
 	# events
 	src/events/TouchEvent.h

@@ -130,7 +130,7 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 	 * @param position
 	 * @param text
 	 */
-	void drawString(Graphene::Point position,
+	void drawString(Graphene::Rect frame,
 					String text,
 					Graphene::Color color,
 					Graphene::Color bgColor,

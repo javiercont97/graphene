@@ -390,7 +390,7 @@ void Graphene::Image::fillPolygon(std::vector<Graphene::Point> points, Graphene:
 	}
 }
 
-void Graphene::Image::drawString(Graphene::Point position,
+void Graphene::Image::drawString(Graphene::Rect frame,
 								 Graphene::String text,
 								 Graphene::Color color,
 								 Graphene::Color bgColor,
