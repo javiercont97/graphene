@@ -12,20 +12,18 @@
 
 namespace Graphene {
 
-
 class Slider: public IWidget {
    public:
 	Slider(IContainer *parent = nullptr)
-		: IWidget(parent), value(0), min(0), max(100), step(5) {
+		: IWidget(parent), value(0), min(0), max(100) {
 	}
 
-	Slider(uint16_t min, uint16_t max, uint16_t step, IContainer *parent = nullptr)
-		: IWidget(parent), value(min), min(min), max(max), step(step) {
+	Slider(uint16_t min, uint16_t max, IContainer *parent = nullptr)
+		: IWidget(parent), value(min), min(min), max(max) {
 	}
 
 	Slider(uint16_t min,
 		   uint16_t max,
-		   uint16_t step,
 		   Color backgroundColor,
 		   Color sliderColor,
 		   Color borderColor,
@@ -35,7 +33,6 @@ class Slider: public IWidget {
 		  value(min),
 		  min(min),
 		  max(max),
-		  step(step),
 		  backgroundColor(backgroundColor),
 		  sliderColor(sliderColor),
 		  borderColor(borderColor),
@@ -47,13 +44,13 @@ class Slider: public IWidget {
 
 	private:
 	// Inherited via IWidget
+	void onPress(TouchEvent *event) override;
 	void onMove(TouchEvent *event) override;
 
 public:
 	void setValue(uint16_t value);
 	void setMin(uint16_t min);
 	void setMax(uint16_t max);
-	void setStep(uint16_t step);
 	void setBackgroundColor(Color color);
 	void setSliderColor(Color color);
 	void setBorderColor(Color color);
@@ -62,7 +59,6 @@ public:
 	uint16_t getValue();
 	uint16_t getMin();
 	uint16_t getMax();
-	uint16_t getStep();
 	Color getBackgroundColor();
 	Color getSliderColor();
 	Color getBorderColor();
@@ -71,14 +67,10 @@ public:
 	// Callbacks
 	void onValueChange(std::function<void(uint16_t)> callback);
 
-   private:
-   uint16_t getNearestStep(Point point, uint16_t stepCount, uint16_t stepSize);
-
 	private:
 	uint16_t value;
 	uint16_t min;
 	uint16_t max;
-	uint16_t step;
 
 	Color backgroundColor = Graphene::WHITE;
 	Color sliderColor = Graphene::BLUE;
