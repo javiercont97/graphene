@@ -16,23 +16,18 @@ void Graphene::CheckBox::draw(AbstractCanvas& canvas) {
 
 		canvas.fillRectangle(
 			this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), this->backgroundColor);
-			
+
 		Point centerLeftPoint(this->bounds.getTopLeft().getX(), this->bounds.getCenter().getY());
 
 		Graphene::Rect textFrame = this->bounds;
 		textFrame.setX(textFrame.getX() + boxSideLength + 10);
-		canvas.drawString(textFrame,
-						  this->text,
-						  this->textColor,
-						  this->backgroundColor,
-						  this->font,
-						  TextAlignment::LEFT);
+		canvas.drawString(
+			textFrame, this->text, this->textColor, this->backgroundColor, this->font, TextAlignment::LEFT);
 
-		canvas.drawRectangle(
-			Point(centerLeftPoint.getX(), centerLeftPoint.getY() - boxSideLength / 2),
-			boxSideLength,
-			boxSideLength,
-			this->borderColor);
+		canvas.drawRectangle(Point(centerLeftPoint.getX(), centerLeftPoint.getY() - boxSideLength / 2),
+							 boxSideLength,
+							 boxSideLength,
+							 this->borderColor);
 
 		if (this->checked) {
 			canvas.drawLine(
@@ -47,7 +42,8 @@ void Graphene::CheckBox::draw(AbstractCanvas& canvas) {
 		}
 
 		if (this->isFocused) {
-			canvas.drawRectangle(this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), this->borderColor);
+			canvas.drawRectangle(
+				this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), this->borderColor);
 		}
 
 		this->_needsRedraw = false;

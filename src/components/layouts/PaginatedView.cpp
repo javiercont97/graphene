@@ -17,7 +17,7 @@ void Graphene::PaginatedView::setPage(int index) {
 		return;
 	}
 
-	for(auto child : this->children) {
+	for (auto child : this->children) {
 		child->setVisible(false);
 	}
 	this->children.at(index)->setVisible(true);

@@ -4,7 +4,7 @@ void Graphene::Slider::draw(AbstractCanvas& canvas) {
 	if (!this->isVisible()) {
 		return;
 	}
-	
+
 	if (this->_needsRedraw) {
 		canvas.fillRectangle(
 			this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), this->backgroundColor);
@@ -16,7 +16,8 @@ void Graphene::Slider::draw(AbstractCanvas& canvas) {
 
 		// Draw the slider
 		uint16_t sliderRadius = 10;
-		uint16_t sliderX = (this->value - this->min) * (this->bounds.getWidth() - 20) / (this->max - this->min) + (this->bounds.getTopLeft().getX() + 10);
+		uint16_t sliderX = (this->value - this->min) * (this->bounds.getWidth() - 20) / (this->max - this->min)
+						   + (this->bounds.getTopLeft().getX() + 10);
 		canvas.fillCircle({sliderX, this->bounds.getCenter().getY()}, sliderRadius, this->sliderColor);
 
 		if (this->isFocused) {
@@ -33,7 +34,9 @@ void Graphene::Slider::onPress(TouchEvent* event) {
 }
 
 void Graphene::Slider::onMove(TouchEvent* event) {
-	uint16_t newValue = (event->position.getX() - this->bounds.getTopLeft().getX() - 10) * (this->max - this->min) / (this->bounds.getWidth() - 20) + this->min;
+	uint16_t newValue = (event->position.getX() - this->bounds.getTopLeft().getX() - 10) * (this->max - this->min)
+							/ (this->bounds.getWidth() - 20)
+						+ this->min;
 
 	this->setValue(newValue);
 }

@@ -16,7 +16,7 @@ class PaginatedView : public IContainer {
 		this->bottomPadding = padding;
 		this->leftPadding = padding;
 	}
-	
+
 	void addPage(IContainer *view);
 	void setPage(int index);
 	int getCurrentPage() const {

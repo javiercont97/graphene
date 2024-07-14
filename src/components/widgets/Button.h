@@ -37,13 +37,13 @@ class Button : public IWidget {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 
-	private:
+   private:
 	// Inherited via IWidget
 	void onPress(TouchEvent *event) override;
 	void onRelease(TouchEvent *event) override;
 	void onTap(TouchEvent *event) override;
 
-	public:
+   public:
 	// Setters
 	void setText(String text);
 	void setFont(Font font);

@@ -127,7 +127,7 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 	/**
 	 * @brief Draw a string at a given position.
 	 *
-	 * @param position
+	 * @param frame
 	 * @param text
 	 */
 	void drawString(Graphene::Rect frame,
@@ -136,6 +136,7 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 					Graphene::Color bgColor,
 					Font font,
 					TextAlignment align = TextAlignment::CENTER) {
+		Graphene::Point position = frame.getCenter();
 		int16_t spacing = font.getHeight();
 		int16_t textWidthInPixels = text.length() * (font.getWidth() + spacing) - spacing;
 		int32_t x = position.getX() - textWidthInPixels / 2;

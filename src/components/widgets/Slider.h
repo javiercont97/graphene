@@ -12,14 +12,12 @@
 
 namespace Graphene {
 
-class Slider: public IWidget {
+class Slider : public IWidget {
    public:
-	Slider(IContainer *parent = nullptr)
-		: IWidget(parent), value(0), min(0), max(100) {
+	Slider(IContainer *parent = nullptr) : IWidget(parent), value(0), min(0), max(100) {
 	}
 
-	Slider(uint16_t min, uint16_t max, IContainer *parent = nullptr)
-		: IWidget(parent), value(min), min(min), max(max) {
+	Slider(uint16_t min, uint16_t max, IContainer *parent = nullptr) : IWidget(parent), value(min), min(min), max(max) {
 	}
 
 	Slider(uint16_t min,
@@ -42,12 +40,12 @@ class Slider: public IWidget {
 	// Inherited via IDrawable
 	virtual void draw(AbstractCanvas &canvas) override;
 
-	private:
+   private:
 	// Inherited via IWidget
 	void onPress(TouchEvent *event) override;
 	void onMove(TouchEvent *event) override;
 
-public:
+   public:
 	void setValue(uint16_t value);
 	void setMin(uint16_t min);
 	void setMax(uint16_t max);
@@ -67,7 +65,7 @@ public:
 	// Callbacks
 	void onValueChange(std::function<void(uint16_t)> callback);
 
-	private:
+   private:
 	uint16_t value;
 	uint16_t min;
 	uint16_t max;

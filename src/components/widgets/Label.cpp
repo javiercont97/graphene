@@ -4,9 +4,10 @@ void Graphene::Label::draw(AbstractCanvas& canvas) {
 	if (!this->isVisible()) {
 		return;
 	}
-	
+
 	if (this->_needsRedraw) {
-		canvas.fillRectangle(this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), backgroundColor);
+		canvas.fillRectangle(
+			this->bounds.getTopLeft(), this->bounds.getWidth(), this->bounds.getHeight(), backgroundColor);
 		canvas.drawString(bounds, text, textColor, backgroundColor, font, this->alignment);
 
 		this->_needsRedraw = false;
