@@ -29,6 +29,13 @@ jobs:
       run: |
         ./scripts/tests.sh
 
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: build/coverage_report
+        retention-days: 30
+
   publish:
     runs-on: ubuntu-latest
     needs: unit-test
