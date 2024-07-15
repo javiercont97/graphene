@@ -74,6 +74,7 @@ int main() {
 	//======================
 	RUN_TEST(testColor);
 	RUN_TEST(testGrayScale);
+	RUN_TEST(testInvertColor);
 
 	//======================
 	// Test Variant class

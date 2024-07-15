@@ -30,6 +30,15 @@ bool Graphene::Color::operator!=(const Color &color) const {
 	return red != color.red || green != color.green || blue != color.blue || alpha != color.alpha;
 }
 
+Graphene::Color Graphene::Color::invert() const {
+	Color c;
+	c.red = 255 - red;
+	c.green = 255 - green;
+	c.blue = 255 - blue;
+	c.alpha = alpha;
+	return c;
+}
+
 Graphene::Color::operator uint32_t() const {
 	return (alpha << 24) | (red << 16) | (green << 8) | blue;
 }

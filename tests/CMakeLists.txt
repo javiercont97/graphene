@@ -41,3 +41,41 @@ add_test(NAME math_test COMMAND math_test)
 
 # Add the tests as a target
 # # add_test(NAME driver_test COMMAND driver_test)
+
+
+# Coverage configuration
+if(CODE_COVERAGE)
+    foreach(test_target core_test math_test)
+        target_compile_options(${test_target} PUBLIC --coverage -O0)
+        target_link_libraries(${test_target} PUBLIC --coverage)
+    endforeach()
+
+    find_program(LCOV lcov)
+    find_program(GENHTML genhtml)
+
+    if(LCOV AND GENHTML)
+        add_custom_target(coverage
+            COMMAND ${LCOV} --capture --directory . --output-file coverage.info
+            COMMAND ${LCOV} --remove coverage.info '/usr/*' --output-file coverage.info
+            COMMAND ${LCOV} --list coverage.info
+            COMMAND ${GENHTML} coverage.info --output-directory out
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Generating coverage report"
+        )
+        
+        add_custom_target(check_coverage
+            COMMAND ${LCOV} --capture --directory . --output-file coverage.info
+            COMMAND ${LCOV} --remove coverage.info '/usr/*' --output-file coverage.info
+            COMMAND ${LCOV} --list coverage.info
+            COMMAND ${LCOV} --summary coverage.info | awk '/lines/{print $$2}' | awk -F. '{if ($$1 < 85) exit 1}'
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Checking coverage"
+        )
+
+		add_custom_target(coverage_html
+			COMMAND ${GENHTML} coverage.info -t "Graphene coverage report" -f --output-directory coverage_report
+			WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+			COMMENT "Generating coverage report in HTML"
+		)
+    endif()
+endif()

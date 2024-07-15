@@ -29,7 +29,7 @@ colorize() {
 path_to_project=$(pwd)
 
 colorize $CYAN "--> [UNIT-TESTS] Prepare to build"
-cmake -S $path_to_project -B $path_to_project/build
+cmake -DCODE_COVERAGE=ON -S $path_to_project -B $path_to_project/build
 if [ $? -ne 0 ]; then
 	colorize $RED "CMake configuration failed."
 	exit 1
@@ -48,13 +48,37 @@ fi
 colorize $CYAN "--> [UNIT-TESTS] Running tests..."
 cd build
 
-ctest -j18 -C Debug -T test --output-on-failure -VV -R .*
+ctest -C Debug -T test --output-on-failure -VV -R .*
 test_status=$?
 
 if [ $test_status -ne 0 ]; then
 	colorize $RED "Tests failed. Exiting with status $test_status."
 	exit $test_status
-else
-	colorize $GREEN "All tests passed successfully."
 fi
 
+colorize $GREEN "All tests passed successfully."
+
+colorize $CYAN "--> [UNIT-TESTS] Run coverage checks..."
+make coverage
+if [ $? -ne 0 ]; then
+	colorize $RED "Coverage report generation failed."
+	exit 1
+fi
+
+colorize $CYAN "--> [UNIT-TESTS] Check coverage target percentage is met..."
+
+make check_coverage
+if [ $? -ne 0 ]; then
+	colorize $RED "Coverage target percentage is not met. (Threshold: 85%)"
+	exit 1
+fi
+
+colorize $GREEN "Coverage target percentage is met."
+
+make coverage_html
+if [ $? -ne 0 ]; then
+	colorize $RED "Coverage report generation failed."
+	exit 1
+fi
+
+colorize $GREEN "Coverage report generated successfully."

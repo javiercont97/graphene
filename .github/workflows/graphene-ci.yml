@@ -13,7 +13,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install unity test framework
+    - name: Install testing deps
       run: |
         git clone https://github.com/ThrowTheSwitch/Unity.git
         cd Unity/
@@ -22,6 +22,8 @@ jobs:
         cmake ..
         make
         sudo make install
+        
+        sudo apt-get install -qq lcov
 
     - name: Run unit tests
       run: |

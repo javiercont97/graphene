@@ -110,6 +110,13 @@ if(CLANG_FORMAT_EXECUTABLE)
 endif()
 
 
-
 # Build examples
 add_subdirectory(examples)
+
+
+# Coverage configuration
+option(CODE_COVERAGE "Enable code coverage" OFF)
+if(CODE_COVERAGE)
+    target_compile_options(Graphene PUBLIC --coverage -O0)
+    target_link_libraries(Graphene PUBLIC --coverage)
+endif()

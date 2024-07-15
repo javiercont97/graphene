@@ -99,3 +99,22 @@ void testGrayScale() {
 	color2 = 0xff555555;
 	TEST_ASSERT_EQUAL(85, color2.toGray8());
 }
+
+void testInvertColor() {
+	Graphene::Color color = Graphene::Color::ColorFactory::fromRGB888(0x0000FF);
+	TEST_ASSERT_EQUAL(0xffff00, color.invert().toRGB888());
+	TEST_ASSERT_NOT_EQUAL(0xffff00, color.toRGB888());
+	TEST_ASSERT_NOT_EQUAL(0x121212, color.invert().toRGB888());
+
+	Graphene::Color color2 = Graphene::Color::ColorFactory::fromRGB888(0xebebed);
+	TEST_ASSERT_EQUAL(0x141412, color2.invert().toRGB888());
+	TEST_ASSERT_NOT_EQUAL(0x141412, color2.toRGB888());
+
+	Graphene::Color color3 = Graphene::Color::ColorFactory::fromRGB888(0x000000);
+	TEST_ASSERT_EQUAL(0xffffff, color3.invert().toRGB888());
+	TEST_ASSERT_NOT_EQUAL(0xffffff, color3.toRGB888());
+
+	Graphene::Color color4 = Graphene::Color::ColorFactory::fromRGB888(0xffffff);
+	TEST_ASSERT_EQUAL(0x000000, color4.invert().toRGB888());
+	TEST_ASSERT_NOT_EQUAL(0x000000, color4.toRGB888());
+}

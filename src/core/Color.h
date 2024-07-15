@@ -12,13 +12,13 @@ class Color {
 	Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
 	Color(const Color &color);
 
-	// copy assignment operator
 	Color &operator=(const Color &color);
 	Color &operator=(const uint32_t &color);
 
-	// comparison operators
 	bool operator==(const Color &color) const;
 	bool operator!=(const Color &color) const;
+
+	Color invert() const;
 
 	// conversion operators
 	operator uint32_t() const;
