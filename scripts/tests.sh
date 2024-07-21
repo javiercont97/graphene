@@ -1,26 +1,5 @@
 #!/bin/bash
-
-##############################################
-# colorize
-##############################################
-
-# Define colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-WHITE='\033[0;37m'
-NC='\033[0m' # No Color
-
-# Function to apply color
-colorize() {
-	local color=$1
-	shift
-	local message="$@"
-	echo -e "${color}${message}${NC}"
-}
+source scripts/colors.sh
 
 ##############################################
 # tests
@@ -28,57 +7,57 @@ colorize() {
 
 path_to_project=$(pwd)
 
-colorize $CYAN "--> [UNIT-TESTS] Prepare to build"
+echo -e "${CYAN}--> [UNIT-TESTS] Prepare to build${NC}"
 cmake -DCODE_COVERAGE=ON -S $path_to_project -B $path_to_project/build
 if [ $? -ne 0 ]; then
-	colorize $RED "CMake configuration failed."
+	echo -e "${RED}CMake configuration failed.${NC}"
 	exit 1
 fi
 
-colorize $CYAN "--> [UNIT-TESTS] Building..."
+echo -e "${CYAN}--> [UNIT-TESTS] Building...${NC}"
 cd $path_to_project
 
 cmake --build "$path_to_project/build" --config Debug --target all --
 if [ $? -ne 0 ]; then
-	colorize $RED "Build failed."
+	echo -e "${RED}Build failed.${NC}"
 	exit 1
 fi
 
 
-colorize $CYAN "--> [UNIT-TESTS] Running tests..."
+echo -e "${CYAN}--> [UNIT-TESTS] Running tests...${NC}"
 cd build
 
 ctest -C Debug -T test --output-on-failure -VV -R .*
 test_status=$?
 
 if [ $test_status -ne 0 ]; then
-	colorize $RED "Tests failed. Exiting with status $test_status."
+	echo -e "${RED}Tests failed. Exiting with status $test_status.${NC}"
 	exit $test_status
 fi
 
-colorize $GREEN "All tests passed successfully."
+echo -e "${GREEN}All tests passed successfully.${NC}"
 
-colorize $CYAN "--> [UNIT-TESTS] Run coverage checks..."
+echo -e "${CYAN}--> [UNIT-TESTS] Run coverage checks...${NC}"
 make coverage
 if [ $? -ne 0 ]; then
-	colorize $RED "Coverage report generation failed."
+	echo -e "${RED}Coverage report generation failed.${NC}"
 	exit 1
 fi
 
-colorize $CYAN "--> [UNIT-TESTS] Check coverage target percentage is met..."
+echo -e "${CYAN}--> [UNIT-TESTS] Check coverage target percentage is met...${NC}"
 
 make check_coverage
 if [ $? -ne 0 ]; then
-	colorize $RED "Coverage target percentage is not met. (Threshold: 85%)"
+	echo -e "${RED}Coverage target percentage is not met. (Threshold: 85%)${NC}"
 	exit 1
 fi
 
-colorize $GREEN "Coverage target percentage is met."
+echo -e "${GREEN}Coverage target percentage is met.${NC}"
 
 make coverage_html
 if [ $? -ne 0 ]; then
-	colorize $RED "Coverage report generation failed."
+	echo -e "${RED}Coverage report generation failed.${NC}"
 	exit 1
 fi
 
-colorize $GREEN "Coverage report generated successfully."
+echo -e "${GREEN}Coverage report generated successfully.${NC}"
