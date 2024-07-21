@@ -24,21 +24,24 @@ void Graphene::CheckBox::draw(AbstractCanvas& canvas) {
 		canvas.drawString(
 			textFrame, this->text, this->textColor, this->backgroundColor, this->font, TextAlignment::LEFT);
 
-		canvas.drawRectangle(Point(centerLeftPoint.getX(), centerLeftPoint.getY() - boxSideLength / 2),
-							 boxSideLength,
-							 boxSideLength,
-							 this->borderColor);
+		Graphene::Rect boxFrame(
+			Point(centerLeftPoint.getX(), centerLeftPoint.getY() - boxSideLength / 2), boxSideLength, boxSideLength);
+		canvas.drawRectangle(boxFrame.getTopLeft(), boxFrame.getWidth(), boxFrame.getHeight(), this->borderColor);
+
+		int weight = boxSideLength / 10;
 
 		if (this->checked) {
-			canvas.drawLine(
-				Point(centerLeftPoint.getX() + 2, centerLeftPoint.getY() - boxSideLength / 2 + 2),
-				Point(centerLeftPoint.getX() + boxSideLength - 2, centerLeftPoint.getY() + boxSideLength / 2 - 2),
-				this->checkColor);
+			canvas.fillPolygon({boxFrame.getTopLeft() + Point(2 * weight, weight),
+								boxFrame.getBottomRight() - Point(weight, 2 * weight),
+								boxFrame.getBottomRight() - Point(2 * weight, weight),
+								boxFrame.getTopLeft() + Point(weight, 2 * weight)},
+							   this->checkColor);
 
-			canvas.drawLine(
-				Point(centerLeftPoint.getX() + boxSideLength - 2, centerLeftPoint.getY() - boxSideLength / 2 + 2),
-				Point(centerLeftPoint.getX() + 2, centerLeftPoint.getY() + boxSideLength / 2 - 2),
-				this->checkColor);
+			canvas.fillPolygon({boxFrame.getTopRight() + Point(-weight, 2 * weight),
+								boxFrame.getBottomLeft() + Point(2 * weight, -weight),
+								boxFrame.getBottomLeft() + Point(weight, -2 * weight),
+								boxFrame.getTopRight() + Point(-2 * weight, weight)},
+							   this->checkColor);
 		}
 
 		if (this->isFocused) {
@@ -86,6 +89,10 @@ void Graphene::CheckBox::setCheckColor(Color color) {
 
 Graphene::String Graphene::CheckBox::getText() {
 	return this->text;
+}
+
+bool Graphene::CheckBox::isChecked() {
+	return this->checked;
 }
 
 void Graphene::CheckBox::onStateChange(std::function<void(bool)> callback) {

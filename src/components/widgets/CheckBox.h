@@ -51,6 +51,7 @@ class CheckBox : public IWidget {
 	void setCheckColor(Color color);
 
 	String getText();
+	bool isChecked();
 
 	// Callbacks
 	void onStateChange(std::function<void(bool)> callback);
