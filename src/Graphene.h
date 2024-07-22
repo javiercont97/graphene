@@ -54,15 +54,6 @@ namespace Graphene {
 
 class SYSTEM {
    public:
-	static void init() {
-		// Load fonts
-		GrapheneSystemFonts["ubuntu_light_9px"] = Font(ubuntu_light_9_table, 8, 9);
-		GrapheneSystemFonts["ubuntu_light_16px"] = Font(ubuntu_light_16_table, 16, 16);
-		GrapheneSystemFonts["ubuntu_light_20px"] = Font(ubuntu_light_20_table, 16, 20);
-		GrapheneSystemFonts["ubuntu_light_23px"] = Font(ubuntu_light_23_table, 16, 23);
-		GrapheneSystemFonts["ubuntu_light_35px"] = Font(ubuntu_light_35_table, 24, 35);
-	}
-
 	static std::vector<String> getSystemFonts() {
 		std::vector<String> fontNames = {};
 		for (auto &pair : GrapheneSystemFonts) {
@@ -76,6 +67,14 @@ class SYSTEM {
 	}
 
 	static std::map<String, Font> GrapheneSystemFonts;
+};
+
+std::map<String, Font> SYSTEM::GrapheneSystemFonts = {
+	{"ubuntu_light_9px", Font(ubuntu_light_9_table, 8, 9)},
+	{"ubuntu_light_16px", Font(ubuntu_light_16_table, 16, 16)},
+	{"ubuntu_light_20px", Font(ubuntu_light_20_table, 16, 20)},
+	{"ubuntu_light_23px", Font(ubuntu_light_23_table, 16, 23)},
+	{"ubuntu_light_35px", Font(ubuntu_light_35_table, 24, 35)},
 };
 
 }  // namespace Graphene
