@@ -27,15 +27,24 @@ class MainView : public Graphene::HorizontalLayout {
 		controllersLayout = new Graphene::VerticalLayout(this);
 		controllersLayout->setSpacing(10);
 
-		increaseBtn = new Graphene::Button(
-			"+", Graphene::Graphene24, Graphene::BLACK, Graphene::WHITE, Graphene::WHITE, controllersLayout);
+		increaseBtn = new Graphene::Button("+",
+										   Graphene::Font(Graphene::ubuntu_light_16_table, 16, 16),
+										   Graphene::BLACK,
+										   Graphene::WHITE,
+										   Graphene::WHITE,
+										   controllersLayout);
 		controllersLayout->add(increaseBtn);
 
-		decreaseBtn = new Graphene::Button(
-			"-", Graphene::Graphene24, Graphene::BLACK, Graphene::WHITE, Graphene::WHITE, controllersLayout);
+		decreaseBtn = new Graphene::Button("-",
+										   Graphene::Font(Graphene::ubuntu_light_16_table, 16, 16),
+										   Graphene::BLACK,
+										   Graphene::WHITE,
+										   Graphene::WHITE,
+										   controllersLayout);
 		controllersLayout->add(decreaseBtn);
 
-		counterLabel = new Graphene::Label("0", Graphene::Graphene24, Graphene::WHITE, Graphene::DARK_GRAY, this);
+		counterLabel = new Graphene::Label(
+			"0", Graphene::Font(Graphene::ubuntu_light_16_table, 16, 16), Graphene::WHITE, Graphene::DARK_GRAY, this);
 
 		this->add(controllersLayout);
 		this->add(counterLabel);
@@ -69,7 +78,7 @@ void splashScreen(GrapheneDrivers::STM32F769I_Canvas screenDriver) {
 							"STM32F769I-DISCO",
 							Graphene::WHITE,
 							Graphene::NAVY,
-							Graphene::Graphene24,
+							Graphene::Font(Graphene::ubuntu_light_16_table, 16, 16),
 							Graphene::TextAlignment::CENTER);
 
 	screenDriver.drawString(
@@ -77,7 +86,7 @@ void splashScreen(GrapheneDrivers::STM32F769I_Canvas screenDriver) {
 		"Graphene",
 		Graphene::WHITE,
 		Graphene::NAVY,
-		Graphene::Graphene24,
+		Graphene::Font(Graphene::ubuntu_light_16_table, 16, 16),
 		Graphene::TextAlignment::CENTER);
 }
 
