@@ -62,7 +62,7 @@ class Button : public IWidget {
 
    protected:
 	String text;
-	Font font = Graphene::Graphene24;
+	Font font = Graphene::Font(ubuntu_light_16_table, 16, 16);
 	Color textColor = Graphene::BLACK;
 	Color backgroundColor = Graphene::WHITE;
 	Color borderColor = Graphene::BLACK;

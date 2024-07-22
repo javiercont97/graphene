@@ -15,16 +15,14 @@ class ProgressBar : public IWidget {
 	ProgressBar(IContainer *parent = nullptr) : IWidget(parent), value(0), min(0), max(100) {
 	}
 
-	ProgressBar(
-		Color backgroundColor, Color progressColor, Color borderColor, Color textColor, IContainer *parent = nullptr)
+	ProgressBar(Color backgroundColor, Color progressColor, Color borderColor, IContainer *parent = nullptr)
 		: IWidget(parent),
 		  value(0),
 		  min(0),
 		  max(100),
 		  backgroundColor(backgroundColor),
 		  progressColor(progressColor),
-		  borderColor(borderColor),
-		  textColor(textColor) {
+		  borderColor(borderColor) {
 	}
 
 	// Inherited via IDrawable
@@ -35,13 +33,11 @@ class ProgressBar : public IWidget {
 	void setBackgroundColor(Color color);
 	void setProgressColor(Color color);
 	void setBorderColor(Color color);
-	void setTextColor(Color color);
 
 	uint16_t getValue();
 	Color getBackgroundColor();
 	Color getProgressColor();
 	Color getBorderColor();
-	Color getTextColor();
 
    private:
 	uint16_t value;
@@ -51,7 +47,6 @@ class ProgressBar : public IWidget {
 	Color backgroundColor = Graphene::DARK_GRAY;
 	Color progressColor = Graphene::GREEN;
 	Color borderColor = Graphene::LIGHT_GRAY;
-	Color textColor = Graphene::WHITE;
 };
 
 }  // namespace Graphene

@@ -14,13 +14,6 @@ void Graphene::ProgressBar::draw(AbstractCanvas& canvas) {
 			canvas.fillRectangle(bounds.getTopLeft(), progressWidth, bounds.getHeight(), progressColor);
 		}
 
-		canvas.drawString(bounds,
-						  String::fromInt(value),
-						  textColor,
-						  value > (max - min) / 2 ? progressColor : backgroundColor,
-						  Graphene::Graphene24,
-						  Graphene::TextAlignment::CENTER);
-
 		canvas.drawRectangle(bounds.getTopLeft(), bounds.getWidth(), bounds.getHeight(), borderColor);
 
 		this->_needsRedraw = false;
@@ -53,11 +46,6 @@ void Graphene::ProgressBar::setBorderColor(Color color) {
 	this->forceRedraw();
 }
 
-void Graphene::ProgressBar::setTextColor(Color color) {
-	this->textColor = color;
-	this->forceRedraw();
-}
-
 uint16_t Graphene::ProgressBar::getValue() {
 	return this->value;
 }
@@ -72,8 +60,4 @@ Graphene::Color Graphene::ProgressBar::getProgressColor() {
 
 Graphene::Color Graphene::ProgressBar::getBorderColor() {
 	return this->borderColor;
-}
-
-Graphene::Color Graphene::ProgressBar::getTextColor() {
-	return this->textColor;
 }
