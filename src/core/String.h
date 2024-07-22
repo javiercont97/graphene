@@ -360,14 +360,27 @@ class String {
 		return os;
 	}
 
-	size_t operator()(const String& str) const {
-		return std::hash<std::string>()(str.str);
+	/**
+	 * @brief Operator <. Compare the string with another string.
+	 *
+	 * @param str
+	 * @return true
+	 * @return false
+	 */
+	bool operator<(const String& str) const {
+		return this->str < str.str;
 	}
-	// struct StringHash {
-	// 	size_t operator()(const String& str) const {
-	// 		return std::hash<std::string>()(str.str);
-	// 	}
-	// };
+
+	/**
+	 * @brief Operator >. Compare the string with another string.
+	 *
+	 * @param str
+	 * @return true
+	 * @return false
+	 */
+	bool operator>(const String& str) const {
+		return this->str > str.str;
+	}
 
    private:
 	std::string str;

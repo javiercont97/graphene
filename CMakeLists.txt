@@ -79,7 +79,6 @@ set(SOURCES
 	# drivers
 	src/drivers/STM32F769I/STM32F769I_Canvas.h
 	src/drivers/STM32F769I/STM32F769I_Touch.h
-	src/drivers/STM32F769I/STMFonts.h
 
 	src/drivers/NodeMCU/NodeMCU_TFT.h
 )

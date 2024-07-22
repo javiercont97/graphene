@@ -135,18 +135,56 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 					Graphene::Color color,
 					Graphene::Color bgColor,
 					Font font,
-					TextAlignment align = TextAlignment::CENTER) {
-		Graphene::Point position = frame.getCenter();
-		int16_t spacing = font.getHeight();
-		int16_t textWidthInPixels = text.length() * (font.getWidth() + spacing) - spacing;
-		int32_t x = position.getX() - textWidthInPixels / 2;
-		tft->setCursor((int16_t)x, (int16_t)position.getY() - font.getWidth() / 2);
-		tft->setTextColor(color.toRGB565(), bgColor.toRGB565());
-		tft->setTextSize(font.getHeight());
+					TextAlignment alignment) {
+		String charmap =
+			" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+		const unsigned char CHARACTER_COUNT = charmap.length();
+		const uint8_t CHARACTER_WIDTH = font.getWidth();
+		const uint8_t CHARACTER_HEIGHT = font.getHeight();
+		const uint8_t Y_ADVANCE = font.getHeight();
+		GFXglyph glyphs[CHARACTER_COUNT];
+		for (int i = 0; i < CHARACTER_COUNT; ++i) {
+			uint16_t offset = i * (CHARACTER_WIDTH * CHARACTER_HEIGHT) / 8;
+			glyphs[i] = {.bitmapOffset = offset,
+						 .width = CHARACTER_WIDTH,
+						 .height = CHARACTER_HEIGHT,
+						 .xAdvance = CHARACTER_WIDTH,
+						 .xOffset = 0,
+						 .yOffset = 1 - ((int8_t)CHARACTER_HEIGHT)};
+		}
+		const GFXfont gfxFont = {.bitmap = font.getCharMap(),
+								 .glyph = glyphs,
+								 .first = charmap[0],
+								 .last = charmap[CHARACTER_COUNT - 1],
+								 .yAdvance = Y_ADVANCE};
+		tft->setFont(&gfxFont);
+		tft->setTextSize(1);
 		tft->setTextWrap(true);
-		tft->print(text);
-		// TODO: Convert Graphene::Font to Adafruit GFX Font
-		// tft->setFont(&gfxFont);
+		tft->setTextColor(color.toRGB565(), bgColor.toRGB565());
+		switch (alignment) {
+			case Graphene::TextAlignment::LEFT: {
+				Graphene::Point position = frame.getBottomLeft();
+				Graphene::Point textLeftCorner(position.getX(),
+											   position.getY() + frame.getHeight() / 2 - font.getHeight() / 2);
+
+				tft->setCursor((int16_t)textLeftCorner.getX(), (int16_t)textLeftCorner.getY());
+				tft->print(text);
+			} break;
+			case Graphene::TextAlignment::CENTER: {
+				Graphene::Point position = frame.getCenter();
+				Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth() / 2,
+											   position.getY() + font.getHeight() / 2);
+				tft->setCursor((int16_t)textLeftCorner.getX(), (int16_t)textLeftCorner.getY());
+				tft->print(text);
+			} break;
+			case Graphene::TextAlignment::RIGHT: {
+				Graphene::Point position = {frame.getBottomRight().getX(), frame.getCenter().getY()};
+				Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth(),
+											   position.getY() + font.getHeight() / 2);
+				tft->setCursor((int16_t)textLeftCorner.getX(), (int16_t)textLeftCorner.getY());
+				tft->print(text);
+			} break;
+		}
 	}
 
 	/**

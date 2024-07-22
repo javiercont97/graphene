@@ -1,10 +1,20 @@
 #include "GrapheneApp.h"
 
+#include <unordered_map>
+
+#include "../core/GrapheneFonts.h"
+
 Graphene::GrapheneApp::GrapheneApp(AbstractCanvas *canvas, AbstractTouchInput *touchInput, IContainer *rootContainer)
 	: canvas(canvas), touchInput(touchInput), rootContainer(rootContainer) {
 	this->hasPrevTouchEvent = false;
 	this->prevTouchEvent = {
 		.type = TouchEventType::RELEASE, .position = Point(0, 0), .timestamp = std::chrono::steady_clock::now()};
+
+	// Load fonts
+	this->GrapheneSystemFonts["ubuntu_light_16px"] = Graphene::Font(ubuntu_light_16_table, 16, 16);
+	this->GrapheneSystemFonts["ubuntu_light_20px"] = Graphene::Font(ubuntu_light_20_table, 16, 20);
+	this->GrapheneSystemFonts["ubuntu_light_23px"] = Graphene::Font(ubuntu_light_23_table, 16, 23);
+	this->GrapheneSystemFonts["ubuntu_light_35px"] = Graphene::Font(ubuntu_light_35_table, 24, 35);
 }
 
 Graphene::GrapheneApp::~GrapheneApp() {

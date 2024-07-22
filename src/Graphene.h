@@ -47,10 +47,5 @@
 // STM32F769I
 #include "drivers/STM32F769I/STM32F769I_Canvas.h"
 #include "drivers/STM32F769I/STM32F769I_Touch.h"
-#include "drivers/STM32F769I/STMFonts.h"
-
-// geometry includes
-
-// Components includes
 
 #endif	// GRAPHENE_FRAMEWORK_H

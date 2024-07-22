@@ -1,8 +1,8 @@
 {
 	"name": "Graphene",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "A simple library for creating graphical user interfaces",
-	"keywords": "STM32F769I, GUI, Graphical User Interface, Touchscreen, tft, ST7735",
+	"keywords": "GUI, Graphical User Interface, Touchscreen, tft, ST7735, UI",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/javiercont97/graphene.git"
@@ -23,12 +23,10 @@
 	},
 	"frameworks": [
 		"mbed",
-		"arduino"
+		"arduino",
+		"freertos"
 	],
-	"platforms": [
-		"ststm32",
-		"espressif8266"
-	],
+	"platforms": "*",
 	"headers": [
 		"Graphene.h"
 	],
