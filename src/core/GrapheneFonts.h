@@ -5,7 +5,8 @@
 
 namespace Graphene {
 // Refer to the fonts directory for the font files
-// This file includes a prebuilt font starting from Ubuntu-Light.ttf with sizes of(w, h): ()
+// This file includes a prebuilt font starting from Ubuntu-Light.ttf with sizes of(w, h): (16, 16), (16, 20), (16, 23),
+// (24, 35)
 
 const uint8_t ubuntu_light_16_table[] = {
 	/* ' ' */

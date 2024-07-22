@@ -2,9 +2,7 @@
 #include <unity/unity.h>
 
 #include "Color.spec.h"
-#include "Object.spec.h"
 #include "String.spec.h"
-#include "Variant.spec.h"
 
 void setUp() {
 }
@@ -55,31 +53,11 @@ int main() {
 	RUN_TEST(testReverse);
 
 	//======================
-	// Test Object class
-	//======================
-	// Test Object properties
-	RUN_TEST(testSetProperty);
-	RUN_TEST(testGetProperty);
-	RUN_TEST(testHasProperty);
-	RUN_TEST(testRemoveProperty);
-	RUN_TEST(testClearProperties);
-	RUN_TEST(testGetPropertyNames);
-
-	// Test Object event handling
-	RUN_TEST(testPublish);
-	RUN_TEST(testCircularPublish);
-
-	//======================
 	// Test Color class
 	//======================
 	RUN_TEST(testColor);
 	RUN_TEST(testGrayScale);
 	RUN_TEST(testInvertColor);
-
-	//======================
-	// Test Variant class
-	//======================
-	RUN_TEST(testVariant);
 
 	return UNITY_END();
 }

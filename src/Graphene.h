@@ -5,9 +5,7 @@
 #include "core/Color.h"
 #include "core/Font.h"
 #include "core/GrapheneFonts.h"
-#include "core/Object.h"
 #include "core/String.h"
-#include "core/Variant.h"
 
 // Events includes
 #include "events/TouchEvent.h"

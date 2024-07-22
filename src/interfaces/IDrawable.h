@@ -1,7 +1,6 @@
 #if !defined(GRAPHENE_DRAWABLE_INTERFACE_H)
 #define GRAPHENE_DRAWABLE_INTERFACE_H
 
-// #include "../core/Object.h"
 #include "../events/TouchEvent.h"
 #include "../math/Rect.h"
 #include "AbstractCanvas.h"

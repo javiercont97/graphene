@@ -1,6 +1,6 @@
 {
 	"name": "Graphene",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "A simple library for creating graphical user interfaces",
 	"keywords": "GUI, Graphical User Interface, Touchscreen, tft, ST7735, UI",
 	"repository": {

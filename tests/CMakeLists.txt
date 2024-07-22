@@ -1,9 +1,7 @@
 add_executable(core_test
 	# core specs
     core/Color.spec.h
-	core/Object.spec.h
 	core/String.spec.h
-	core/Variant.spec.h
 
 	# core test files
 	core/GrapheneCore.spec.cpp

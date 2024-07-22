@@ -29,11 +29,8 @@ set(SOURCES
 	# Core files
 	src/core/Color.h
 	src/core/Color.cpp
-	src/core/Object.h
-	src/core/Object.cpp
 	src/core/String.h
 	src/core/String.cpp
-	src/core/Variant.h
 	src/core/Font.h
 	src/core/Font.cpp
 	src/core/GrapheneFonts.h

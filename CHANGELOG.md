@@ -1,4 +1,4 @@
-# Changelog - v1.2.4
+# Changelog - v1.2.5
 
-- Improved checkbox mark visibility (line strokes are wider now)
-- Bundled fonts for all supported platforms
+- Drop object class, not used.
+- Drop variant class, not needed
