@@ -163,9 +163,8 @@ class AdafruitST7735 : public Graphene::AbstractCanvas {
 		tft->setTextColor(color.toRGB565(), bgColor.toRGB565());
 		switch (alignment) {
 			case Graphene::TextAlignment::LEFT: {
-				Graphene::Point position = frame.getBottomLeft();
-				Graphene::Point textLeftCorner(position.getX(),
-											   position.getY() + frame.getHeight() / 2 - font.getHeight() / 2);
+				Graphene::Point position = {frame.getBottomLeft().getX(), frame.getCenter().getY()};
+				Graphene::Point textLeftCorner(position.getX(), position.getY() + font.getHeight() / 2);
 
 				tft->setCursor((int16_t)textLeftCorner.getX(), (int16_t)textLeftCorner.getY());
 				tft->print(text);

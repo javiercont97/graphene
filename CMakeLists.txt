@@ -78,6 +78,8 @@ set(SOURCES
 	src/drivers/STM32F769I/STM32F769I_Touch.h
 
 	src/drivers/NodeMCU/NodeMCU_TFT.h
+
+	src/drivers/NoTouchDriver.h
 )
 
 # Create the static library

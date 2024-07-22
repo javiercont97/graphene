@@ -39,11 +39,45 @@
 #include "runtime/GrapheneApp.h"
 
 // Driver includes
+// Generic drivers
+#include "drivers/NoTouchDriver.h"
+
 // NodeMCU
 #include "drivers/NodeMCU/NodeMCU_TFT.h"
 
 // STM32F769I
 #include "drivers/STM32F769I/STM32F769I_Canvas.h"
 #include "drivers/STM32F769I/STM32F769I_Touch.h"
+
+namespace Graphene {
+#include <map>
+
+class SYSTEM {
+   public:
+	static void init() {
+		// Load fonts
+		GrapheneSystemFonts["ubuntu_light_9px"] = Font(ubuntu_light_9_table, 8, 9);
+		GrapheneSystemFonts["ubuntu_light_16px"] = Font(ubuntu_light_16_table, 16, 16);
+		GrapheneSystemFonts["ubuntu_light_20px"] = Font(ubuntu_light_20_table, 16, 20);
+		GrapheneSystemFonts["ubuntu_light_23px"] = Font(ubuntu_light_23_table, 16, 23);
+		GrapheneSystemFonts["ubuntu_light_35px"] = Font(ubuntu_light_35_table, 24, 35);
+	}
+
+	static std::vector<String> getSystemFonts() {
+		std::vector<String> fontNames = {};
+		for (auto &pair : GrapheneSystemFonts) {
+			fontNames.push_back(pair.first);
+		}
+		return fontNames;
+	}
+
+	static Font &getSystemFont(String fontName) {
+		return GrapheneSystemFonts[fontName];
+	}
+
+	static std::map<String, Font> GrapheneSystemFonts;
+};
+
+}  // namespace Graphene
 
 #endif	// GRAPHENE_FRAMEWORK_H

@@ -1,4 +1,6 @@
-# Changelog - v1.2.5
+# Changelog - v1.2.6
 
-- Drop object class, not used.
-- Drop variant class, not needed
+- Fix LEFT text alignment in ST7735 driver
+- Add smaller font
+- Create NoTouchDriver for non-touch displays
+- Create a SYSTEM class with static members to initialize the fonts
