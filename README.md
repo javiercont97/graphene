@@ -1,5 +1,7 @@
 # Graphene
 
+![Graphene logo](Graphene_logo_solid.png)
+
 Graphene is named after a 2D material which is in fact as thin as 1 carbon atom thick, this is because the library is meant to be super-thin and run on most embedded system chips (STM32, ESP, or even Arduino boards).
 
 Graphene is a versatile and powerful RTOS-independent and hardware-independent GFX library designed specifically for embedded devices such as the STM32f769i or ESP32. It provides a comprehensive set of graphical functions and features that enable developers to create stunning user interfaces and visualizations on these platforms.
