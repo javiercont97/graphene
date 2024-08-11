@@ -50,3 +50,5 @@ build_flags =
 -----
 Note: For other platforms you might need to implement touch drivers and display drivers. See current implementations bundled in the library as an starting point
 
+## Docs
+Visit the [wiki](https://github.com/javiercont97/graphene/wiki) to read Graphene Docs!
