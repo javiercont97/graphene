@@ -396,8 +396,57 @@ void Graphene::Image::drawString(Graphene::Rect frame,
 								 Graphene::Color bgColor,
 								 Graphene::Font font,
 								 Graphene::TextAlignment align) {
-	// Center the text
-	Graphene::Point textTopLeft;
+	// Draw the background
+	this->fillRectangle(frame.getTopLeft(), frame.getWidth(), frame.getHeight(), bgColor);
+
+	// Draw the text
+	switch (align) {
+		case Graphene::TextAlignment::LEFT: {
+			Graphene::Point position = frame.getTopLeft();
+			Graphene::Point textLeftCorner(position.getX(),
+										   position.getY() + frame.getHeight() / 2 - font.getHeight() / 2);
+
+			for (size_t i = 0; i < text.length(); i++) {
+				// Get the character map
+				const uint8_t* charMap = font.getCharMap();
+
+				// Draw the character
+				for (uint32_t y = 0; y < font.getHeight(); y++) {
+					for (uint32_t x = 0; x < font.getWidth(); x++) {
+						if (charMap[y] & (1 << (font.getWidth() - x - 1))) {
+							this->drawPixel(
+								{textLeftCorner.getX() + i * font.getWidth() + x, textLeftCorner.getY() + y}, color);
+						}
+					}
+				}
+			}
+
+			// BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+			// 						(uint16_t)textLeftCorner.getY(),
+			// 						(uint8_t*)text.cStyleString(),
+			// 						LEFT_MODE);
+		} break;
+		case Graphene::TextAlignment::CENTER: {
+			Graphene::Point position = frame.getCenter();
+			Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth() / 2,
+										   position.getY() - font.getHeight() / 2);
+
+			// BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+			// 						(uint16_t)textLeftCorner.getY(),
+			// 						(uint8_t*)text.cStyleString(),
+			// 						LEFT_MODE);
+		} break;
+		case Graphene::TextAlignment::RIGHT: {
+			Graphene::Point position = {frame.getTopRight().getX(), frame.getCenter().getY()};
+			Graphene::Point textLeftCorner(position.getX() - text.length() * font.getWidth(),
+										   position.getY() - font.getHeight() / 2);
+
+			// BSP_LCD_DisplayStringAt((uint16_t)textLeftCorner.getX(),
+			// 						(uint16_t)textLeftCorner.getY(),
+			// 						(uint8_t*)text.cStyleString(),
+			// 						LEFT_MODE);
+		} break;
+	}
 }
 
 void Graphene::Image::clear(Graphene::Color color) {

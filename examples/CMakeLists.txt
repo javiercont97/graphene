@@ -32,3 +32,8 @@ target_include_directories(string_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
 add_executable(vector_demo vectors_demo/vector_demo.cpp)
 target_link_libraries(vector_demo Graphene)
 target_include_directories(vector_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
+# Font Glyphs
+add_executable(font_glyphs_demo canvas_demo/font_glyphs_demo.cpp)
+target_link_libraries(font_glyphs_demo Graphene)
+target_include_directories(font_glyphs_demo PRIVATE ${CMAKE_SOURCE_DIR}/src)

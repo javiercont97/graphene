@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include <vector>
+
 namespace Graphene {
 
 class Font {
@@ -17,6 +19,7 @@ class Font {
 	uint16_t getWidth() const;
 	uint16_t getHeight() const;
 	uint8_t *getCharMap() const;
+	std::vector<std::vector<uint8_t>> getGlyph(char c) const;
 
    private:
 	const uint8_t *charmap;
